@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  title: string;
+  path: string;
+  posts: CollectionEntry<"articles">[];
+  currentPath: string;
+}
+const { title, path, posts, currentPath } = Astro.props;
+const position = posts.findIndex((post) => post.data.path === currentPath);
+const previous = posts[position - 1];
+const next = posts[position + 1];
+---
+
+<nav class="series-navigation" aria-label="Article series">
+  <p class="eyebrow">Part {position + 1} of {posts.length}</p>
+  <h2><a href={path}>{title}</a></h2>
+  <ol>
+    {posts.map((post) => (
+      <li>
+        <a href={post.data.path} aria-current={post.data.path === currentPath ? "page" : undefined}>
+          {post.data.title}
+        </a>
+      </li>
+    ))}
+  </ol>
+  {(previous || next) && (
+    <div class="series-steps">
+      {previous && <a href={previous.data.path}><span>Previous in series</span>{previous.data.title}</a>}
+      {next && <a href={next.data.path}><span>Next in series</span>{next.data.title}</a>}
+    </div>
+  )}
+</nav>

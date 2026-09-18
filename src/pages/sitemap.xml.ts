@@ -1,9 +1,10 @@
 import type { APIContext } from "astro";
 import { articles, POSTS_PER_PAGE } from "../lib/content";
-import { archives } from "../lib/archives";
+import { allArchives } from "../lib/archives";
 
 export async function GET({ site }: APIContext) {
   const entries = await articles();
+  const archives = allArchives(entries);
   const totalPages = Math.ceil(entries.filter(({ data }) => data.kind === "post").length / POSTS_PER_PAGE);
   const paths = [
     "/",

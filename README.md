@@ -85,6 +85,43 @@ Write the article here using Markdown.
 
 Set `draft: false` when ready. Drafts are excluded from routes, listings, and RSS. Paths must be unique and end in `/`. Existing system, taxonomy, and pagination routes are reserved. Use fenced code blocks with a language for syntax highlighting in new Markdown posts. The imported taxonomy membership in `src/data/archives.json` is a snapshot of WordPress; new native Markdown posts need their taxonomy membership added to the archive implementation if they should appear in those topic pages.
 
+## Series and related articles
+
+To join a series, add its slug and a positive order number to the article metadata:
+
+```yaml
+series: "build-tools-for-vmware-aria"
+seriesOrder: 5
+```
+
+For a new series, first add a definition to `src/data/series.json` with `slug`, `title`, and `description`.
+Use a unique lowercase slug with hyphens between words.
+The site generates `/series/<slug>/` when the series has a published post.
+The existing Build Tools series uses an ordered list of WordPress IDs in that file, so imports retain its reading order.
+New posts use `series` and `seriesOrder`; they do not need a WordPress ID.
+
+Each published post in a series shows its position, the reading list, and Previous/Next links.
+Order numbers must be unique within the published series, but gaps are allowed.
+The visible part number counts published posts only.
+Drafts and standalone pages are excluded from the reading list.
+
+Related articles appear below the series navigation, or below the article body when there is no series.
+The site suggests up to three posts based on shared tags and categories, with tags receiving more weight.
+Automatic suggestions exclude the current post, drafts, pages, and other posts in the same series.
+No suggestions appear when there are no matching posts.
+
+To choose the suggestions yourself, add up to three published article paths:
+
+```yaml
+related:
+  - "/using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development/"
+```
+
+An explicit list replaces automatic suggestions and can include another post from the same series.
+Use `related: []` to hide suggestions for that article.
+The build rejects unknown series, duplicate published order numbers, and links to missing, draft, or standalone pages.
+It also rejects links from an article to itself.
+
 ## Re-run the import
 
 ```powershell

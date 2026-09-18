@@ -3,14 +3,17 @@ import { render } from "astro:content";
 import Base from "../layouts/Base.astro";
 import PostCard from "../components/PostCard.astro";
 import TableOfContents from "../components/TableOfContents.astro";
+import SeriesNavigation from "../components/SeriesNavigation.astro";
 import { articles, formatDate } from "../lib/content";
-import { archives, archivePosts, topicArchive } from "../lib/archives";
+import { archives, allArchives, archivePosts, topicArchive } from "../lib/archives";
+import { articleSeries, relatedArticles } from "../lib/series";
 import comments from "../data/comments.json";
 
 export async function getStaticPaths() {
   const entries = await articles();
+  const resolvedArchives = allArchives(entries);
   const paths = new Set(entries.map((entry) => entry.data.path));
-  for (const archive of archives) {
+  for (const archive of resolvedArchives) {
     if (paths.has(archive.path))
       throw new Error(`Duplicate archive path: ${archive.path}`);
     paths.add(archive.path);
@@ -20,7 +23,7 @@ export async function getStaticPaths() {
       params: { path: entry.data.path.replace(/^\/|\/$/g, "") },
       props: { entry, archive: null },
     })),
-    ...archives.map((archive) => ({
+    ...resolvedArchives.map((archive) => ({
       params: { path: archive.path.replace(/^\/|\/$/g, "") },
       props: { entry: null, archive },
     })),
@@ -31,8 +34,11 @@ const rendered = entry ? await render(entry) : null;
 const Content = rendered?.Content;
 const showGeneratedContents = entry?.data.toc && !entry.data.wordpressId;
 const isPost = entry?.data.kind === "post";
+const entries = await articles();
+const series = isPost ? articleSeries(entries).find((group) => group.posts.some((post) => post.id === entry.id)) : undefined;
+const suggestions = isPost ? relatedArticles(entry, entries) : [];
 const topic = archive ?? (entry ? topicArchive(entry.data.path) : undefined);
-const related = topic ? archivePosts(topic, await articles()) : [];
+const related = topic ? archivePosts(topic, entries) : [];
 const title = entry?.data.title ?? archive?.title ?? "Archive";
 const description =
   (entry?.data.description ?? archive?.description) ||
@@ -100,6 +106,13 @@ const discussion = entry
           {showGeneratedContents && <TableOfContents headings={rendered?.headings ?? []} />}
           {Content && <Content />}
         </div>
+        {series && <SeriesNavigation title={series.title} path={series.path} posts={series.posts} currentPath={entry.data.path} />}
+        {suggestions.length > 0 && (
+          <section class="related-articles" aria-labelledby="related-articles-title">
+            <h2 id="related-articles-title">Related articles</h2>
+            {suggestions.map((post) => <PostCard post={post} />)}
+          </section>
+        )}
         {topic && (
           <section class="topic-articles" aria-label="Articles in this topic">
             {related.length ? (

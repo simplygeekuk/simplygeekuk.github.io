@@ -9,6 +9,12 @@ categories: []
 tags: []
 draft: true
 toc: true
+# Optional: use a slug registered in src/data/series.json.
+# series: "build-tools-for-vmware-aria"
+# seriesOrder: 5
+# Optional: select up to three published article paths; [] hides suggestions.
+# related:
+#   - "/another-article/"
 ---
 
 <!-- Update the title, summary, path, date, categories, and tags above. -->

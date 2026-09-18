@@ -1,8 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 import { articles } from "../lib/content";
-import { archives } from "../lib/archives";
+import { allArchives } from "../lib/archives";
 const entries = await articles();
+const archives = allArchives(entries);
 ---
 
 <Base
