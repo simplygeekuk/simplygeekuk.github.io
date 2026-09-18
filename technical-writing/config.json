@@ -13,7 +13,7 @@
   "enabled": true,
   "spelling": {
     "mode": "british",
-    "directive": "Project house style: plain British English, stated in the repository CLAUDE.md and the sdd-workflow writing rules."
+    "directive": "Project house style: British English."
   },
   "paths": [
     {

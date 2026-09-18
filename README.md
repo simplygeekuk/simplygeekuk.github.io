@@ -44,6 +44,28 @@ Imported articles live in `src/content/articles/`. Their `.md` files contain YAM
 
 ## Write an article
 
+For a complete starting structure, copy [templates/article.md](templates/article.md) into `src/content/articles/` with a unique filename.
+For a standalone page, use [templates/page.md](templates/page.md).
+The article template includes an introduction, prerequisites, setup, code, verification, troubleshooting, references, and a summary.
+Remove sections that your topic does not need.
+
+1. Update the title, description, unique path, and publication date in the copied file.
+2. Write the content below the metadata. Use `##` for sections and `###` for subsections; the layout supplies the page title.
+3. Put screenshots in `public/images/your-slug/` and reference them as `/images/your-slug/filename.webp`. Add useful alternative text.
+4. Keep `draft: true` while writing. Drafts have no preview route. To view the page locally, temporarily set `draft: false` and run `npm run dev`.
+5. Open the configured path locally, then restore `draft: true` if the content is not ready for publication.
+
+New Markdown articles and pages automatically display **Page Contents** above the introduction, using headings from `##` through `######`.
+Nested headings become nested links. A page without these headings has no TOC.
+Set `toc: false` in the metadata to hide the generated TOC.
+Imported WordPress articles retain their existing contents navigation.
+
+Standalone pages use `kind: "page"` and do not appear in the homepage post list or RSS feed.
+Add a navigation link separately if a page needs one.
+Template files remain outside the content collection and are never published directly.
+
+For a minimal article, use this example:
+
 Create `src/content/articles/my-new-post.md`:
 
 ```markdown

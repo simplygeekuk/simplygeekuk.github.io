@@ -590,14 +590,14 @@ nav a[aria-current="page"] {
 .prose [id] {
   scroll-margin-top: 30px;
 }
-.prose #ez-toc-container {
+.prose :is(#ez-toc-container, .page-contents) {
   padding: 0 0 0 20px;
   border-left: 2px solid var(--accent);
   font-size: 15px;
   line-height: 1.6;
   margin: 0 0 36px;
 }
-.prose .ez-toc-title {
+.prose :is(.ez-toc-title, .page-contents-title) {
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
@@ -605,36 +605,36 @@ nav a[aria-current="page"] {
   text-transform: uppercase;
   margin: 0 0 12px;
 }
-.prose #ez-toc-container ul {
+.prose :is(#ez-toc-container, .page-contents) ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.prose #ez-toc-container ul ul {
+.prose :is(#ez-toc-container, .page-contents) ul ul {
   border-left: 1px solid var(--line);
   padding-left: 16px;
   margin: 6px 0 10px 2px;
   font-size: 14px;
 }
-.prose #ez-toc-container li {
+.prose :is(#ez-toc-container, .page-contents) li {
   margin: 0 0 6px;
 }
-.prose #ez-toc-container li:last-child {
+.prose :is(#ez-toc-container, .page-contents) li:last-child {
   margin-bottom: 0;
 }
-.prose #ez-toc-container a {
+.prose :is(#ez-toc-container, .page-contents) a {
   color: var(--ink);
   text-decoration: none;
 }
-.prose #ez-toc-container ul ul a {
+.prose :is(#ez-toc-container, .page-contents) ul ul a {
   color: var(--muted);
 }
-.prose #ez-toc-container a:hover,
-.prose #ez-toc-container a:focus-visible {
+.prose :is(#ez-toc-container, .page-contents) a:hover,
+.prose :is(#ez-toc-container, .page-contents) a:focus-visible {
   color: var(--accent);
   text-decoration: underline;
 }
-.prose #ez-toc-container a:focus-visible {
+.prose :is(#ez-toc-container, .page-contents) a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }

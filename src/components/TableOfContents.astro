@@ -1,0 +1,43 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+interface Item extends Heading {
+  children: Item[];
+}
+interface Props {
+  headings?: Heading[];
+  items?: Item[];
+  nested?: boolean;
+}
+const { headings = [], items, nested = false } = Astro.props;
+const tree: Item[] = items ?? [];
+if (!items) {
+  const stack: Item[] = [];
+  for (const heading of headings.filter(({ depth }) => depth >= 2 && depth <= 6)) {
+    const item: Item = { ...heading, children: [] };
+    while (stack.length && stack[stack.length - 1].depth >= item.depth) stack.pop();
+    const parent = stack[stack.length - 1];
+    (parent ? parent.children : tree).push(item);
+    stack.push(item);
+  }
+}
+---
+
+{nested ? (
+  <ul>
+    {tree.map((item) => (
+      <li>
+        <a href={`#${encodeURIComponent(item.slug)}`}>{item.text}</a>
+        {item.children.length > 0 && <Astro.self items={item.children} nested />}
+      </li>
+    ))}
+  </ul>
+) : tree.length > 0 && (
+  <nav class="page-contents" aria-label="Page Contents">
+    <p class="page-contents-title">Page Contents</p>
+    <Astro.self items={tree} nested />
+  </nav>
+)}

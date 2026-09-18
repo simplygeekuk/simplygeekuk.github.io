@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import Base from "../layouts/Base.astro";
 import PostCard from "../components/PostCard.astro";
+import TableOfContents from "../components/TableOfContents.astro";
 import { articles, formatDate } from "../lib/content";
 import { archives, archivePosts, topicArchive } from "../lib/archives";
 import comments from "../data/comments.json";
@@ -28,6 +29,7 @@ export async function getStaticPaths() {
 const { entry, archive } = Astro.props;
 const rendered = entry ? await render(entry) : null;
 const Content = rendered?.Content;
+const showGeneratedContents = entry?.data.toc && !entry.data.wordpressId;
 const isPost = entry?.data.kind === "post";
 const topic = archive ?? (entry ? topicArchive(entry.data.path) : undefined);
 const related = topic ? archivePosts(topic, await articles()) : [];
@@ -94,7 +96,10 @@ const discussion = entry
             </p>
           )}
         </header>
-        <div class="prose">{Content && <Content />}</div>
+        <div class="prose">
+          {showGeneratedContents && <TableOfContents headings={rendered?.headings ?? []} />}
+          {Content && <Content />}
+        </div>
         {topic && (
           <section class="topic-articles" aria-label="Articles in this topic">
             {related.length ? (

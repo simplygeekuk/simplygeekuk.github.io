@@ -15,6 +15,7 @@ const articles = defineCollection({
     categories: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    toc: z.boolean().default(true),
     wordpressId: z.number().optional(),
     originalUrl: z.url().optional(),
     thumbnail: z.string().startsWith("/").optional(),
