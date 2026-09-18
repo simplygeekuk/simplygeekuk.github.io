@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { displayStyles } from "../config/display";
 interface Props {
   title?: string;
   description?: string;
@@ -19,7 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en-GB" data-theme="dark">
+<html lang="en-GB" data-theme="dark" style={displayStyles}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

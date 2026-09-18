@@ -1,7 +1,9 @@
 import { getCollection } from "astro:content";
 import articleImages from "../data/article-images.json";
 
-export const POSTS_PER_PAGE = 8;
+import { display } from "../config/display";
+
+export const POSTS_PER_PAGE = display.articlesPerPage;
 
 export async function articles() {
   const entries = await getCollection("articles", ({ data }) => !data.draft);

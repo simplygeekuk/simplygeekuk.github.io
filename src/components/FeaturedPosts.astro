@@ -1,12 +1,13 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import PostCard from "./PostCard.astro";
+import { display } from "../config/display";
 
 interface Props {
   posts: CollectionEntry<"articles">[];
 }
 const { posts } = Astro.props;
-const recentPosts = posts.slice(0, 6);
+const recentPosts = posts.slice(0, display.recentArticles);
 ---
 
 {recentPosts.length > 0 && (

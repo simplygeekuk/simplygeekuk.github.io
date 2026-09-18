@@ -86,7 +86,7 @@ h2 {
   color: #fff;
 }
 .wrap {
-  width: min(1200px, calc(100% - 64px));
+  width: min(var(--page-width), calc(100% - var(--desktop-gutter)));
   margin-inline: auto;
 }
 .sr-only {
@@ -370,7 +370,7 @@ nav a[aria-current="page"] {
 .yearly-posts .card-content p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: var(--preview-lines);
   overflow: hidden;
 }
 .card-footer {
@@ -552,7 +552,7 @@ nav a[aria-current="page"] {
 .related-articles .card-content p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: var(--related-preview-lines);
   overflow: hidden;
 }
 .site-footer p {
@@ -623,8 +623,8 @@ nav a[aria-current="page"] {
 .article-featured-image {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 1;
-  max-height: 280px;
+  aspect-ratio: var(--featured-image-aspect-ratio);
+  max-height: var(--featured-image-max-height);
   object-fit: cover;
   border-radius: 8px;
 }
@@ -894,7 +894,7 @@ nav a[aria-current="page"] {
 }
 @media (max-width: 760px) {
   .wrap {
-    width: calc(100% - 36px);
+    width: min(var(--page-width), calc(100% - var(--mobile-gutter)));
   }
   .header-inner {
     flex-wrap: wrap;
