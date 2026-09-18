@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import PostCard from "../components/PostCard.astro";
+import FeaturedPosts from "./FeaturedPosts.astro";
 import YearlyPosts from "./YearlyPosts.astro";
 import type { CollectionEntry } from "astro:content";
 import { POSTS_PER_PAGE } from "../lib/content";
@@ -25,11 +25,7 @@ const previousPage = currentPage === 2 ? "/" : `/page/${currentPage - 1}/`;
         Follow via RSS <span aria-hidden="true">&nearr;</span>
       </a>
     </header>
-    {currentPage === 1 && <section class="featured-posts" aria-label="Featured articles">
-      {posts.slice(0, 3).map((post) => (
-        <PostCard post={post} featured />
-      ))}
-    </section>}
+    {currentPage === 1 && <FeaturedPosts posts={allPosts} />}
     <section aria-label="Latest articles">
       <YearlyPosts posts={posts} />
       {totalPages > 1 && (

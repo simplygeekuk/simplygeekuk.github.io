@@ -274,11 +274,68 @@ nav a[aria-current="page"] {
 .home-intro > a:hover {
   color: var(--accent);
 }
-.featured-posts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+.recent-articles {
   margin-bottom: 48px;
+}
+.recent-articles-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.recent-articles-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.carousel-status {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+.carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 22px;
+}
+.carousel-controls button:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.carousel-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.featured-posts {
+  --carousel-gap: 16px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 2 * var(--carousel-gap)) / 3);
+  gap: var(--carousel-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block: 6px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.featured-posts > .post-card {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+.featured-posts a:focus-visible {
+  outline-offset: -5px;
 }
 .post-card {
   background: var(--card);
@@ -826,7 +883,7 @@ nav a[aria-current="page"] {
     font-size: 28px;
   }
   .featured-posts {
-    gap: 12px;
+    --carousel-gap: 12px;
   }
   .featured .card-content {
     padding: 18px;
@@ -898,16 +955,14 @@ nav a[aria-current="page"] {
   .home-intro p {
     font-size: 13px;
   }
-  .featured-posts {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 12px;
+  .recent-articles {
     margin-bottom: 28px;
   }
-  .featured {
-    flex: 0 0 88%;
-    scroll-snap-align: start;
+  .recent-articles-heading {
+    flex-wrap: wrap;
+  }
+  .featured-posts {
+    grid-auto-columns: 88%;
   }
   .featured .card-content {
     min-height: 145px;

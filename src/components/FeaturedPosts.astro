@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from "astro:content";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  posts: CollectionEntry<"articles">[];
+}
+const { posts } = Astro.props;
+const recentPosts = posts.slice(0, 6);
+---
+
+{recentPosts.length > 0 && (
+  <section class="recent-articles" aria-labelledby="recent-articles-title" data-article-carousel>
+    <div class="recent-articles-heading">
+      <h2 id="recent-articles-title">Recent articles</h2>
+      <div class="carousel-controls" hidden>
+        <span class="carousel-status" aria-live="polite" aria-atomic="true"></span>
+        <button type="button" data-previous aria-label="Previous recent articles" aria-controls="recent-articles-track" disabled>
+          <span aria-hidden="true">&larr;</span>
+        </button>
+        <button type="button" data-next aria-label="Next recent articles" aria-controls="recent-articles-track">
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+    </div>
+    <div id="recent-articles-track" class="featured-posts" tabindex="0" role="group" aria-label="Recent articles; use the left and right arrow keys to scroll">
+      {recentPosts.map((post) => <PostCard post={post} featured />)}
+    </div>
+  </section>
+)}
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-article-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>(".featured-posts");
+    const controls = carousel.querySelector<HTMLElement>(".carousel-controls");
+    const previous = carousel.querySelector<HTMLButtonElement>("[data-previous]");
+    const next = carousel.querySelector<HTMLButtonElement>("[data-next]");
+    const status = carousel.querySelector<HTMLElement>(".carousel-status");
+    if (!track || !controls || !previous || !next || !status) return;
+    const cards = [...track.querySelectorAll<HTMLElement>(".post-card")];
+    if (!cards.length) return;
+
+    const stride = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap);
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      previous.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+      const first = Math.min(cards.length, Math.round(track.scrollLeft / stride()) + 1);
+      const visible = Math.max(1, Math.floor((track.clientWidth + parseFloat(getComputedStyle(track).columnGap) + 2) / stride()));
+      const last = Math.min(cards.length, first + visible - 1);
+      status.textContent = first === last ? `${first} of ${cards.length}` : `${first}–${last} of ${cards.length}`;
+      controls.hidden = max <= 2;
+    };
+    const move = (position: number) => {
+      track.scrollTo({
+        left: Math.max(0, Math.min(position, track.scrollWidth - track.clientWidth)),
+        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      });
+    };
+    const step = (direction: number) => move((Math.round(track.scrollLeft / stride()) + direction) * stride());
+    previous.addEventListener("click", () => step(-1));
+    next.addEventListener("click", () => step(1));
+    track.addEventListener("keydown", (event) => {
+      if (event.target !== track) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        step(event.key === "ArrowLeft" ? -1 : 1);
+      } else if (event.key === "Home" || event.key === "End") {
+        event.preventDefault();
+        move(event.key === "Home" ? 0 : track.scrollWidth);
+      }
+    });
+    let scrollTimer: ReturnType<typeof setTimeout>;
+    track.addEventListener("scroll", () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(update, 120);
+    }, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  });
+</script>
