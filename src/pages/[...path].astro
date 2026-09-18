@@ -5,6 +5,7 @@ import PostCard from "../components/PostCard.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import SeriesNavigation from "../components/SeriesNavigation.astro";
 import Comments from "../components/Comments.astro";
+import BackToTop from "../components/BackToTop.astro";
 import { articles, formatDate } from "../lib/content";
 import { archives, allArchives, archivePosts, topicArchive } from "../lib/archives";
 import { articleSeries, relatedArticles } from "../lib/series";
@@ -207,4 +208,5 @@ const discussion = entry
       </article>
     )
   )}
+  {isPost && <BackToTop />}
 </Base>

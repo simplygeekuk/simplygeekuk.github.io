@@ -1,0 +1,48 @@
+<a class="article-back-to-top" href="#top" hidden>
+  <span aria-hidden="true">&uarr;</span>
+  Back to top
+</a>
+
+<script>
+  const link = document.querySelector<HTMLAnchorElement>(".article-back-to-top");
+  if (link) {
+    const updateVisibility = () => {
+      link.hidden = window.scrollY < 600;
+    };
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("pageshow", updateVisibility);
+  }
+</script>
+
+<style>
+  .article-back-to-top {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--ink);
+    box-shadow: 0 4px 16px #0003;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .article-back-to-top:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media print {
+    .article-back-to-top {
+      display: none;
+    }
+  }
+</style>
