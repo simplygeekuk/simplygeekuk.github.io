@@ -245,6 +245,9 @@ function migrateLink(value, item) {
 for (const item of selected) {
   console.log(`Importing ${plain(item.title.rendered)}`);
   const $ = load(item.content.rendered, {}, false);
+  // Place the imported contents navigation immediately below the article header.
+  const contents = $("#ez-toc-container").first();
+  if (contents.length) $.root().prepend(contents);
   $(
     "script, style, link, form, noscript, .sharedaddy, .jp-relatedposts",
   ).remove();

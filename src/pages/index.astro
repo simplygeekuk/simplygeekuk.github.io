@@ -8,7 +8,7 @@ const posts = (await articles())
   .slice(0, 8);
 const previews = new Map(posts.map((post) => {
   const $ = load(post.body ?? "");
-  $("pre, script, style, .missing-image").remove();
+  $("pre, script, style, .missing-image, #ez-toc-container").remove();
   const text = $("p").toArray().map((paragraph) => $(paragraph).text()).join(" ").replace(/\s+/g, " ").trim();
   const preview = text.length > 1500 ? text.slice(0, 1500).replace(/\s+\S*$/, "") + "…" : text;
   return [post.id, preview || post.data.description];

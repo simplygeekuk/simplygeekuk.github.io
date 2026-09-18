@@ -12,6 +12,12 @@ wordpressId: 2838
 originalUrl: "https://simplygeek.co.uk/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/"
 ---
 
+<div id="ez-toc-container" class="ez-toc-v2_0_88 ez-toc-wrap-left counter-hierarchy ez-toc-counter ez-toc-transparent ez-toc-container-direction">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Page Contents</p>
+<span class="ez-toc-title-toggle"></span></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-1" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Installing_Windows_Subsystem_for_Linux_WSL">Installing Windows Subsystem for Linux (WSL)</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Create_Environment_for_Ansible_Development">Create Environment for Ansible Development</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Visual_Studio_Code_Setup">Visual Studio Code Setup</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-4" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Create_and_Configure_VS_Code_Workspace">Create and Configure VS Code Workspace</a></li><li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-5" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Add_projects_to_VS_Code_Workspace">Add projects to VS Code Workspace</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Exploring_some_of_the_benefits_of_using_WSL_and_VS_Code">Exploring some of the benefits of using WSL and VS Code</a></li></ul></nav></div>
+
 
 <p class="wp-block-paragraph"><strong>Windows Subsystem for Linux (WSL)</strong> is a compatibility layer that allows you to run a Linux environment directly on Windows, without the need for a virtual machine or dual-boot setup. It provides native access to a full Linux command-line experience, enabling developers to use Linux-based tools like Ansible, Git, and Python seamlessly alongside their Windows workflows. WSL is especially beneficial for Ansible development, as it provides a native-like environment for testing and executing playbooks, while still leveraging the convenience of the Windows desktop.</p>
 
@@ -59,11 +65,7 @@ originalUrl: "https://simplygeek.co.uk/getting-started-with-ansible-development-
 
 
 
-<div id="ez-toc-container" class="ez-toc-v2_0_88 ez-toc-wrap-left counter-hierarchy ez-toc-counter ez-toc-transparent ez-toc-container-direction">
-<div class="ez-toc-title-container">
-<p class="ez-toc-title">Page Contents</p>
-<span class="ez-toc-title-toggle"></span></div>
-<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-1" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Installing_Windows_Subsystem_for_Linux_WSL">Installing Windows Subsystem for Linux (WSL)</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Create_Environment_for_Ansible_Development">Create Environment for Ansible Development</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Visual_Studio_Code_Setup">Visual Studio Code Setup</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-4" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Create_and_Configure_VS_Code_Workspace">Create and Configure VS Code Workspace</a></li><li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-5" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Add_projects_to_VS_Code_Workspace">Add projects to VS Code Workspace</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/#Exploring_some_of_the_benefits_of_using_WSL_and_VS_Code">Exploring some of the benefits of using WSL and VS Code</a></li></ul></nav></div>
+
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="Installing_Windows_Subsystem_for_Linux_WSL"></span><strong>Installing Windows Subsystem for Linux (WSL)</strong><span class="ez-toc-section-end"></span></h2>
 
 

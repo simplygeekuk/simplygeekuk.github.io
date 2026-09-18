@@ -12,6 +12,12 @@ wordpressId: 2657
 originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/"
 ---
 
+<div id="ez-toc-container" class="ez-toc-v2_0_88 ez-toc-wrap-left counter-hierarchy ez-toc-counter ez-toc-transparent ez-toc-container-direction">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Page Contents</p>
+<span class="ez-toc-title-toggle"></span></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Install_the_vRealize_Developer_Tools_extension_for_Visual_Studio_Code">Install the vRealize Developer Tools extension for Visual Studio Code</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Change_Active_Profile">Change Active Profile</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Create_Projects">Create Projects</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Intellisense_Support">Intellisense Support</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Browse_and_Fetch_Orchestrator_Content">Browse and Fetch Orchestrator Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Run_JavaScript_Actions">Run JavaScript Actions</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Other_commands">Other commands</a></li></ul></nav></div>
+
 
 <p class="wp-block-paragraph">The Build Tools for VMware Aria project has developed an Extension for Visual Studio Code that provides native integration directly in the IDE. Using VSCode with this extension will provide the following features when developing code for your VCF Automation environment:</p>
 
@@ -43,11 +49,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<div id="ez-toc-container" class="ez-toc-v2_0_88 ez-toc-wrap-left counter-hierarchy ez-toc-counter ez-toc-transparent ez-toc-container-direction">
-<div class="ez-toc-title-container">
-<p class="ez-toc-title">Page Contents</p>
-<span class="ez-toc-title-toggle"></span></div>
-<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Install_the_vRealize_Developer_Tools_extension_for_Visual_Studio_Code">Install the vRealize Developer Tools extension for Visual Studio Code</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Change_Active_Profile">Change Active Profile</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Create_Projects">Create Projects</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Intellisense_Support">Intellisense Support</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Browse_and_Fetch_Orchestrator_Content">Browse and Fetch Orchestrator Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Run_JavaScript_Actions">Run JavaScript Actions</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Other_commands">Other commands</a></li></ul></nav></div>
+
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="Install_the_vRealize_Developer_Tools_extension_for_Visual_Studio_Code"></span>Install the vRealize Developer Tools extension for Visual Studio Code<span class="ez-toc-section-end"></span></h2>
 
 

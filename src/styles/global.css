@@ -591,19 +591,52 @@ nav a[aria-current="page"] {
   scroll-margin-top: 30px;
 }
 .prose #ez-toc-container {
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--paper);
-  font-size: 14px;
-  margin: 30px 0;
+  padding: 0 0 0 20px;
+  border-left: 2px solid var(--accent);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 36px;
 }
 .prose .ez-toc-title {
-  font-weight: bold;
-  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
 }
 .prose #ez-toc-container ul {
-  padding-left: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.prose #ez-toc-container ul ul {
+  border-left: 1px solid var(--line);
+  padding-left: 16px;
+  margin: 6px 0 10px 2px;
+  font-size: 14px;
+}
+.prose #ez-toc-container li {
+  margin: 0 0 6px;
+}
+.prose #ez-toc-container li:last-child {
+  margin-bottom: 0;
+}
+.prose #ez-toc-container a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.prose #ez-toc-container ul ul a {
+  color: var(--muted);
+}
+.prose #ez-toc-container a:hover,
+.prose #ez-toc-container a:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.prose #ez-toc-container a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 .prose .ez-toc-title-toggle,
 .prose .ez-toc-section-end {

@@ -12,16 +12,18 @@ wordpressId: 2662
 originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/"
 ---
 
-
-<p class="wp-block-paragraph">This series has focused on getting up and running with the Build Tools and creating basic projects. In this post, I will demonstrate all the available Maven commands and some additional parameters that can be used. This page can also be used as a useful Maven command reference.</p>
-
-
-
 <div id="ez-toc-container" class="ez-toc-v2_0_88 ez-toc-wrap-left counter-hierarchy ez-toc-counter ez-toc-transparent ez-toc-container-direction">
 <div class="ez-toc-title-container">
 <p class="ez-toc-title">Page Contents</p>
 <span class="ez-toc-title-toggle"></span></div>
 <nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Creating_Projects">Creating Projects</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#TypeScript_Project">TypeScript Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#JavaScript_Project">JavaScript Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#XML_Project">XML Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Mixed_Project">Mixed Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#ABX_Project">ABX Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#vRA_8x_Project">vRA 8.x Project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Push_Content">Push Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Pull_Content">Pull Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Clean_Orchestrator_Packages">Clean Orchestrator Packages</a></li></ul></nav></div>
+
+
+<p class="wp-block-paragraph">This series has focused on getting up and running with the Build Tools and creating basic projects. In this post, I will demonstrate all the available Maven commands and some additional parameters that can be used. This page can also be used as a useful Maven command reference.</p>
+
+
+
+
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="Creating_Projects"></span>Creating Projects<span class="ez-toc-section-end"></span></h2>
 
 
