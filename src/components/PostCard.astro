@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/content";
+import { archives } from "../lib/archives";
+interface Props {
+  post: CollectionEntry<"articles">;
+  index?: number;
+  featured?: boolean;
+  preview?: string;
+}
+const { post, featured = false, preview } = Astro.props;
+const thumbnail = post.data.thumbnail;
+---
+
+<article
+  class:list={["post-card", { featured, "has-thumbnail": thumbnail }]}
+  data-search={`${post.data.title} ${post.data.description} ${post.data.categories.join(" ")} ${post.data.tags.join(" ")}`.toLowerCase()}
+>
+  <a class="card-content" href={post.data.path}>
+    {thumbnail && (
+      <img
+        class="post-thumbnail"
+        src={thumbnail}
+        alt=""
+        width="80"
+        height="80"
+        loading="lazy"
+      />
+    )}
+    <h2>{post.data.title}</h2>
+    {!featured && <p>{preview ?? post.data.description}</p>}
+  </a>
+  <div class="card-footer">
+    <time datetime={post.data.published.toISOString()}>
+      {formatDate(post.data.published)}
+    </time>
+    {!featured && post.data.categories.length > 0 && (
+      <ul class="category-labels" aria-label="Categories">
+        {post.data.categories.map((category) => {
+          const archive = archives.find(
+            (archive) =>
+              archive.kind === "category" &&
+              archive.title === category &&
+              archive.postIds.includes(post.data.wordpressId ?? -1),
+          );
+          return (
+            <li>
+              {archive ? <a href={archive.path}>{category}</a> : category}
+            </li>
+          );
+        })}
+      </ul>
+    )}
+    {featured && (
+      <a
+        class="featured-read"
+        href={post.data.path}
+        aria-label={`Read ${post.data.title}`}
+      >
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    )}
+  </div>
+</article>

@@ -1,0 +1,47 @@
+{
+  "version": 3,
+  "profile": "technical-readability",
+  "asd_ste100": {
+    "standard": {
+      "name": "ASD-STE100",
+      "issue": 9
+    }
+  },
+  "style": {
+    "rules": []
+  },
+  "enabled": true,
+  "spelling": {
+    "mode": "british",
+    "directive": "Project house style: plain British English, stated in the repository CLAUDE.md and the sdd-workflow writing rules."
+  },
+  "paths": [
+    {
+      "glob": "migration/VALIDATION.md",
+      "mode": "descriptive"
+    },
+    {
+      "glob": "README.md",
+      "mode": "mixed",
+      "default_mode": "descriptive"
+    },
+    {
+      "glob": "migration/*.md",
+      "mode": "mixed",
+      "default_mode": "descriptive"
+    },
+    {
+      "glob": "src/content/articles/*.md",
+      "mode": "mixed",
+      "default_mode": "descriptive"
+    }
+  ],
+  "exclude": [
+    "migration/CHANGED-FILES.md",
+    "dist/**",
+    "node_modules/**",
+    ".migration-cache/**",
+    "CHANGELOG.md"
+  ],
+  "notes": "Covers maintenance documentation and blog articles for the SimplyGeek migration. Existing imported content is preserved; this configuration governs later writing and review."
+}

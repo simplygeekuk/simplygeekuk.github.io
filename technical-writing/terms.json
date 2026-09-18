@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "standard": {
+    "name": "ASD-STE100",
+    "issue": 9
+  },
+  "technical_nouns": [
+    {
+      "term": "service-oriented architecture",
+      "definition": "Software architecture that organises capabilities into loosely coupled reusable services.",
+      "category": "Software and automation concepts",
+      "source": "src/content/articles/2601-using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development.md",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Approval applies only to the software sense defined here."
+    },
+    {
+      "term": "playbook",
+      "definition": "Ansible document that defines automation plays and tasks to execute against hosts.",
+      "category": "Software and automation concepts",
+      "source": "src/content/articles/2838-getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code.md",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Approval applies only to the software sense defined here."
+    },
+    {
+      "term": "workflow",
+      "definition": "Visual automation flow executed by VCF Operations Orchestrator.",
+      "category": "Software and automation concepts",
+      "source": "src/content/articles/2693-vcf-operations-orchestrator-why-i-write-actions-and-not-workflows-mostly.md",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Approval applies only to the software sense defined here."
+    },
+    {
+      "term": "action",
+      "definition": "Reusable scripted function used by VCF Operations Orchestrator.",
+      "category": "Software and automation concepts",
+      "source": "src/content/articles/2693-vcf-operations-orchestrator-why-i-write-actions-and-not-workflows-mostly.md",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Approval applies only to the software sense defined here. The core alternatives step, procedure, and task do not identify the reusable Orchestrator function. The resolver-listed law category does not describe this usage."
+    },
+    {
+      "term": "semaphore",
+      "definition": "Concurrency-control mechanism used to coordinate access to a shared resource.",
+      "category": "Software and automation concepts",
+      "source": "src/content/articles/2688-process-locking-made-easy-in-vcf-operations-orchestrator-featuring-automatic-unlock.md",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Approval applies only to the software sense defined here."
+    }
+  ],
+  "technical_verbs": [],
+  "notes": "These noun senses distinguish the automation concepts discussed in SimplyGeek articles. Approval does not extend to unrelated senses or verb uses."
+}

@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import { articles } from "../lib/content";
+import { archives } from "../lib/archives";
+const entries = await articles();
+---
+
+<Base
+  title="Site map"
+  description="Find all SimplyGeek articles, topics, and series."
+>
+  <section class="archive wrap">
+    <h1>Site map</h1>
+    <h2>Articles</h2>
+    <ul>
+      {entries
+        .filter((entry) => entry.data.kind === "post")
+        .map((entry) => (
+          <li>
+            <a href={entry.data.path}>{entry.data.title}</a>
+          </li>
+        ))}
+    </ul>
+    <h2>Pages</h2>
+    <ul>
+      {entries
+        .filter((entry) => entry.data.kind === "page")
+        .map((entry) => (
+          <li>
+            <a href={entry.data.path}>{entry.data.title}</a>
+          </li>
+        ))}
+    </ul>
+    <h2>Topics and series</h2>
+    <ul>
+      {archives
+        .filter(
+          (archive) => archive.kind !== "tag" && archive.postIds.length > 0,
+        )
+        .map((archive) => (
+          <li>
+            <a href={archive.path}>{archive.title}</a>
+          </li>
+        ))}
+    </ul>
+  </section>
+</Base>

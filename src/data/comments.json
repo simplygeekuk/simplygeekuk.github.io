@@ -1,0 +1,58 @@
+[
+  {
+    "id": 3364,
+    "post": 2693,
+    "parent": 0,
+    "author": "Mayank",
+    "date": "2025-07-01T15:49:55Z",
+    "html": "<p>I always love this approach. You can use vRODoc for JSDoc self-annotated actions as HTML. Thats would be very cool </p>\n"
+  },
+  {
+    "id": 3365,
+    "post": 2693,
+    "parent": 3364,
+    "author": "Gavin Stephens",
+    "date": "2025-07-01T15:57:25Z",
+    "html": "<p>Thanks Mayank. I am actually working on my own documentation feature (about 90% complete) and will share a post on this soon.</p>\n"
+  },
+  {
+    "id": 3366,
+    "post": 2693,
+    "parent": 0,
+    "author": "Divyesh Patel",
+    "date": "2025-07-03T03:59:42Z",
+    "html": "<p>This is also the core part of how VMware team deliver solutions using vRBT to our customers !</p>\n"
+  },
+  {
+    "id": 3367,
+    "post": 2693,
+    "parent": 3366,
+    "author": "Gavin Stephens",
+    "date": "2025-07-03T08:18:38Z",
+    "html": "<p>Thanks for sharing Divyesh</p>\n"
+  },
+  {
+    "id": 3368,
+    "post": 2601,
+    "parent": 0,
+    "author": "Mayank",
+    "date": "2025-07-08T15:12:04Z",
+    "html": "<p>And this can be extended to Polyglot modules as well. </p>\n"
+  },
+  {
+    "id": 3836,
+    "post": 2723,
+    "parent": 0,
+    "author": "Mayank",
+    "date": "2025-07-21T07:18:03Z",
+    "html": "<p>Just wondering does this have search capability?</p>\n"
+  },
+  {
+    "id": 3842,
+    "post": 2723,
+    "parent": 3836,
+    "author": "Gavin Stephens",
+    "date": "2025-07-21T09:08:45Z",
+    "html": "<p>HI Mayank. Not currently, My initial goal was to create markdown documents that I could then store in Azure Devops or Gitlab (as their Wiki’s are MD based) and use the search capabilities within those products.</p>\n"
+  }
+]

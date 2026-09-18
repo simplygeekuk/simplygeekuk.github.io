@@ -1,0 +1,172 @@
+---
+import { render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import PostCard from "../components/PostCard.astro";
+import { articles, formatDate } from "../lib/content";
+import { archives, archivePosts, topicArchive } from "../lib/archives";
+import comments from "../data/comments.json";
+
+export async function getStaticPaths() {
+  const entries = await articles();
+  const paths = new Set(entries.map((entry) => entry.data.path));
+  for (const archive of archives) {
+    if (paths.has(archive.path))
+      throw new Error(`Duplicate archive path: ${archive.path}`);
+    paths.add(archive.path);
+  }
+  return [
+    ...entries.map((entry) => ({
+      params: { path: entry.data.path.replace(/^\/|\/$/g, "") },
+      props: { entry, archive: null },
+    })),
+    ...archives.map((archive) => ({
+      params: { path: archive.path.replace(/^\/|\/$/g, "") },
+      props: { entry: null, archive },
+    })),
+  ];
+}
+const { entry, archive } = Astro.props;
+const rendered = entry ? await render(entry) : null;
+const Content = rendered?.Content;
+const isPost = entry?.data.kind === "post";
+const topic = archive ?? (entry ? topicArchive(entry.data.path) : undefined);
+const related = topic ? archivePosts(topic, await articles()) : [];
+const title = entry?.data.title ?? archive?.title ?? "Archive";
+const description =
+  (entry?.data.description ?? archive?.description) ||
+  `${title} articles and guides from SimplyGeek.`;
+const discussion = entry
+  ? comments.filter((comment) => comment.post === entry.data.wordpressId)
+  : [];
+---
+
+<Base
+  title={title}
+  description={description}
+  article={isPost}
+  published={isPost ? entry?.data.published : undefined}
+>
+  {archive ? (
+    <section class="archive wrap">
+      <a class="back-link" href="/archive/">
+        &larr; All articles
+      </a>
+      <p class="eyebrow">
+        {archive.kind === "series"
+          ? "Article series"
+          : archive.kind === "tag"
+            ? "Tag"
+            : "Topic"}
+      </p>
+      <h1>{title}</h1>
+      {archive.description && <p>{archive.description}</p>}
+      {related.length ? (
+        related.map((post) => <PostCard post={post} />)
+      ) : (
+        <p>
+          No articles are currently published in this topic.{" "}
+          <a href="/archive/">Browse all articles.</a>
+        </p>
+      )}
+    </section>
+  ) : (
+    entry && (
+      <article class="article wrap">
+        <header class="article-header">
+          <a class="back-link" href="/">
+            &larr; Back to the blog
+          </a>
+          <p class="eyebrow">
+            {isPost
+              ? (entry.data.categories.at(-1) ?? "Article")
+              : topic
+                ? "Explore a topic"
+                : "Behind the blog"}
+          </p>
+          <h1>{title}</h1>
+          {isPost && (
+            <p class="article-meta">
+              <time datetime={entry.data.published.toISOString()}>
+                {formatDate(entry.data.published)}
+              </time>
+              <span> / </span>
+              {entry.data.author}
+            </p>
+          )}
+        </header>
+        <div class="prose">{Content && <Content />}</div>
+        {topic && (
+          <section class="topic-articles" aria-label="Articles in this topic">
+            {related.length ? (
+              related.map((post) => <PostCard post={post} />)
+            ) : (
+              <p>
+                No articles are currently published in this topic.{" "}
+                <a href="/archive/">Browse all articles.</a>
+              </p>
+            )}
+          </section>
+        )}
+        {isPost && entry.data.tags.length > 0 && (
+          <ul class="tag-list" aria-label="Article tags">
+            {entry.data.tags.map((tag) => {
+              const archive = archives.find(
+                (archive) =>
+                  archive.kind === "tag" &&
+                  archive.title === tag &&
+                  archive.postIds.includes(entry.data.wordpressId ?? -1),
+              );
+              return (
+                <li>{archive ? <a href={archive.path}>{tag}</a> : tag}</li>
+              );
+            })}
+          </ul>
+        )}
+        {discussion.length > 0 && (
+          <section
+            class="discussion"
+            id="comments"
+            aria-labelledby="discussion-title"
+          >
+            <h2 id="discussion-title">
+              Discussion <span>({discussion.length})</span>
+            </h2>
+            <p class="discussion-note">
+              Comments from the original blog, preserved for reference. New
+              comments are not enabled.
+            </p>
+            <ol class="comment-list">
+              {discussion.map((comment) => (
+                <li class="comment" id={`comment-${comment.id}`}>
+                  <header>
+                    <strong>{comment.author}</strong>
+                    <a href={`#comment-${comment.id}`}>
+                      <time datetime={comment.date}>
+                        {formatDate(new Date(comment.date))}
+                      </time>
+                    </a>
+                  </header>
+                  {comment.parent > 0 && (
+                    <a
+                      class="comment-parent"
+                      href={`#comment-${comment.parent}`}
+                    >
+                      Reply to{" "}
+                      {discussion.find((parent) => parent.id === comment.parent)
+                        ?.author ?? "earlier comment"}
+                    </a>
+                  )}
+                  <div class="prose" set:html={comment.html} />
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+        <div class="article-end">
+          <a href="/archive/">&larr; Explore more articles</a>
+          <a href="/feed.xml">Follow via RSS &nearr;</a>
+        </div>
+      </article>
+    )
+  )}
+</Base>

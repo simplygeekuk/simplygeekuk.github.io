@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "standard": {
+    "name": "ASD-STE100",
+    "issue": 9
+  },
+  "candidates": [],
+  "notes": "Initial selective terminology discovery completed: 20 proposals yielded 13 exact protected names/identifiers, 2 general-prose uses, and 5 domain candidates. The owner approved all five noun definitions on 2026-09-18; they now reside in terms.json. No proposals remain pending or rejected."
+}

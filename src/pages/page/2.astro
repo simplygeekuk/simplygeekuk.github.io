@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostCard from "../../components/PostCard.astro";
+import { articles } from "../../lib/content";
+const posts = (await articles())
+  .filter((entry) => entry.data.kind === "post")
+  .slice(8);
+---
+
+<Base title="Older articles">
+  <section class="archive wrap">
+    <h1>Older articles</h1>
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
+    <a href="/archive/">Browse all articles &rarr;</a>
+  </section>
+</Base>

@@ -1,0 +1,23 @@
+---
+// GitHub Pages cannot issue an HTTP redirect for the legacy WordPress feed path.
+// This browser redirect is a convenience; subscribers should use /feed.xml.
+const feed = new URL("/feed.xml", Astro.site);
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SimplyGeek RSS feed</title>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0;url=${feed}`} />
+    <link rel="canonical" href={feed} />
+  </head>
+  <body>
+    <p>
+      The SimplyGeek RSS feed is at <a href={feed}>feed.xml</a>. Update your
+      feed reader to this address.
+    </p>
+  </body>
+</html>
