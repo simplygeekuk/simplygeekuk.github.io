@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import articleImages from "../data/article-images.json";
 
 export const POSTS_PER_PAGE = 8;
 
@@ -15,7 +16,20 @@ export async function articles() {
     }
     paths.add(entry.data.path);
   }
-  return entries.sort(
+  // Keep curated images separate from imported content; explicit article images win.
+  const illustratedEntries = entries.map((entry) => {
+    const image = articleImages.find((image) => image.path === entry.data.path);
+    if (!image || entry.data.featuredImage) return entry;
+    return {
+      ...entry,
+      data: {
+        ...entry.data,
+        featuredImage: image.featuredImage,
+        thumbnail: entry.data.thumbnail ?? image.thumbnail,
+      },
+    };
+  });
+  return illustratedEntries.sort(
     (a, b) => b.data.published.getTime() - a.data.published.getTime(),
   );
 }

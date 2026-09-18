@@ -1,0 +1,79 @@
+[
+  {
+    "path": "/using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development/",
+    "featuredImage": "/images/featured/network-connections.webp",
+    "thumbnail": "/images/featured/network-connections-thumb.webp",
+    "alt": "Blue Ethernet cables connected to a network switch.",
+    "photographer": "Brett Sayles",
+    "source": "https://www.pexels.com/photo/cables-connected-to-ethernet-ports-2881232/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  },
+  {
+    "path": "/vcf-automation-build-tools-for-vmware-aria-up-and-running/",
+    "featuredImage": "/images/featured/development-workspace.webp",
+    "thumbnail": "/images/featured/development-workspace-thumb.webp",
+    "alt": "A laptop displaying code on a desk.",
+    "photographer": "Daniil Komov",
+    "source": "https://www.pexels.com/photo/modern-workspace-with-laptop-and-code-display-34804001/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  },
+  {
+    "path": "/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/",
+    "featuredImage": "/images/featured/project-workspace.webp",
+    "thumbnail": "/images/featured/project-workspace-thumb.webp",
+    "alt": "Two monitors displaying development and design tools.",
+    "photographer": "Pixabay",
+    "source": "https://www.pexels.com/photo/computer-screen-turned-on-159299/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  },
+  {
+    "path": "/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/",
+    "featuredImage": "/images/featured/visual-studio-code.webp",
+    "thumbnail": "/images/featured/visual-studio-code-thumb.webp",
+    "alt": "Visual Studio Code open on a blue-lit laptop.",
+    "photographer": "Nemuel Sereti",
+    "source": "https://www.pexels.com/photo/programming-code-on-laptop-screen-6424590/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  },
+  {
+    "path": "/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/",
+    "featuredImage": "/images/featured/terminal-workspace.webp",
+    "thumbnail": "/images/featured/terminal-workspace-thumb.webp",
+    "alt": "Hands at a laptop displaying terminal output.",
+    "photographer": "Sora Shimazaki",
+    "source": "https://www.pexels.com/photo/crop-faceless-developer-working-on-software-code-on-laptop-5926382/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  },
+  {
+    "path": "/how-i-write-beautiful-code-in-vcf-operations-orchestrator-using-eslint-and-prettier/",
+    "featuredImage": "/images/featured/javascript-code.webp",
+    "thumbnail": "/images/featured/javascript-code-thumb.webp",
+    "alt": "Colourful JavaScript code on a monitor.",
+    "photographer": "Markus Spiske",
+    "source": "https://www.pexels.com/photo/technology-computer-desktop-programming-113850/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  },
+  {
+    "path": "/getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code/",
+    "featuredImage": "/images/featured/python-development.webp",
+    "thumbnail": "/images/featured/python-development-thumb.webp",
+    "alt": "Python code open in an editor.",
+    "photographer": "Pixabay",
+    "source": "https://www.pexels.com/photo/turned-on-monitor-displaying-text-270623/",
+    "license": "Pexels licence",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "downloaded": "2026-09-18"
+  }
+]

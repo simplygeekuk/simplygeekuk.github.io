@@ -8,6 +8,7 @@ import { articles, formatDate } from "../lib/content";
 import { archives, allArchives, archivePosts, topicArchive } from "../lib/archives";
 import { articleSeries, relatedArticles } from "../lib/series";
 import comments from "../data/comments.json";
+import articleImages from "../data/article-images.json";
 
 export async function getStaticPaths() {
   const entries = await articles();
@@ -34,6 +35,7 @@ const rendered = entry ? await render(entry) : null;
 const Content = rendered?.Content;
 const showGeneratedContents = entry?.data.toc && !entry.data.wordpressId;
 const isPost = entry?.data.kind === "post";
+const imageCredit = articleImages.find((image) => image.featuredImage === entry?.data.featuredImage);
 const entries = await articles();
 const series = isPost ? articleSeries(entries).find((group) => group.posts.some((post) => post.id === entry.id)) : undefined;
 const suggestions = isPost ? relatedArticles(entry, entries) : [];
@@ -102,6 +104,23 @@ const discussion = entry
             </p>
           )}
         </header>
+        {isPost && entry.data.featuredImage && (
+          <figure class="article-featured">
+          <img
+            class="article-featured-image"
+            src={entry.data.featuredImage}
+            alt={imageCredit?.alt ?? ""}
+            decoding="async"
+            fetchpriority="high"
+          />
+          {imageCredit && (
+            <figcaption>
+              Photo: <a href={imageCredit.source}>{imageCredit.photographer} / Pexels</a>
+              {" · "}<a href={imageCredit.licenseUrl}>Licence</a>
+            </figcaption>
+          )}
+          </figure>
+        )}
         <div class="prose">
           {showGeneratedContents && <TableOfContents headings={rendered?.headings ?? []} />}
           {Content && <Content />}

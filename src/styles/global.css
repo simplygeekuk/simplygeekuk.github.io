@@ -544,6 +544,22 @@ nav a[aria-current="page"] {
   padding-bottom: 25px;
   margin-bottom: 35px;
 }
+.article-featured {
+  margin: 0 0 35px;
+}
+.article-featured figcaption {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.article-featured-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 .back-link {
   font-size: 14px;
   color: var(--muted);
