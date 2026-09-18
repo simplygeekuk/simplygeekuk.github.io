@@ -1,0 +1,89 @@
+---
+import giscus from "../data/giscus.json";
+
+interface Props {
+  hasArchivedComments?: boolean;
+}
+const { hasArchivedComments = false } = Astro.props;
+const configured = Boolean(giscus.repoId && giscus.categoryId);
+---
+
+{configured && (
+  <section class="discussion" id={hasArchivedComments ? "new-comments" : "comments"} aria-labelledby="new-comments-title">
+    <h2 id="new-comments-title">Join the discussion</h2>
+    <p class="discussion-note">
+      Sign in with GitHub to leave a comment.
+      {" "}<a href={`https://github.com/${giscus.repo}/discussions`}>View discussions on GitHub</a>.
+    </p>
+    <giscus-comments
+      data-repo={giscus.repo}
+      data-repo-id={giscus.repoId}
+      data-category={giscus.category}
+      data-category-id={giscus.categoryId}
+    >
+      <noscript>Enable JavaScript to read and write comments here, or visit the discussions on GitHub.</noscript>
+    </giscus-comments>
+  </section>
+)}
+
+<script>
+  class GiscusComments extends HTMLElement {
+    private observer?: MutationObserver;
+
+    private theme() {
+      return document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    }
+
+    private syncTheme = () => {
+      this.querySelector<HTMLIFrameElement>("iframe.giscus-frame")?.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: this.theme() } } },
+        "https://giscus.app",
+      );
+    };
+
+    connectedCallback() {
+      this.addEventListener("load", this.syncTheme, true);
+      this.observer = new MutationObserver(this.syncTheme);
+      this.observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme"],
+      });
+
+      if (this.querySelector("script")) return;
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      Object.assign(script.dataset, {
+        repo: this.dataset.repo,
+        repoId: this.dataset.repoId,
+        category: this.dataset.category,
+        categoryId: this.dataset.categoryId,
+        mapping: "pathname",
+        strict: "1",
+        reactionsEnabled: "1",
+        emitMetadata: "0",
+        inputPosition: "top",
+        theme: this.theme(),
+        lang: "en",
+        loading: "lazy",
+      });
+      this.append(script);
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+      this.removeEventListener("load", this.syncTheme, true);
+    }
+  }
+
+  if (!customElements.get("giscus-comments")) {
+    customElements.define("giscus-comments", GiscusComments);
+  }
+</script>
+
+<style>
+  giscus-comments {
+    display: block;
+  }
+</style>

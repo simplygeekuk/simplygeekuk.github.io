@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import PostCard from "../components/PostCard.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import SeriesNavigation from "../components/SeriesNavigation.astro";
+import Comments from "../components/Comments.astro";
 import { articles, formatDate } from "../lib/content";
 import { archives, allArchives, archivePosts, topicArchive } from "../lib/archives";
 import { articleSeries, relatedArticles } from "../lib/series";
@@ -166,11 +167,10 @@ const discussion = entry
             aria-labelledby="discussion-title"
           >
             <h2 id="discussion-title">
-              Discussion <span>({discussion.length})</span>
+              Archived comments <span>({discussion.length})</span>
             </h2>
             <p class="discussion-note">
-              Comments from the original blog, preserved for reference. New
-              comments are not enabled.
+              Comments from the original blog, preserved for reference.
             </p>
             <ol class="comment-list">
               {discussion.map((comment) => (
@@ -199,6 +199,7 @@ const discussion = entry
             </ol>
           </section>
         )}
+        {isPost && <Comments hasArchivedComments={discussion.length > 0} />}
         <div class="article-end">
           <a href="/archive/">&larr; Explore more articles</a>
           <a href="/feed.xml">Follow via RSS &nearr;</a>
