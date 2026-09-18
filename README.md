@@ -1,10 +1,21 @@
 # SimplyGeek
 
-An Astro static blog for `https://simplygeekuk.github.io`, preparing the migration from [SimplyGeek on WordPress](https://simplygeek.co.uk/).
+The SimplyGeek blog, built with Astro for GitHub Pages. Articles cover DevOps, automation and cloud infrastructure.
 
-This is a **local migration preview of all currently public content**: 13 posts, 7 pages, and 7 visible comments. WordPress and the custom domain have not been changed. Publication is a separate next step.
+The configured site URL is `https://simplygeekuk.github.io`. See [Deployment](#deployment) for publishing and indexing settings, and [Migration notes](migration/README.md) for the WordPress import history and domain cutover plan.
 
-17 screenshots in two older articles could not be recovered from their unavailable external host. Clear placeholders mark those gaps, as requested by the owner. One additional image was recovered from the Internet Archive. See [migration/media-recovery.json](migration/media-recovery.json) for original URLs and recovery details.
+## Site features
+
+- Responsive light and dark themes with a terminal-style SimplyGeek logo.
+- A carousel of the six most recent articles, with arrow controls, keyboard navigation and mobile swipe scrolling.
+- Eight articles per homepage listing page, with year headings and previews capped at five lines.
+- A searchable full article archive using the same cards and previews as the homepage.
+- Topic pages, series reading lists, Previous/Next links and related-article suggestions.
+- Featured images, card thumbnails and automatic lossless WebP generation for production builds.
+- Preserved WordPress discussions and optional new comments; see [Comments](#comments) for configuration status.
+- RSS at `/feed.xml`, an XML sitemap at `/sitemap.xml`, a readable site map at `/sitemap/`, and a custom 404 page.
+
+Site builds use local content and do not contact WordPress.
 
 ## Run locally
 
@@ -17,30 +28,31 @@ npm run dev
 
 Open the URL printed by Astro, normally `http://localhost:4321`.
 
+Before publishing, check and build the site, then inspect the production output:
+
 ```powershell
 npm run check
 npm run build
 npm run preview
 ```
 
+`npm run dev` serves source images. The production build generates optimised images. `npm run preview` serves the last build, so rebuild after changes before checking it.
+
 If a restricted environment blocks Astro's per-user telemetry configuration, set `$env:ASTRO_TELEMETRY_DISABLED='1'` in PowerShell before running these commands.
 
-## What is included
+## Project layout
 
-- A responsive dark/light theme, searchable article archive, topic pages, About page, and custom 404 page.
-- All 13 public posts and 7 pages, checked against the WordPress post/page sitemaps.
-- 63 category, 138 tag, and 1 series archive, preserving their original paths. Empty historical taxonomy archives remain available with an explicit empty state.
-- The 7 comments actually returned by the public API, including replies and comment anchors, preserved as read-only discussions.
-- WordPress publication dates, categories, tags, heading anchors, and original article paths.
-- Local copies of 154 referenced images, responsive variants, thumbnails, and full-resolution featured photos under `public/wp-content/uploads/`.
-- One recovered HttpRestClient image under `public/media/recovered/`, with archive provenance recorded in the migration manifest.
-- Automatic lossless WebP generation during production builds; every accepted conversion passes a pixel-equality check. Originals are retained for downloads and historical image URLs. `npm run dev` serves source images; `npm run build` followed by `npm run preview` serves optimized images.
-- RSS at `/feed.xml`, with a browser redirect from `/feed/`. Existing feed readers need the new URL or a real HTTP redirect at domain cutover.
-- A GitHub Actions workflow that checks and builds pull requests and deploys `main` to GitHub Pages once Pages is configured.
-- A public-content inventory and a repeatable importer. Site builds work without contacting WordPress.
-- XML sitemap at `/sitemap.xml`, human-readable site map at `/sitemap/`, compatibility entry at `/sitemap.html`, and the original `/page/2/` archive path.
+| Location | Purpose |
+| --- | --- |
+| `src/content/articles/` | Blog posts and standalone pages |
+| `templates/` | Starting points for new content |
+| `src/components/`, `src/layouts/`, `src/styles/` | Shared presentation and styling |
+| `src/data/` | Series definitions, image credits, imported archives and comments configuration |
+| `public/images/` | Images added during ongoing authoring |
+| `technical-writing/` | Writing profile and approved terminology |
+| `migration/` | Import records, media recovery and domain cutover planning |
 
-Imported articles live in `src/content/articles/`. Their `.md` files contain YAML metadata and the original rendered HTML, lightly cleaned of WordPress scripts and empty spacer paragraphs. This preserves code and image markup for review. New articles can use normal Markdown; conversion of the historical HTML to idiomatic Markdown is a later editorial step.
+Article files contain YAML metadata followed by Markdown or imported HTML. Both formats are supported, including in homepage and archive previews. Imported articles have received local editorial updates; the importer is not part of routine authoring.
 
 ## Write an article
 
@@ -64,26 +76,25 @@ Standalone pages use `kind: "page"` and do not appear in the homepage post list 
 Add a navigation link separately if a page needs one.
 Template files remain outside the content collection and are never published directly.
 
-For a minimal article, use this example:
+Set `draft: false` when ready for publication. Drafts are excluded from routes, listings and RSS. Paths must be unique and end in `/`. Existing system, taxonomy and pagination routes are reserved. Use fenced code blocks with a language for syntax highlighting.
 
-Create `src/content/articles/my-new-post.md`:
+The imported taxonomy membership in `src/data/archives.json` is a WordPress snapshot. Categories and tags alone do not add native posts to those topic archives; that requires a change to the archive implementation.
 
-```markdown
----
-title: "My new post"
-description: "A short summary for the journal and RSS feed."
-path: "/my-new-post/"
-published: "2026-09-18T09:00:00Z"
-author: "Gavin Stephens"
-categories: ["Automation"]
-tags: ["Ansible"]
-draft: true
----
+Write a concise description for metadata and RSS, and a useful opening paragraph for readers. Homepage and archive cards extract previews from rendered body paragraphs, falling back to the description when none are available. Five lines is a maximum, not a required preview length.
 
-Write the article here using Markdown.
-```
+Follow [technical-writing/config.json](technical-writing/config.json) and the approved terms in [technical-writing/terms.json](technical-writing/terms.json). The project uses technical-readability with British spelling. Preserve exact commands, identifiers and historical version references unless the task includes a technical refresh.
 
-Set `draft: false` when ready. Drafts are excluded from routes, listings, and RSS. Paths must be unique and end in `/`. Existing system, taxonomy, and pagination routes are reserved. Use fenced code blocks with a language for syntax highlighting in new Markdown posts. The imported taxonomy membership in `src/data/archives.json` is a snapshot of WordPress; new native Markdown posts need their taxonomy membership added to the archive implementation if they should appear in those topic pages.
+## Images
+
+Use local public URLs for images. Set `featuredImage` for the article's header image and `thumbnail` for its card image. The layout displays the featured image automatically; avoid repeating it in the body.
+
+[src/data/article-images.json](src/data/article-images.json) stores curated images and their credits separately from imported content. It provides fallback images by article path. An explicit `featuredImage` overrides that fallback, so check the thumbnail as well.
+
+The layout finds alternative text and credit information by featured-image URL. Keep the source, photographer and licence details accurate. The current attribution format is for Pexels; other sources need a suitable caption implementation.
+
+Keep technical screenshots in the article body so readers can inspect them without the header image's crop. Preserve missing-image placeholders until the original screenshots or genuine replacements are available.
+
+Production builds generate lossless WebP variants and verify that accepted conversions preserve the pixels. Original images remain available for downloads and historical URLs.
 
 ## Series and related articles
 
@@ -122,24 +133,29 @@ Use `related: []` to hide suggestions for that article.
 The build rejects unknown series, duplicate published order numbers, and links to missing, draft, or standalone pages.
 It also rejects links from an article to itself.
 
-## Re-run the import
+## Comments
 
-```powershell
-# Refresh all public content after backing up any local article edits.
-npm run import:wordpress -- --all --overwrite
-```
+Imported WordPress comments remain read-only, including replies and their original anchors.
 
-The importer is fixed to your public WordPress site. It needs network access but no credentials. `--overwrite` replaces the selected generated article files and refreshes imported archive/comment data; commit or back up edits first. It does not delete older imports, import drafts, or synchronize deletions. Media already on disk is reused; if WordPress replaces an image at the same URL, review and remove that specific local image before importing again. The original three-post sample mode remains available when `--all` is omitted, but should not be used to refresh this full import.
+The current working tree includes an optional Giscus component for new comments through GitHub Discussions. It is not configured yet: `repoId` and `categoryId` in `src/data/giscus.json` are empty. The component stays hidden until both values are supplied. This does not establish that comments are enabled on the deployed site.
 
-Read [migration/report.json](migration/report.json) for imported and remaining items, media, unavailable or externally hosted images, links still pointing to WordPress, and embeds needing review. [migration/inventory.json](migration/inventory.json) lists the public posts and pages seen during this import. Raw API responses are kept locally in the gitignored `.migration-cache/` directory; they are not a full WordPress backup.
+## Deployment
 
-## Publish the preview later
+[.github/workflows/pages.yml](.github/workflows/pages.yml) checks and builds pull requests without deploying them. Pushes to `main` also deploy to GitHub Pages once Pages is configured. The workflow can be run manually on `main`.
 
-1. Review the complete site locally, especially screenshots, code blocks, topic pages, discussions, and the About page.
-2. Commit and push this project to the repository's `main` branch when ready to publish.
-3. In the GitHub repository, choose **Settings → Pages → Build and deployment → Source → GitHub Actions**. If the initial workflow ran before Pages was configured, rerun it from the Actions tab.
-4. The workflow deploys to `https://simplygeekuk.github.io`. Pull requests only check/build and do not deploy.
+1. Review the site locally, including screenshots, code, topic pages, series navigation, discussions and the About page.
+2. In repository settings, select **Pages → Build and deployment → Source → GitHub Actions**.
+3. Commit and push the changes to `main` when ready to publish them.
+4. Check the workflow's build and deployment results in the Actions tab. If it ran before Pages was configured, rerun it.
 
-The preview deliberately has a `noindex` meta tag and a restrictive `public/robots.txt` to discourage search indexing while content is duplicated. This does not make the preview private. The final domain migration needs the steps in [migration/PLAN.md](migration/PLAN.md), including changing both indexing settings. No `CNAME` file has been added.
+The deployment target is `https://simplygeekuk.github.io`, as configured in [astro.config.mjs](astro.config.mjs). A successful push alone does not confirm a successful deployment.
 
-Platform references: [Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/), [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), and [WordPress posts API](https://developer.wordpress.org/rest-api/reference/posts/).
+### Domain and indexing
+
+The layout still includes a `noindex` meta tag, and [public/robots.txt](public/robots.txt) blocks crawlers. These settings discourage indexing during migration; they do not make the site private. No `CNAME` file is present.
+
+The custom-domain cutover is a separate step. Follow [migration/PLAN.md](migration/PLAN.md), including changes to the site URL, domain configuration and both indexing settings.
+
+RSS is served at `/feed.xml`. The browser redirect from `/feed/` is not an HTTP redirect for feed readers. Existing subscribers need the new URL or an HTTP redirect at domain cutover. `/sitemap.html` remains as a compatibility entry, and `/page/2/` is retained for pagination.
+
+For import records, missing media and instructions for rerunning the importer, see [Migration notes](migration/README.md).
