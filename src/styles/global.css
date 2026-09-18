@@ -518,7 +518,6 @@ nav a[aria-current="page"] {
 .archive {
   padding-block: 60px 80px;
   min-height: 65vh;
-  max-width: 1120px;
 }
 .archive h1 {
   margin-bottom: 25px;
@@ -545,7 +544,6 @@ nav a[aria-current="page"] {
   margin: 10px 0;
 }
 .article {
-  max-width: 1120px;
   margin-block: 55px 75px;
   padding: 40px 50px;
   background: var(--card);

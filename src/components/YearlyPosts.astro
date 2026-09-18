@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { load } from "cheerio";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  posts: CollectionEntry<"articles">[];
+}
+const { posts } = Astro.props;
+const previews = new Map(posts.map((post) => {
+  const $ = load(post.rendered?.html ?? post.body ?? "");
+  $("pre, script, style, .missing-image, #ez-toc-container").remove();
+  const text = $("p").toArray().map((paragraph) => $(paragraph).text()).join(" ").replace(/\s+/g, " ").trim();
+  const preview = text.length > 1500 ? text.slice(0, 1500).replace(/\s+\S*$/, "") + "…" : text;
+  return [post.id, preview || post.data.description];
+}));
+const years = [...new Set(posts.map((post) => post.data.published.getUTCFullYear()))];
+---
+
+<div class="yearly-posts">
+  {years.map((year) => (
+    <section class="year-section" aria-labelledby={`year-${year}`}>
+      <div class="year-heading">
+        <h2 id={`year-${year}`}>{year}</h2>
+        <span class="year-rule" aria-hidden="true"></span>
+        <span>Articles &amp; guides</span>
+      </div>
+      {posts
+        .filter((post) => post.data.published.getUTCFullYear() === year)
+        .map((post) => <PostCard post={post} preview={previews.get(post.id)} />)}
+    </section>
+  ))}
+</div>

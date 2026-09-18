@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import PostCard from "../components/PostCard.astro";
+import YearlyPosts from "../components/YearlyPosts.astro";
 import { articles } from "../lib/content";
 const posts = (await articles()).filter(({ data }) => data.kind === "post");
 ---
@@ -22,9 +22,7 @@ const posts = (await articles()).filter(({ data }) => data.kind === "post");
       <p id="search-status" role="status"></p>
     </div>
     <div class="post-list">
-      {posts.map((post) => (
-        <PostCard post={post} />
-      ))}
+      <YearlyPosts posts={posts} />
     </div>
   </section>
 </Base>
@@ -42,6 +40,9 @@ const posts = (await articles()).filter(({ data }) => data.kind === "post");
       cards.forEach((card) => {
         card.hidden = !card.dataset.search?.includes(query);
         if (!card.hidden) visible++;
+      });
+      document.querySelectorAll<HTMLElement>(".post-list .year-section").forEach((section) => {
+        section.hidden = !section.querySelector(".post-card:not([hidden])");
       });
       const status = document.querySelector("#search-status");
       if (status)
