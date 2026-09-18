@@ -1,10 +1,10 @@
 ---
 title: "Empower VCF Operations Orchestrator API integration with HttpRestClient"
-description: "VCF Operations Orchestrator allows you to define endpoints for API integration in the inventory as RestHosts using the HTTP-REST plugin. Once a RestHost is defined, it is then possible to authenticate and perform HTTP web requests on the…"
+description: "Use HttpRestClient for Orchestrator API integrations, with shared retry handling, request configuration and examples for supported HTTP methods."
 path: "/empower-vcf-operations-orchestrator-api-integration-with-httprestclient/"
 kind: "post"
 published: "2025-06-24T15:15:26Z"
-updated: "2025-07-03T21:25:52Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["JavaScript","Broadcom (VMware)","VMware Cloud Foundation","VCF Operations Orchestrator","Development"]
 tags: ["VCF Operations Orchestrator"]
@@ -15,57 +15,57 @@ featuredImage: "/wp-content/uploads/2025/06/miguel-angel-padrinan-alba-kZNeA-R48
 ---
 
 
-<p class="wp-block-paragraph">VCF Operations Orchestrator allows you to define endpoints for API integration in the inventory as RestHosts using the HTTP-REST plugin. Once a RestHost is defined, it is then possible to authenticate and perform HTTP web requests on the endpoint (GET, POST, etc).</p>
+<p class="wp-block-paragraph">The HTTP-REST plugin in VCF Operations Orchestrator represents API endpoints as RestHosts in the inventory. After defining a RestHost, you can authenticate and send HTTP requests such as GET and POST to its endpoint.</p>
 
 
 
-<p class="wp-block-paragraph">HttpRestClient is designed to enhance this experience by doing all the heavy lifting when performing these requests, such as handling of different content types, error handling and retry logic.</p>
+<p class="wp-block-paragraph">HttpRestClient handles common request tasks, including content types, errors and retries.</p>
 
 
 
-<p class="wp-block-paragraph">Here are some of the benefits and features provided by the <strong>HttpRestClient</strong>:</p>
+<p class="wp-block-paragraph"><strong>HttpRestClient</strong> provides these features:</p>
 
 
 
 <ul class="wp-block-list">
-<li>Provides support for the following HTTP methods: GET, POST, PUT, PATCH, DELETE, HEAD;</li>
+<li>Supports GET, POST, PUT, PATCH, DELETE and HEAD.</li>
 
 
 
-<li>Retries a failed connection (default to 5 attempts) with a delay specified in seconds (defaults to 10 seconds);</li>
+<li>Retries failed connections with a configurable delay. Defaults are 5 attempts and 10 seconds between attempts.</li>
 
 
 
-<li>Option to specify the expected response codes (defaults are set per method);</li>
+<li>Accepts expected response codes, with defaults for each method.</li>
 
 
 
-<li>Option to retry on 500 status code (default enabled);</li>
+<li>Can retry on a 500 status code. This is enabled by default.</li>
 
 
 
-<li>Automatic handling of “<strong>application/x-www-form-urlencoded</strong>” content;</li>
+<li>Handles <strong>application/x-www-form-urlencoded</strong> content automatically.</li>
 
 
 
-<li>Option to set Accept-Type header (defaults to application/json);</li>
+<li>Accepts an Accept-Type header, which defaults to application/json.</li>
 
 
 
-<li>Option to set Content-Type header (defaults to Accept-Type);</li>
+<li>Accepts a Content-Type header, which defaults to Accept-Type.</li>
 
 
 
-<li>Automatic URI and URI Component encoding (detects if existing encoding is present);</li>
+<li>Encodes URIs and URI components automatically, detecting existing encoding.</li>
 
 
 
-<li>Obfuscates secrets in content from log output that match password/secret/refreshToken;</li>
+<li>Obfuscates secrets in logged content when they match password/secret/refreshToken.</li>
 </ul>
 
 
 
-<p class="wp-block-paragraph">The HttpRestClient serves as the backbone for API integration between VCF Operations Orchestrator and the API endpoint and is designed to integrate with or extend any API service.</p>
+<p class="wp-block-paragraph">HttpRestClient provides shared request handling between Orchestrator and API endpoints. It is designed to integrate with or extend any API service.</p>
 
 
 <div class="wp-block-image">
@@ -77,11 +77,11 @@ featuredImage: "/wp-content/uploads/2025/06/miguel-angel-padrinan-alba-kZNeA-R48
 
 
 
-<h2 class="wp-block-heading">Using the HttpRestClient</h2>
+<h2 class="wp-block-heading">Use HttpRestClient</h2>
 
 
 
-<p class="wp-block-paragraph">Using the HttpRestClient in an Action or Workflow simply requires the following to import the module:</p>
+<p class="wp-block-paragraph">Import HttpRestClient into an action or workflow using one of these approaches:</p>
 
 
 
@@ -101,7 +101,7 @@ featuredImage: "/wp-content/uploads/2025/06/miguel-angel-padrinan-alba-kZNeA-R48
 
 
 
-<p class="wp-block-paragraph">Or extend using classical inheritance</p>
+<p class="wp-block-paragraph">Alternatively, extend the class using classical inheritance:</p>
 
 
 
@@ -124,15 +124,15 @@ featuredImage: "/wp-content/uploads/2025/06/miguel-angel-padrinan-alba-kZNeA-R48
 
 
 
-<p class="wp-block-paragraph">A new instance of the HttpRestClient class will be created and exposed by the variable ‘<strong>rest</strong>‘ that can be used to perform the required API calls. Note that ‘<strong>rest</strong>‘ can be changed to any value you require.</p>
+<p class="wp-block-paragraph">The code creates an HttpRestClient instance in <strong>rest</strong>. Use this variable for API calls, or rename it if needed.</p>
 
 
 
-<h2 class="wp-block-heading">Supported Methods</h2>
+<h2 class="wp-block-heading">Supported methods</h2>
 
 
 
-<p class="wp-block-paragraph">To use HttpRestClient to perform an API call, use one of the following methods:</p>
+<p class="wp-block-paragraph">Use one of the following methods to make an API call:</p>
 
 
 
@@ -260,7 +260,7 @@ featuredImage: "/wp-content/uploads/2025/06/miguel-angel-padrinan-alba-kZNeA-R48
 
 
 
-<p class="wp-block-paragraph">Each method will return the <strong>RESTResponse</strong> object. I felt it would be easier to leave it to the developer to decide how to handle the response. This way, you can decide if you want the content in string format, retrieve headers, or both. Look at my examples to see how responses are handled.</p>
+<p class="wp-block-paragraph">Each method returns a <strong>RESTResponse</strong> object. The caller decides how to process it: retrieve the content as a string, inspect the headers or do both. The examples below show how to handle responses.</p>
 
 
 
@@ -268,11 +268,11 @@ featuredImage: "/wp-content/uploads/2025/06/miguel-angel-padrinan-alba-kZNeA-R48
 
 
 
-<p class="wp-block-paragraph">The following are some examples of using the HttpRestClient.</p>
+<p class="wp-block-paragraph">These examples demonstrate HttpRestClient usage.</p>
 
 
 
-<h3 class="wp-block-heading">GET Example</h3>
+<h3 class="wp-block-heading">GET example</h3>
 
 
 
@@ -290,7 +290,7 @@ var responseContent = JSON.parse(response.contentAsString);</code></pre>
 
 
 
-<h3 class="wp-block-heading">POST Example</h3>
+<h3 class="wp-block-heading">POST example</h3>
 
 
 
@@ -314,7 +314,7 @@ var responseContent = JSON.parse(response.contentAsString);</code></pre>
 
 
 
-<h3 class="wp-block-heading">DELETE Example</h3>
+<h3 class="wp-block-heading">DELETE example</h3>
 
 
 

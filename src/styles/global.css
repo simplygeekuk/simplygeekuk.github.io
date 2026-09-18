@@ -122,17 +122,30 @@ h2 {
   gap: 30px;
 }
 .brand {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   flex-shrink: 0;
+  min-height: 60px;
+  color: var(--ink);
 }
-.brand img {
-  width: 200px;
-  height: 60px;
-  object-fit: contain;
+.brand:hover {
+  color: var(--ink);
 }
-[data-theme="light"] .brand {
-  background: #303030;
-  border-radius: 6px;
+.brand-prompt {
+  width: 36px;
+  height: 32px;
+  flex-shrink: 0;
+  color: #20a9d6;
+}
+.brand-wordmark {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  line-height: 1;
+}
+.brand-wordmark span {
+  color: #20a9d6;
 }
 nav {
   display: flex;
@@ -811,8 +824,8 @@ nav a[aria-current="page"] {
     gap: 18px;
     font-size: 13px;
   }
-  .brand img {
-    width: 175px;
+  .brand-wordmark {
+    font-size: 28px;
   }
   .featured-posts {
     gap: 12px;
@@ -833,9 +846,13 @@ nav a[aria-current="page"] {
     gap: 8px;
     padding-block: 8px;
   }
-  .brand img {
-    width: 180px;
-    height: 54px;
+  .brand {
+    min-height: 54px;
+    gap: 8px;
+  }
+  .brand-prompt {
+    width: 30px;
+    height: 28px;
   }
   .menu-toggle {
     display: flex;

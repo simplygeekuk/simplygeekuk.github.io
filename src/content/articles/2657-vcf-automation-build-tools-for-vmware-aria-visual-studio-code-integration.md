@@ -1,10 +1,10 @@
 ---
 title: "VCF Automation – Build Tools for VMware Aria – Visual Studio Code Integration"
-description: "The Build Tools for VMware Aria project has developed an Extension for Visual Studio Code that provides native integration directly in the IDE. Using VSCode with this extension will provide the following features when developing code for…"
+description: "Explore the vRealize Developer Tools extension for VS Code, including project creation, content browsing, action execution and its limitations."
 path: "/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/"
 kind: "post"
 published: "2025-06-24T14:23:07Z"
-updated: "2025-06-24T14:30:45Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator","Build Tools for VMware Aria","Development","Visual Studio Code"]
 tags: ["VCF Automation","VCF Operations Orchestrator","Build Tools for VMware Aria"]
@@ -16,10 +16,10 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 <div class="ez-toc-title-container">
 <p class="ez-toc-title">Page Contents</p>
 <span class="ez-toc-title-toggle"></span></div>
-<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Install_the_vRealize_Developer_Tools_extension_for_Visual_Studio_Code">Install the vRealize Developer Tools extension for Visual Studio Code</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Change_Active_Profile">Change Active Profile</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Create_Projects">Create Projects</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Intellisense_Support">Intellisense Support</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Browse_and_Fetch_Orchestrator_Content">Browse and Fetch Orchestrator Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Run_JavaScript_Actions">Run JavaScript Actions</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Other_commands">Other commands</a></li></ul></nav></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Install_the_vRealize_Developer_Tools_extension_for_Visual_Studio_Code">Install the vRealize Developer Tools extension for Visual Studio Code</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Change_Active_Profile">Change the active profile</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Create_Projects">Create projects</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Intellisense_Support">IntelliSense support</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Browse_and_Fetch_Orchestrator_Content">Browse and fetch Orchestrator content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Run_JavaScript_Actions">Run JavaScript actions</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration/#Other_commands">Other commands</a></li></ul></nav></div>
 
 
-<p class="wp-block-paragraph">The Build Tools for VMware Aria project has developed an Extension for Visual Studio Code that provides native integration directly in the IDE. Using VSCode with this extension will provide the following features when developing code for your VCF Automation environment:</p>
+<p class="wp-block-paragraph">The Build Tools for VMware Aria project provides a Visual Studio Code extension. It adds the following features for developing VCF Automation content in the IDE:</p>
 
 
 
@@ -45,7 +45,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">I have had quite a few issues with the plugin and found that it provides limited support. The biggest benefit of using the Build Tools is that the code can be managed in VSCode to begin with.</p>
+<p class="wp-block-paragraph">I encountered several issues with the extension and found its support limited. For me, the main benefit of Build Tools is already being able to manage the code in VS Code.</p>
 
 
 
@@ -58,11 +58,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Restart Visual Studio Code after the extension has been installed, as I had issues when I didn’t do this.</p>
+<p class="wp-block-paragraph">Restart Visual Studio Code after installing the extension. I encountered issues when I skipped this step.</p>
 
 
 
-<p class="wp-block-paragraph">You will also need to ensure that the extension uses the same version as your projects. Click the cog icon on the vRealize Develop Tools extension page and select ‘<strong>Extension Settings</strong>‘.</p>
+<p class="wp-block-paragraph">Match the extension's Build Tools version to your projects. On its extension page, select the cog icon, then <strong>Extension Settings</strong>.</p>
 
 
 
@@ -70,7 +70,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">On the Extension Settings page, change the <strong>Build Tools Default Version</strong> to the desired version (or use the latest, in my case, 4.2.1).</p>
+<p class="wp-block-paragraph">Set <strong>Build Tools Default Version</strong> to the required version. I used 4.2.1, the latest version when I wrote this post.</p>
 
 
 
@@ -78,7 +78,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">To access all of the available commands provided by the plugin, open the command palette and search for ‘vrealize’.</p>
+<p class="wp-block-paragraph">Open the command palette and search for vrealize to see the extension's commands.</p>
 
 
 
@@ -86,11 +86,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h2 class="wp-block-heading has-text-align-left"><span class="ez-toc-section" id="Change_Active_Profile"></span>Change Active Profile<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading has-text-align-left"><span class="ez-toc-section" id="Change_Active_Profile"></span>Change the active profile<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The command ‘<strong>vRealize: Change Active Profile</strong>‘ can be used to change the active profile, i.e. the active connection to a VCF Automation and VCF Operations Orchestrator instance.</p>
+<p class="wp-block-paragraph">Use <strong>vRealize: Change Active Profile</strong> to select the active connection to VCF Automation and VCF Operations Orchestrator.</p>
 
 
 
@@ -102,15 +102,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">If you need to view content from a specific environment, then changing the active profile is handy. Other than this, I don’t see any other use case.</p>
+<p class="wp-block-paragraph">I find profile switching useful for viewing content from a specific environment. I have not found another use for it.</p>
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Create_Projects"></span>Create Projects<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Create_Projects"></span>Create projects<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The command ‘<strong>vRealize: New Project</strong>‘ can be used to create new Build Tools-supported projects. The projects that you can create are covered in part 2 of this series, <a href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/" data-type="post" data-id="2653">VCF Automation – Build Tools for VMware Aria – Overview of VCF Automation Projects</a></p>
+<p class="wp-block-paragraph">Use <strong>vRealize: New Project</strong> to create a supported Build Tools project. Part 2 of this series describes the options: <a href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/" data-type="post" data-id="2653">VCF Automation – Build Tools for VMware Aria – Overview of VCF Automation Projects</a>.</p>
 
 
 
@@ -118,11 +118,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Select the project that you are interested in. I have selected the <strong>vRO JavaScript-based</strong> in this example.</p>
+<p class="wp-block-paragraph">Select a project type. This example uses <strong>vRO JavaScript-based</strong>.</p>
 
 
 
-<p class="wp-block-paragraph">Provide the <strong>group ID</strong> (<strong>com.simplygeek</strong> in my example)</p>
+<p class="wp-block-paragraph">Enter the <strong>group ID</strong>. This example uses <strong>com.simplygeek</strong>.</p>
 
 
 
@@ -130,7 +130,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Provide a name for the project (<strong>vro-javascript</strong> in my example)</p>
+<p class="wp-block-paragraph">Enter a project name. This example uses <strong>vro-javascript</strong>.</p>
 
 
 
@@ -138,11 +138,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">You will be prompted on where to create the new project. In my example, I have a root folder called ‘vcf-automation’ where this project will be created.</p>
+<p class="wp-block-paragraph">When prompted, choose where to create the project. I use a root folder called vcf-automation.</p>
 
 
 
-<p class="wp-block-paragraph">A new VSCode window will open the new project.</p>
+<p class="wp-block-paragraph">The project opens in a new VS Code window.</p>
 
 
 
@@ -154,15 +154,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Intellisense_Support"></span>Intellisense Support<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Intellisense_Support"></span>IntelliSense support<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">Intellisense support is provided for JavaScript actions via the vRO Language Server provided by the vRDT plugin. However, this has one major caveat: Only plain text username and password authentication is supported (in settings.xml). This means that if you use refresh tokens, this feature will not work.</p>
+<p class="wp-block-paragraph">The vRDT extension's vRO Language Server provides IntelliSense for JavaScript actions. It supports only plain text username and password authentication in settings.xml. Code completion does not work with refresh tokens.</p>
 
 
 
-<p class="wp-block-paragraph">The code completion feature will allow any Orchestrator plugins or built-in wrapper classes to be detected within the IDE. In the example below, using <code>System.getModule</code>, you can see that module paths within my environment have been detected and displayed.</p>
+<p class="wp-block-paragraph">Code completion detects Orchestrator plugins and built-in wrapper classes. In this example, <code>System.getModule</code> displays module paths from my environment.</p>
 
 
 
@@ -182,15 +182,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">I don’t find this feature particularly useful, and not having support for refresh tokens is a deal-breaker. If the vRO language server is updated in the future, I will update this section.</p>
+<p class="wp-block-paragraph">I find this feature of limited use, particularly because it does not support refresh tokens. I will revisit this section if the vRO language server changes.</p>
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Browse_and_Fetch_Orchestrator_Content"></span>Browse and Fetch Orchestrator Content<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Browse_and_Fetch_Orchestrator_Content"></span>Browse and fetch Orchestrator content<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">This feature of the extension is what I have found to be the most useful. On the left-hand panel of VSCode will be an icon for vRealize Developer Tools. This allows content on Orchestrator to be explored and also provides the capability to fetch remote content.</p>
+<p class="wp-block-paragraph">The content browser is the extension feature I find most useful. Select the vRealize Developer Tools icon in VS Code's left-hand panel to explore Orchestrator content and fetch remote files.</p>
 
 
 
@@ -198,7 +198,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Below is an example of content being explored with a remote Workflow displayed in the IDE:</p>
+<p class="wp-block-paragraph">This example displays a remote workflow in the IDE:</p>
 
 
 
@@ -206,7 +206,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Below is another example of a remote Action being displayed in the IDE:</p>
+<p class="wp-block-paragraph">This example displays a remote action:</p>
 
 
 
@@ -214,23 +214,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">What I like about this example is that the Action is transpiled when it is displayed in the IDE.</p>
+<p class="wp-block-paragraph">The extension transpiles the action for display in the IDE, which I find useful.</p>
 
 
 
-<p class="wp-block-paragraph">Finally, one more example displaying the Orchestrator inventory:</p>
-
-
-
-<figure class="wp-block-image size-full"><span class="missing-image" role="note">Screenshot unavailable. This image could not be recovered from the original blog.</span></figure>
-
-
-
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Run_JavaScript_Actions"></span>Run JavaScript Actions<span class="ez-toc-section-end"></span></h2>
-
-
-
-<p class="wp-block-paragraph">For a <strong>vRO JavaScript-based</strong> project, it is possible to run Actions directly from the IDE. When an Action is opened, an icon is visible in the top right side of the editor that looks like a lightning bolt.</p>
+<p class="wp-block-paragraph">You can also browse the Orchestrator inventory:</p>
 
 
 
@@ -238,7 +226,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">But there is a catch: Actions with parameters are not supported (apparently, this will be coming in a future version of the vRDT extension). When running such an Action, the output similar to the below is displayed:</p>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Run_JavaScript_Actions"></span>Run JavaScript actions<span class="ez-toc-section-end"></span></h2>
+
+
+
+<p class="wp-block-paragraph">In a <strong>vRO JavaScript-based</strong> project, open an action to run it from the IDE. The run control is a lightning bolt icon at the top right of the editor.</p>
 
 
 
@@ -246,15 +238,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">There is no output, and the Action didn’t run because the parameters were not provided.</p>
-
-
-
-<p class="wp-block-paragraph">A workaround for this would be to create a temporary JS file that acts as a wrapper for the Action you wish to run. This does have the limitation that the Action you want to run must already be present on Orchestrator (has been pushed from the local repository to the Orchestrator instance).</p>
-
-
-
-<p class="wp-block-paragraph">To demonstrate this, I have created an Action called ‘<strong>runActionWithParams</strong>‘ in Orchestrator that accepts two parameters, x and y, and prints these to the console. I have created a wrapper JavaScript file locally to run this Action</p>
+<p class="wp-block-paragraph">Actions with parameters are not supported. This was reportedly planned for a future vRDT release. Attempting to run one produces output like this:</p>
 
 
 
@@ -262,7 +246,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Which has the following output:</p>
+<p class="wp-block-paragraph">The action does not run or produce output because its parameters were not supplied.</p>
+
+
+
+<p class="wp-block-paragraph">As a workaround, create a temporary JavaScript file that calls the action with its parameters. The target action must already exist on Orchestrator: push it from the local repository first.</p>
+
+
+
+<p class="wp-block-paragraph">For this example, I created <strong>runActionWithParams</strong> in Orchestrator. It accepts x and y and prints them to the console. The following local JavaScript wrapper calls it:</p>
 
 
 
@@ -270,7 +262,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">This is another feature which I feel has limited need, and it’s easier to run the Actions within the Orchestrator appliance.</p>
+<p class="wp-block-paragraph">The wrapper produces this output:</p>
+
+
+
+<figure class="wp-block-image size-full"><span class="missing-image" role="note">Screenshot unavailable. This image could not be recovered from the original blog.</span></figure>
+
+
+
+<p class="wp-block-paragraph">I find this feature of limited use and prefer to run actions in the Orchestrator appliance.</p>
 
 
 
@@ -278,7 +278,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Any command made available with the vRDT extension that I have not covered in this post is because it did not work in my environment.</p>
+<p class="wp-block-paragraph">I have omitted other vRDT commands because they did not work in my environment.</p>
 
 
 

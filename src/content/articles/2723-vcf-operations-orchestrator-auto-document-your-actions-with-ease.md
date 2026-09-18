@@ -1,10 +1,10 @@
 ---
 title: "VCF Operations Orchestrator: Auto-Document Your Actions with Ease"
-description: "I spend a significant amount of time developing code for VCF Operations Orchestrator, and while I follow a strict and structured development process, documentation often falls behind. Keeping documentation up to date is an ongoing…"
+description: "Generate Markdown documentation from Orchestrator actions, class wrappers and JSDoc comments in a Build Tools JavaScript project."
 path: "/vcf-operations-orchestrator-auto-document-your-actions-with-ease/"
 kind: "post"
 published: "2025-07-03T08:40:52Z"
-updated: "2025-07-03T22:17:32Z"
+updated: "2026-09-18T16:22:41Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator"]
 tags: ["VCF Operations Orchestrator","VCF Automation"]
@@ -15,49 +15,49 @@ featuredImage: "/wp-content/uploads/2025/07/vincenzo-marotta-afG2ZF8h1OQ-unsplas
 ---
 
 
-<p class="wp-block-paragraph">I spend a significant amount of time developing code for VCF Operations Orchestrator, and while I follow a strict and structured development process, documentation often falls behind. Keeping documentation up to date is an ongoing challenge as it’s difficult to maintain and keep up with frequent code changes.</p>
+<p class="wp-block-paragraph">I spend much of my time developing VCF Operations Orchestrator code. Even with a structured development process, documentation can fall behind frequent code changes.</p>
 
 
 
-<p class="wp-block-paragraph">To solve this, I decided it was time to automate the documentation process and created a script to achieve this. When I set out to build this solution, I had a clear set of requirements I wanted it to meet:</p>
+<p class="wp-block-paragraph">I created a script to automate the documentation. It needed to meet these requirements:</p>
 
 
 
 <ul class="wp-block-list">
-<li>Generate markdown (.md) files that are compatible with GitLab/GitHub/Azure Devops Wiki</li>
+<li>Generate Markdown (.md) files compatible with GitLab, GitHub and Azure DevOps Wiki.</li>
 
 
 
-<li>Act as an extension to the Build Tools for VMware Aria;</li>
+<li>Extend Build Tools for VMware Aria.</li>
 
 
 
-<li>Use NodeJS, as this would already be available when using Build Tools for VMware Aria;</li>
+<li>Use NodeJS, which is already required by Build Tools for VMware Aria.</li>
 
 
 
-<li>Require little or no dependencies;</li>
+<li>Require few or no dependencies.</li>
 
 
 
-<li>Able to read and process checked-out source code;</li>
+<li>Read and process checked-out source code.</li>
 
 
 
-<li>Handle standard Actions, Class wrapper Actions, prototypes and inline methods;</li>
+<li>Handle standard actions, class wrapper actions, prototypes and inline methods.</li>
 
 
 
-<li>Support JSDoc tags;</li>
+<li>Support JSDoc tags.</li>
 
 
 
-<li>Honours the module hierarchy (use the same hierarchy for documents);</li>
+<li>Use the code's module hierarchy for the documentation.</li>
 </ul>
 
 
 
-<p class="wp-block-paragraph">You can find my documentation tool here: <a href="https://github.com/simplygeekuk/vcf-operations-orchestrator-doc-generator" target="_blank" rel="noopener noreferrer">vcf-operations-orchestrator-doc-generator</a>, along with instructions on how to use the script. <strong>Please note that you must be managing your code using the Build Tools for VMware Aria using a JS-Based Actions-Only Project</strong>.</p>
+<p class="wp-block-paragraph">The <a href="https://github.com/simplygeekuk/vcf-operations-orchestrator-doc-generator" target="_blank" rel="noopener noreferrer">vcf-operations-orchestrator-doc-generator repository</a> contains the tool and usage instructions. <strong>It requires code managed with Build Tools for VMware Aria in a JS-Based Actions-Only Project.</strong></p>
 
 
 
@@ -66,47 +66,47 @@ featuredImage: "/wp-content/uploads/2025/07/vincenzo-marotta-afG2ZF8h1OQ-unsplas
 
 
 <ul class="wp-block-list">
-<li>Documents Actions that are used as Class wrappers</li>
+<li>Documents actions used as class wrappers.</li>
 
 
 
-<li>Documents standard Actions and creates a single document based on the parent directory</li>
+<li>Groups standard actions into one document per parent directory.</li>
 
 
 
-<li>Adds the module path</li>
+<li>Includes the module path.</li>
 
 
 
-<li>For Classes, detects inheritance (extends)</li>
+<li>Detects class inheritance (extends).</li>
 
 
 
-<li>Documents all functions (prototype-based and inline)</li>
+<li>Documents prototype-based and inline functions.</li>
 
 
 
-<li>Documents all parameters and returns</li>
+<li>Documents all parameters and returns.</li>
 
 
 
-<li>Preserves examples and displays them in JavaScript highlighting</li>
+<li>Preserves examples with JavaScript syntax highlighting.</li>
 
 
 
-<li>Outputs in Markdown (md) files</li>
+<li>Produces Markdown (md) files.</li>
 
 
 
-<li>Creates a root-level README linking to all sub-pages</li>
+<li>Creates a root-level README linking to all sub-pages.</li>
 
 
 
-<li>Documentation folder structure honours the code hierarchy</li>
+<li>Matches the documentation folder structure to the code hierarchy.</li>
 
 
 
-<li>Easily integrated into a pipeline and pushed to supporting systems such as Azure DevOps Wiki</li>
+<li>Integrates with a pipeline to publish to systems such as Azure DevOps Wiki.</li>
 </ul>
 
 
@@ -119,15 +119,15 @@ featuredImage: "/wp-content/uploads/2025/07/vincenzo-marotta-afG2ZF8h1OQ-unsplas
 
 
 
-<h3 class="wp-block-heading">Example documents that are created:</h3>
+<h3 class="wp-block-heading">Example documents</h3>
 
 
 
-<h4 class="wp-block-heading">Class Document</h4>
+<h4 class="wp-block-heading">Class document</h4>
 
 
 
-<p class="wp-block-paragraph">ActiveDirectoryService.md – A single file that documents a class and all methods.</p>
+<p class="wp-block-paragraph">ActiveDirectoryService.md documents a class and all its methods in one file.</p>
 
 
 
@@ -135,11 +135,11 @@ featuredImage: "/wp-content/uploads/2025/07/vincenzo-marotta-afG2ZF8h1OQ-unsplas
 
 
 
-<h4 class="wp-block-heading">Standard Action Document</h4>
+<h4 class="wp-block-heading">Standard action document</h4>
 
 
 
-<p class="wp-block-paragraph">vm.md – A single file to represent the module path “com.simplygeek.vcenter.vm” where all Actions within the module are presented as documented “functions”.</p>
+<p class="wp-block-paragraph">vm.md documents the com.simplygeek.vcenter.vm module. It presents each action in that module as a function.</p>
 
 
 
@@ -147,11 +147,11 @@ featuredImage: "/wp-content/uploads/2025/07/vincenzo-marotta-afG2ZF8h1OQ-unsplas
 
 
 
-<h4 class="wp-block-heading">Top-Level README (TOC):</h4>
+<h4 class="wp-block-heading">Top-level README (table of contents)</h4>
 
 
 
-<p class="wp-block-paragraph">README.md – Top-level file that acts as a table of contents for all the produced files.</p>
+<p class="wp-block-paragraph">README.md provides a top-level table of contents for all generated files.</p>
 
 
 
@@ -159,11 +159,11 @@ featuredImage: "/wp-content/uploads/2025/07/vincenzo-marotta-afG2ZF8h1OQ-unsplas
 
 
 
-<p class="wp-block-paragraph">After many sleep-deprived nights, I now have a solution that generates documentation automatically, that I can seamlessly integrate into my pipeline and publish directly to my preferred wiki.</p>
+<p class="wp-block-paragraph">The script generates documentation automatically. I can integrate it into my pipeline and publish the output to my preferred wiki.</p>
 
 
 
-<p class="wp-block-paragraph">I hope that by sharing this solution, I can help others automate their documentation. As this is the initial release, there may be some issues, but I welcome your feedback and will do my best to support.</p>
+<p class="wp-block-paragraph">I hope this helps you automate your documentation. This is the initial release, so there may be issues. I welcome feedback and will help where I can.</p>
 
 
 

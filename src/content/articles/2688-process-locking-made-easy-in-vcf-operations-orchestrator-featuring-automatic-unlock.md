@@ -1,10 +1,10 @@
 ---
 title: "Process locking made easy in VCF Operations Orchestrator, featuring automatic unlock"
-description: "VCF Operations Orchestrator has a built-in locking semaphore provided by the LockingSystem class. When a lock is created, the workflow is placed into a waiting state, and any additional executions of the workflow will be placed in a queue…"
+description: "Use LockingService to create and remove Orchestrator locks, configure retries and optionally remove stale locks after the retry limit."
 path: "/process-locking-made-easy-in-vcf-operations-orchestrator-featuring-automatic-unlock/"
 kind: "post"
 published: "2025-06-24T15:31:14Z"
-updated: "2025-07-03T21:17:10Z"
+updated: "2026-09-18T16:22:41Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VCF Operations Orchestrator"]
 tags: ["VCF Operations Orchestrator"]
@@ -19,28 +19,28 @@ featuredImage: "/wp-content/uploads/2025/06/flyd-zAhAUSdRLJ8-unsplash-scaled.jpg
 
 
 
-<p class="wp-block-paragraph">Locking is a useful technique that can help protect the consistency of data or prevent multiple processes from updating a resource at the same time. This is especially important when workflows run concurrently and update the same resources.</p>
+<p class="wp-block-paragraph">Locking protects data consistency by preventing multiple processes from updating the same resource at once. This matters when concurrent workflows share resources.</p>
 
 
 
-<p class="wp-block-paragraph"><strong>LockingSystem </strong>provides the method <strong>‘lock</strong>‘ that will attempt to acquire a lock for a given lockId and owner. If a lock is successfully acquired, the boolean true is returned; otherwise, the return value is false.</p>
+<p class="wp-block-paragraph">The <strong>LockingSystem </strong>method <strong>lock</strong> attempts to acquire a lock for a given lockId and owner. It returns true if successful, or false otherwise.</p>
 
 
 
-<p class="wp-block-paragraph">Another function that could have been used is ‘<strong>LockAndWait</strong>‘; however, this will wait indefinitely if the lock cannot be acquired. Using the ‘<strong>lock</strong>‘ function provides more control and allows implementing a timeout feature or taking other corrective measures. Subsequently, a lock can be released using the ‘<strong>unlock</strong>‘ method.</p>
+<p class="wp-block-paragraph"><strong>LockAndWait</strong> waits indefinitely if it cannot acquire a lock. I use <strong>lock</strong> instead because it allows a timeout or other corrective handling. Release an acquired lock with <strong>unlock</strong>.</p>
 
 
 
-<p class="wp-block-paragraph">I have created a <strong>LockingService </strong>that extends <strong>LockingSystem </strong>to provide additional features:</p>
+<p class="wp-block-paragraph">My <strong>LockingService </strong>extends <strong>LockingSystem </strong>with these features:</p>
 
 
 
 <ul class="wp-block-list">
-<li>Re-attempt a failed lock (default 5 attempts) with a delay specified in seconds (default 60 seconds). This will allow the amount of time to wait for a lock to be configured independently for every use case;</li>
+<li>Retries failed lock attempts with a configurable delay in seconds. The defaults are 5 attempts and 60 seconds. Configure the wait time independently for each use case.</li>
 
 
 
-<li>Option to automatically remove an existing lock once the max attempts have been reached. This can be useful if a previous workflow run has failed, leaving behind a stale lock.</li>
+<li>Can remove an existing lock automatically after the maximum attempts. This helps when a failed workflow run leaves a stale lock.</li>
 </ul>
 
 
@@ -49,11 +49,11 @@ featuredImage: "/wp-content/uploads/2025/06/flyd-zAhAUSdRLJ8-unsplash-scaled.jpg
 
 
 
-<h2 class="wp-block-heading">Using the LockingService</h2>
+<h2 class="wp-block-heading">Use LockingService</h2>
 
 
 
-<p class="wp-block-paragraph">Using the LockingService in an Action or Workflow simply requires the following to import the module:</p>
+<p class="wp-block-paragraph">Import LockingService into an action or workflow with the following code:</p>
 
 
 
@@ -61,15 +61,15 @@ featuredImage: "/wp-content/uploads/2025/06/flyd-zAhAUSdRLJ8-unsplash-scaled.jpg
 
 
 
-<p class="wp-block-paragraph">A new instance of the <strong>LockingService</strong> class will be created and exposed by the variable ‘<strong>locking</strong>, which can be used to create and remove locks. Note that ‘<strong>locking</strong>‘ can be changed to any value you require.</p>
+<p class="wp-block-paragraph">The code creates a <strong>LockingService</strong> instance in <strong>locking</strong>. Use that variable to create and remove locks, or rename it if needed.</p>
 
 
 
-<h3 class="wp-block-heading">Available Methods</h3>
+<h3 class="wp-block-heading">Available methods</h3>
 
 
 
-<p class="wp-block-paragraph">To use <strong>LockingService </strong>to create and remove locks, use one of the following methods:</p>
+<p class="wp-block-paragraph">Use these <strong>LockingService </strong>methods to create and remove locks:</p>
 
 
 
@@ -89,7 +89,7 @@ featuredImage: "/wp-content/uploads/2025/06/flyd-zAhAUSdRLJ8-unsplash-scaled.jpg
 
 
 
-<p class="wp-block-paragraph">Returns a boolean</p>
+<p class="wp-block-paragraph">Returns a boolean.</p>
 
 
 

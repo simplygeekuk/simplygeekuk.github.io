@@ -1,10 +1,10 @@
 ---
 title: "VCF Automation – Build Tools for VMware Aria – Overview of VCF Automation Projects"
-description: "The Build Tools for VMware Aria support a variety of project types. In this post, I’ll focus on those relevant to managing VCF Automation and VCF Automation Orchestrator content. I’ll explain the purpose of each project type, offer…"
+description: "Compare TypeScript, JavaScript, XML, mixed and vRA projects in Build Tools for VMware Aria, with creation commands and project limitations."
 path: "/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/"
 kind: "post"
 published: "2025-06-24T14:08:04Z"
-updated: "2025-07-02T09:00:19Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator","Build Tools for VMware Aria","Development","Maven"]
 tags: ["VCF Automation","VCF Operations Orchestrator","Build Tools for VMware Aria"]
@@ -16,14 +16,14 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 <div class="ez-toc-title-container">
 <p class="ez-toc-title">Page Contents</p>
 <span class="ez-toc-title-toggle"></span></div>
-<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Project_Types">Project Types</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_TypeScript-based_Project">vRO TypeScript-based Project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_TypeScript-based_Project_Example">Create a vRO TypeScript-based Project Example</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_JavaScript-based_Project">vRO JavaScript-based Project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_JavaScript-based_Project_Example">Create a vRO JavaScript-based Project Example</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_XML-based_Project">vRO XML-based Project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_XML-based_Project_Example">Create a vRO XML-based Project Example</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_Mixed_Project">vRO Mixed Project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_Mixed_Project_Example">Create a vRO Mixed Project Example</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRA_8x_Project">vRA 8.x Project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-11" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRA_8x_Project_Example">Create a vRA 8.x Project Example</a></li></ul></li></ul></li></ul></nav></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Project_Types">Project types</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_TypeScript-based_Project">vRO TypeScript-based project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_TypeScript-based_Project_Example">Create a vRO TypeScript-based project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_JavaScript-based_Project">vRO JavaScript-based project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_JavaScript-based_Project_Example">Create a vRO JavaScript-based project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_XML-based_Project">vRO XML-based project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_XML-based_Project_Example">Create a vRO XML-based project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRO_Mixed_Project">vRO Mixed project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRO_Mixed_Project_Example">Create a vRO Mixed project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#vRA_8x_Project">vRA 8.x project</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-11" href="/vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects/#Create_a_vRA_8x_Project_Example">Create a vRA 8.x project</a></li></ul></li></ul></li></ul></nav></div>
 
 
-<p class="wp-block-paragraph">The Build Tools for VMware Aria support a variety of project types. In this post, I’ll focus on those relevant to managing VCF Automation and VCF Automation Orchestrator content. I’ll explain the purpose of each project type, offer guidance on when to use each based on your use case, and provide example commands to help you create them.</p>
+<p class="wp-block-paragraph">Build Tools for VMware Aria supports several project types. This post explains those used to manage VCF Automation and VCF Operations Orchestrator content, when to choose them and how to create them.</p>
 
 
 
-<p class="wp-block-paragraph">First, let’s take a look at the list of available project types:</p>
+<p class="wp-block-paragraph">The available project types are:</p>
 
 
 
@@ -49,7 +49,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">If you are not familiar with the old product acronyms:<br>vRA = VCF Automation<br>vRO = VCF Operations Orchestrator.</p>
+<p class="wp-block-paragraph">The project names use the older product acronyms:<br>vRA = VCF Automation<br>vRO = VCF Operations Orchestrator.</p>
 
 
 
@@ -68,57 +68,57 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Project_Types"></span>Project Types<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Project_Types"></span>Project types<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The following sections provide examples of the different project types that can be created. Please note that the ‘<strong>archetypeVersion</strong>‘ variable used in these examples was the version of the Build Tools at the time of writing. Please check the <a href="https://github.com/vmware/build-tools-for-vmware-aria" target="_blank" rel="noopener noreferrer">GitHub project</a> if a new version is available, as it’s recommended to use the latest.</p>
+<p class="wp-block-paragraph">The examples use the Build Tools version available when I wrote this post, set by <strong>archetypeVersion</strong>. Check the <a href="https://github.com/vmware/build-tools-for-vmware-aria" target="_blank" rel="noopener noreferrer">GitHub project</a> for newer releases. I recommend using the latest version.</p>
 
 
 
-<p class="wp-block-paragraph">I recommend creating a root folder to store the project(s). In my examples, I use the root folder ‘<strong>aria-automation</strong>‘.</p>
+<p class="wp-block-paragraph">Create a root folder for your projects. My examples use <strong>aria-automation</strong>.</p>
 
 
 
-<h3 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="vRO_TypeScript-based_Project"></span>vRO TypeScript-based Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="vRO_TypeScript-based_Project"></span>vRO TypeScript-based project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">This will create a <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer">TypeScript</a> project that allows VCF Operations Orchestrator content to be developed and managed like a modern JavaScript project using many of the ECMAScript 6-supported features, module dependencies, class inheritance, and much more.</p>
+<p class="wp-block-paragraph">This creates a <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer">TypeScript</a> project for Orchestrator content. It supports development features such as ECMAScript 6 syntax, module dependencies and class inheritance.</p>
 
 
 
-<p class="wp-block-paragraph">Workflows, Actions, Configurations, and Resources can all be managed using this project and are developed as .ts files in the native TypeScript language. This has the advantage of managing all Orchestrator content in a single place using the same language.</p>
+<p class="wp-block-paragraph">The project manages workflows, actions, configurations and resources as native TypeScript .ts files. You can maintain all of this content in one place using the same language.</p>
 
 
 
-<p class="wp-block-paragraph">This project type requires a good level of JavaScript and TypeScript knowledge and has some important points to consider:</p>
+<p class="wp-block-paragraph">This project type requires a good understanding of JavaScript and TypeScript. Consider these limitations:</p>
 
 
 
 <ul class="wp-block-list">
-<li>Code written in TypeScript is converted back to JavaScript during build time. This means that content cannot be ‘pulled’ from the Orchestrator server as there is no mechanism to convert the native JavaScript code to TypeScript;</li>
+<li>TypeScript is converted to JavaScript at build time. You cannot pull content from Orchestrator because there is no conversion back to TypeScript.</li>
 
 
 
-<li>All development must be made in the user’s development environment (i.e. locally using an IDE). This is related to the previous point and also because of the way the JavaScript code is converted and presented on the Orchestrator server;</li>
+<li>All development must happen locally in your development environment, such as an IDE. This follows from the conversion process and the way generated JavaScript is presented in Orchestrator.</li>
 
 
 
-<li>Pushing code to the Orchestrator server can be significant due to the node dependencies that are required;</li>
+<li>Pushing code can take significant time because of the required Node dependencies.</li>
 
 
 
-<li>Requires Types/Interfaces to be defined that could massively increase initial delivery times;</li>
+<li>Defining types and interfaces can substantially increase initial delivery time.</li>
 </ul>
 
 
 
-<p class="wp-block-paragraph">Despite these points, this is a great project type if you have TypeScript experience that allows you to truly manage Orchestrator content as an application.</p>
+<p class="wp-block-paragraph">If you have TypeScript experience and can work within these constraints, this project type lets you manage Orchestrator content as an application.</p>
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_TypeScript-based_Project_Example"></span>Create a vRO TypeScript-based Project Example<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_TypeScript-based_Project_Example"></span>Create a vRO TypeScript-based project<span class="ez-toc-section-end"></span></h4>
 
 
 
@@ -130,11 +130,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Once complete, you should see a new folder with the name of what <strong>artifactId</strong> was set to (vro-ts in my example).</p>
+<p class="wp-block-paragraph">The command creates a folder named after <strong>artifactId</strong>: vro-ts in this example.</p>
 
 
 
-<p class="wp-block-paragraph">In the new folder, under ‘<strong>src</strong>‘, you should have a folder structure like the following:</p>
+<p class="wp-block-paragraph">Inside it, <strong>src</strong> has the following structure:</p>
 
 
 
@@ -146,15 +146,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRO_JavaScript-based_Project"></span>vRO JavaScript-based Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRO_JavaScript-based_Project"></span>vRO JavaScript-based project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">In Orchestrator, all content, including Actions, is stored in XML format. Actions themselves are simply JavaScript functions wrapped in XML, which makes native development cumbersome and limits the ability to leverage modern development tools.</p>
+<p class="wp-block-paragraph">Orchestrator stores all content, including actions, in XML. An action is a JavaScript function wrapped in XML, which makes native development cumbersome and limits the use of modern development tools.</p>
 
 
 
-<p class="wp-block-paragraph">The JavaScript-based project type solves this by enabling you to write Orchestrator Actions in pure JavaScript, stored as standard <code>.js</code> files. The Build Tools handle the background conversion of these files into the XML format required by Orchestrator, allowing you to work entirely in JavaScript while maintaining full compatibility with the platform.</p>
+<p class="wp-block-paragraph">The JavaScript-based project lets you write actions as standard <code>.js</code> files. Build Tools converts them to the XML format Orchestrator requires, so you can develop in JavaScript while keeping platform compatibility.</p>
 
 
 
@@ -162,7 +162,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_JavaScript-based_Project_Example"></span>Create a vRO JavaScript-based Project Example<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_JavaScript-based_Project_Example"></span>Create a vRO JavaScript-based project<span class="ez-toc-section-end"></span></h4>
 
 
 
@@ -174,7 +174,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph" id="the-pasted-async">Once complete, you should see a new folder named after the <strong>artifactId</strong> (vro-js in my example). Within this folder, there will be a sample function in the path ‘<strong>src\main\resources\com\simplygeek\vro-js</strong>‘ where ‘<strong>com\simplygeek\vro-js</strong>‘ is derived from the <strong>groupId</strong> and <strong>artifactId</strong> values.</p>
+<p class="wp-block-paragraph" id="the-pasted-async">The command creates a folder named after <strong>artifactId</strong>: vro-js in this example. It contains a sample function at <strong>src\main\resources\com\simplygeek\vro-js</strong>. The <strong>com\simplygeek\vro-js</strong> portion comes from <strong>groupId</strong> and <strong>artifactId</strong>.</p>
 
 
 
@@ -194,27 +194,27 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">I recommend removing this folder later once you have created new functions, but it can be useful for initial testing (pushing/pulling code).</p>
+<p class="wp-block-paragraph">Use the sample folder to test pushing and pulling code. I recommend removing it after you create your own functions.</p>
 
 
 
-<p class="wp-block-paragraph">To create new functions (Actions), create a folder structure which is based on the module path in Orchestrator. As per my example, if there was an Action in Orchestrator called ‘<strong>myFunction</strong>‘ in the module ‘<strong>com.simplygeek</strong>‘, this would be represented as a folder structure ‘<strong>com/simplygeek</strong>‘ which contains a file called ‘<strong>myFunction.js</strong>‘. Use the sample function for the initial boilerplate for these functions.</p>
+<p class="wp-block-paragraph">Match each action's folder structure to its Orchestrator module path. For example, <strong>myFunction</strong> in <strong>com.simplygeek</strong> becomes <strong>myFunction.js</strong> inside <strong>com/simplygeek</strong>. Use the sample function as the starting template.</p>
 
 
 
-<p class="wp-block-paragraph">It is important to note lines 1-6, which are the <a href="https://jsdoc.app/" target="_blank" rel="noopener noreferrer">JSDoc</a> block used to describe the function. Build Tools uses this information when creating the Action in Orchestrator and for defining the inputs and return type (the parameters within the function() are ignored during this process).</p>
+<p class="wp-block-paragraph">Lines 1–6 contain the <a href="https://jsdoc.app/" target="_blank" rel="noopener noreferrer">JSDoc</a> block. Build Tools uses it to describe the action and define its inputs and return type. It ignores the parameters declared inside function() during this process.</p>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRO_XML-based_Project"></span>vRO XML-based Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRO_XML-based_Project"></span>vRO XML-based project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">This project will allow content in Orchestrator to be managed in its native XML format for the development of Workflows, Configurations and Resources (Actions are also supported but will be wrapped in XML and are therefore not recommended (use JavaScript-based projects for this!)).</p>
+<p class="wp-block-paragraph">This project manages workflows, configurations and resources in Orchestrator's native XML format. It also supports actions, but wraps them in XML. I recommend JavaScript-based projects for actions instead.</p>
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_XML-based_Project_Example"></span>Create a vRO XML-based Project Example<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_XML-based_Project_Example"></span>Create a vRO XML-based project<span class="ez-toc-section-end"></span></h4>
 
 
 
@@ -222,27 +222,27 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Set ‘<strong>groupId</strong>‘ and ‘<strong>artifactId</strong>‘ to your values. Set ‘<strong>workflowsPath</strong>‘ to the name (or path) of the root folder for the Orchestrator Workflows (do not use <strong>Library</strong> as this already exists). This can also be changed later by simply renaming the folder that is created or creating a new folder (or multiple folders if desired).</p>
+<ol><li>Set <strong>groupId</strong> and <strong>artifactId</strong> to your values.</li><li>Set <strong>workflowsPath</strong> to the name or path of the root workflow folder. Do not use <strong>Library</strong>, which already exists.</li></ol><p>You can later rename the generated folder or create one or more new folders.</p>
 
 
 
-<p class="wp-block-paragraph">Once complete, you should see a new folder with the name of what <strong>artifactId</strong> was set to (vro-xml in my example). Within this folder, there will be a sample Workflow in the path ‘<strong>src\main\resources\Workflow\Simplygeek</strong>‘ where ‘<strong>Simplygeek</strong>‘ is derived from the <strong>workflowsPath</strong> value.</p>
+<p class="wp-block-paragraph">The command creates a folder named after <strong>artifactId</strong>: vro-xml in this example. It includes a sample workflow at <strong>src\main\resources\Workflow\Simplygeek</strong>. The <strong>Simplygeek</strong> folder name comes from <strong>workflowsPath</strong>.</p>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRO_Mixed_Project"></span>vRO Mixed Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRO_Mixed_Project"></span>vRO Mixed project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">The Mixed project is a ‘<strong>virtual</strong>‘ Maven project that contains two underlying projects, a JavaScript-based and an XML-based project. A virtual Maven project allows these to be managed as a single entity using a single set of Maven commands/goals to push/pull content to/from Orchestrator.</p>
+<p class="wp-block-paragraph">The Mixed project is a <strong>virtual</strong> Maven project containing JavaScript-based and XML-based subprojects. One set of Maven commands or goals pushes and pulls both subprojects' content to and from Orchestrator.</p>
 
 
 
-<p class="wp-block-paragraph">As per the Build Tools documentation, this project is recommended for the initial onboarding of existing Orchestrator code into the solution. Later, the code should be moved and managed within their respective project types.</p>
+<p class="wp-block-paragraph">The Build Tools documentation recommends this project for initially importing existing Orchestrator code. Afterwards, move the code into its respective project types and manage it there.</p>
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_Mixed_Project_Example"></span>Create a vRO Mixed Project Example<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRO_Mixed_Project_Example"></span>Create a vRO Mixed project<span class="ez-toc-section-end"></span></h4>
 
 
 
@@ -250,23 +250,23 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph" id="the-pasted-async">Set ‘<strong>groupId</strong>‘ and ‘<strong>artifactId</strong>‘ to your values. Set ‘<strong>workflowsPath</strong>‘ to the name (or path) of the root folder for the Orchestrator Workflows (do not use <strong>Library</strong> as this already exists). This can also be changed later by simply renaming the folder that is created or creating a new folder (or multiple folders if desired).</p>
+<ol><li>Set <strong>groupId</strong> and <strong>artifactId</strong> to your values.</li><li>Set <strong>workflowsPath</strong> to the name or path of the root workflow folder. Do not use <strong>Library</strong>, which already exists.</li></ol><p>You can later rename the generated folder or create one or more new folders.</p>
 
 
 
-<p class="wp-block-paragraph">Once complete, you should see a new folder with the name of what <strong>artifactId</strong> was set to (vro-mixed in my example). Within this folder, there will be two subfolders, ‘<strong>actions</strong>‘ and ‘<strong>workflows</strong>‘. These are Maven projects based on the ‘<strong>package-actions-archetype</strong>‘ and ‘<strong>package-xml-archetype</strong>‘ archetypes, respectively.</p>
+<p class="wp-block-paragraph">The command creates a folder named after <strong>artifactId</strong>: vro-mixed in this example. It contains <strong>actions</strong> and <strong>workflows</strong> subfolders. These are Maven projects based on <strong>package-actions-archetype</strong> and <strong>package-xml-archetype</strong>, respectively.</p>
 
 
 
-<p class="wp-block-paragraph">These subprojects follow the same folder structure as per the examples above for the respective project type.</p>
+<p class="wp-block-paragraph">Each subproject uses the folder structure described above for its project type.</p>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRA_8x_Project"></span>vRA 8.x Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRA_8x_Project"></span>vRA 8.x project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">The VCF Automation 8.x project type allows the management of all VCF Automation content that includes:</p>
+<p class="wp-block-paragraph">The VCF Automation 8.x project type manages the following content:</p>
 
 
 
@@ -316,7 +316,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRA_8x_Project_Example"></span>Create a vRA 8.x Project Example<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_vRA_8x_Project_Example"></span>Create a vRA 8.x project<span class="ez-toc-section-end"></span></h4>
 
 
 
@@ -328,7 +328,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Once complete, you should see a new folder named by the <strong>artifactId</strong> (vra-content in my example). Within this folder, there will be the following folder structure under ‘<strong>src\main\resources</strong>‘:</p>
+<p class="wp-block-paragraph">The command creates a folder named after <strong>artifactId</strong>: vra-content in this example. Its <strong>src\main\resources</strong> directory has this structure:</p>
 
 
 
@@ -336,7 +336,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">At the root of the project, there will be a ‘<strong>content.yaml</strong>‘ file with the following content:</p>
+<p class="wp-block-paragraph">The project root contains <strong>content.yaml</strong> with the following content:</p>
 
 
 
@@ -365,11 +365,11 @@ content-source: []</code></pre>
 
 
 
-<p class="wp-block-paragraph">These lists represent the content items that will be pushed or pulled from the VCF Automation platform, regardless of which content exists within the project. The best approach when starting is to populate content in VCF Automation and then update this file with the items. Then pull down the content, which can be managed within the project.</p>
+<p>The lists in content.yaml select the items to push or pull, regardless of which content files exist in the project. To get started:</p><ol><li>Create the content in VCF Automation.</li><li>Add those items to content.yaml.</li><li>Pull the content into the project, where you can manage it locally.</li></ol>
 
 
 
-<p class="wp-block-paragraph">Hopefully, this is enough to get started with the various project types available, and I will provide further content to cover these in more depth soon.</p>
+<p class="wp-block-paragraph">These examples provide a starting point for each project type. Future posts will cover them in more detail.</p>
 
 
 

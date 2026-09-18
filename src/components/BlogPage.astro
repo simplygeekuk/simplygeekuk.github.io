@@ -13,7 +13,7 @@ const totalPages = Math.max(1, Math.ceil(allPosts.length / POSTS_PER_PAGE));
 const posts = allPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
 const previousPage = currentPage === 2 ? "/" : `/page/${currentPage - 1}/`;
 const previews = new Map(posts.map((post) => {
-  const $ = load(post.body ?? "");
+  const $ = load(post.rendered?.html ?? post.body ?? "");
   $("pre, script, style, .missing-image, #ez-toc-container").remove();
   const text = $("p").toArray().map((paragraph) => $(paragraph).text()).join(" ").replace(/\s+/g, " ").trim();
   const preview = text.length > 1500 ? text.slice(0, 1500).replace(/\s+\S*$/, "") + "…" : text;

@@ -39,6 +39,83 @@
       "category": "Software and automation concepts",
       "source": "src/content/articles/2688-process-locking-made-easy-in-vcf-operations-orchestrator-featuring-automatic-unlock.md",
       "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Approval applies only to the software sense defined here."
+    },
+    {
+      "term": "virtual environment",
+      "definition": "A Python environment with its own interpreter and installed packages, isolated from other Python environments by default.",
+      "category": "Software and automation concepts",
+      "source": "https://docs.python.org/3/library/venv.html",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2838-getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code.md\", \"context\": \" This guide sets up AlmaLinux 10 in WSL 2, creates a Python virtual environment and connects it to the Ansible extension in VS Code. The result is a workspace with code completion, syntax highlighting, YAML validation and linting, plus acc\"}]."
+    },
+    {
+      "term": "execution environment",
+      "definition": "A container image that packages the Ansible runtime and dependencies needed to run automation.",
+      "category": "Software and automation concepts",
+      "source": "https://docs.ansible.com/projects/ansible/latest/getting_started_ee/index.html",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2838-getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code.md\", \"context\": \"rtual environment. Running container-based tools or Ansible execution environments also requires a container engine, which is outside this setup. ## Set up Visual Studio Code A dedicated [VS Code profile](https://code.visualstudio.com/docs/c\"}]."
+    },
+    {
+      "term": "fully qualified collection name",
+      "definition": "An Ansible name qualified by its namespace and collection, such as namespace.collection.module.",
+      "category": "Software and automation concepts",
+      "source": "https://docs.ansible.com/projects/lint/rules/fqcn/",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2838-getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code.md\", \"context\": \"e file. The next screenshot shows IntelliSense suggesting a fully qualified collection name (FQCN) for a module. An FQCN identifies the namespace, collection and module, such as `ansible.builtin.copy`. See the [Ansible Lint FQCN rule](https://docs.ans\"}]."
+    },
+    {
+      "term": "prototypal inheritance",
+      "definition": "JavaScript inheritance in which an object can obtain properties and methods through its prototype chain.",
+      "category": "Software and automation concepts",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2601-using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development.md\", \"context\": \"lished using native JavaScript features such as classes and prototypal inheritance. The service itself can be implemented as a single Action within Orchestrator, encapsulating all logic related to the API in a clean, reusable structure. Consi\"}]."
+    },
+    {
+      "term": "constructor function",
+      "definition": "A JavaScript function used with new to initialise an object instance.",
+      "category": "Software and automation concepts",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2601-using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development.md\", \"context\": \" uses ECMAScript 5, the  keyword is not supported. Instead, constructor functions are used to define classes, following the classical function-based approach. The prototype allows us to define and attach additional methods to our “class,” e\"}]."
+    },
+    {
+      "term": "artefact repository manager",
+      "definition": "A service that stores and provides access to software artefacts and manages local or proxied artefact repositories.",
+      "category": "Software and automation concepts",
+      "source": "https://maven.apache.org/repository-management.html",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2648-vcf-automation-build-tools-for-vmware-aria-up-and-running.md\", \"context\": \"l) It’s strongly recommended to deploy or have access to an artefact repository manager to store supporting artefacts and integrate them into your deployment targets and pipelines. There are many suitable options available, such as Artifactory, Ne\"}]."
+    },
+    {
+      "term": "refresh token",
+      "definition": "A credential used to request a new access token from an authorisation server.",
+      "category": "Software and automation concepts",
+      "source": "https://www.rfc-editor.org/rfc/rfc6749.html#section-1.5",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2648-vcf-automation-build-tools-for-vmware-aria-up-and-running.md\", \"context\": \" some steps to use Postman to obtain the VCF Automation API Refresh Token, which is needed for the build tools to access the infrastructure. Download it here. Obtain VCF Automation Refresh Token An API refresh token is required to ob\"}]."
+    },
+    {
+      "term": "access token",
+      "definition": "A credential representing authorisation to access protected resources.",
+      "category": "Software and automation concepts",
+      "source": "https://www.rfc-editor.org/rfc/rfc6749.html#section-1.4",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2648-vcf-automation-build-tools-for-vmware-aria-up-and-running.md\", \"context\": \"Refresh Token An API refresh token is required to obtain an access (bearer) token when making API calls to VCF Automation. For the Build Tools, only the refresh token is required (as the build tools will internally request bearer tokens when\"}]."
+    },
+    {
+      "term": "infrastructure as code",
+      "definition": "The practice of defining and managing infrastructure through machine-readable configuration kept as code.",
+      "category": "Software and automation concepts",
+      "source": "https://developer.hashicorp.com/terraform/intro",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2664-vcf-automation-native-git-integration-vs-alternatives.md\", \"context\": \"ther physical or software-based. We often refer to this as ‘Infrastructure as Code‘, though this term is usually applied everywhere. Content – This is content developed and presented to the end users for consumption. Content includes configur\"}]."
+    },
+    {
+      "term": "multi-module project",
+      "definition": "A Maven project that groups modules so the reactor can collect, order and build them together.",
+      "category": "Software and automation concepts",
+      "source": "https://maven.apache.org/guides/mini/guide-multiple-modules.html",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2662-vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference.md\", \"context\": \"ater). Mixed Project This is not a real project but a Maven multi-module project that contains both a JavaScript-based and an XML-based project as submodules. According to the Built Tools documentation, this project is designed for initial \"}]."
+    },
+    {
+      "term": "class wrapper",
+      "definition": "An Orchestrator action that exposes a JavaScript constructor for callers to create class-style object instances.",
+      "category": "Software and automation concepts",
+      "source": "src/content/articles/2723-vcf-operations-orchestrator-auto-document-your-actions-with-ease.md",
+      "notes": "Explicitly approved by the repository owner on 2026-09-18 for the defined software sense under technical-readability. Approval does not extend to unrelated senses or verb uses. No strict ASD-STE100 category equivalence is claimed. Resolver semantic triage: {\"profile\": \"technical-readability\", \"outcome\": \"TECHNICAL_TERM\", \"guidance\": \"Named as a project or domain concept, so it is governed under either profile. Its lexical state is ABSENT_FROM_CORE. Take the terminology decision before the text depends on the word.\"}. Repository evidence: [{\"path\": \"src/content/articles/2723-vcf-operations-orchestrator-auto-document-your-actions-with-ease.md\", \"context\": \"d process checked-out source code; Handle standard Actions, Class wrapper Actions, prototypes and inline methods; Support JSDoc tags; Honours the module hierarchy (use the same hierarchy for documents); You can find my documentation \"}]."
     }
   ],
   "technical_verbs": [],

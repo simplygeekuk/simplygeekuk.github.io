@@ -1,10 +1,10 @@
 ---
 title: "VCF Automation – Build Tools for VMware Aria – Up and Running"
-description: "It’s been a while since I last covered the Build Tools that support development in VCF Automation, and a lot has changed since my original IaC for vRealize series. I’ve received quite a few requests for an update, and I finally found time…"
+description: "Set up Build Tools for VMware Aria on Windows, configure Maven and an optional Artifactory repository, then push and pull Orchestrator actions."
 path: "/vcf-automation-build-tools-for-vmware-aria-up-and-running/"
 kind: "post"
 published: "2025-06-24T13:51:38Z"
-updated: "2025-07-02T08:47:27Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator","Development","Build Tools for VMware Aria","DevOps","Maven","Artifactory"]
 tags: ["VCF Automation","VCF Operations Orchestrator"]
@@ -16,14 +16,14 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 <div class="ez-toc-title-container">
 <p class="ez-toc-title">Page Contents</p>
 <span class="ez-toc-title-toggle"></span></div>
-<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Deploy_and_Configure_Artifactory_Repository_Manager_optional">Deploy and Configure Artifactory Repository Manager (optional)</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Configure_Jfrog_Artifactory">Configure Jfrog Artifactory</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_Local_Repository_for_Aria">Create a Local Repository for Aria</a></li><li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_User_for_Repository_Access">Create a User for Repository Access</a></li></ul></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_Certificate_for_Orchestrator_Package_Signing">Create a Certificate for Orchestrator Package Signing</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Signed_Certificate">Signed Certificate</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Self-Signed_Certificate">Self-Signed Certificate</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_Keystore_Artefact_optional">Create Keystore Artefact (optional)</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Upload_Keystore_Artefact_to_Artifactory">Upload Keystore Artefact to Artifactory</a></li></ul></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Configure_Developer_Workstation_Windows">Configure Developer Workstation (Windows)</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-11" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_Postman_optional">Install Postman (optional)</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-12" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Obtain_VCF_Automation_Refresh_Token">Obtain VCF Automation Refresh Token</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-13" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_Java_Development_Kit_JDK">Install Java Development Kit (JDK)</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-14" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_NodeJS">Install NodeJS</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-15" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_Apache_Maven">Install Apache Maven</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-16" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_Master_Password">Create a Master Password</a></li><li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-17" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Configure_Project_Settings_settingsxml">Configure Project Settings (settings.xml)</a></li></ul></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-18" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_Your_First_Project_Actions-based">Create Your First Project (Actions-based)</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-19" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Push_Actions">Push Actions</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-20" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Pull_Actions">Pull Actions</a></li></ul></li></ul></nav></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Deploy_and_Configure_Artifactory_Repository_Manager_optional">Deploy and configure Artifactory Repository Manager (optional)</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Configure_Jfrog_Artifactory">Configure JFrog Artifactory</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_Local_Repository_for_Aria">Create a local repository for Aria</a></li><li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_User_for_Repository_Access">Create a user for repository access</a></li></ul></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_Certificate_for_Orchestrator_Package_Signing">Create a certificate for Orchestrator package signing</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Signed_Certificate">Signed certificate</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Self-Signed_Certificate">Self-signed certificate</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_Keystore_Artefact_optional">Create the keystore artefact (optional)</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Upload_Keystore_Artefact_to_Artifactory">Upload the keystore artefact to Artifactory</a></li></ul></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Configure_Developer_Workstation_Windows">Configure the developer workstation (Windows)</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-11" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_Postman_optional">Install Postman (optional)</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-12" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Obtain_VCF_Automation_Refresh_Token">Obtain a VCF Automation refresh token</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-13" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_Java_Development_Kit_JDK">Install Java Development Kit (JDK)</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-14" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_NodeJS">Install NodeJS</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-15" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Install_Apache_Maven">Install Apache Maven</a><ul class="ez-toc-list-level-3"><li class="ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-16" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_a_Master_Password">Create a master password</a></li><li class="ez-toc-page-1 ez-toc-heading-level-3"><a class="ez-toc-link ez-toc-heading-17" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Configure_Project_Settings_settingsxml">Configure project settings (settings.xml)</a></li></ul></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-18" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Create_Your_First_Project_Actions-based">Create your first project (actions-based)</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-19" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Push_Actions">Push actions</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-20" href="/vcf-automation-build-tools-for-vmware-aria-up-and-running/#Pull_Actions">Pull actions</a></li></ul></li></ul></nav></div>
 
 
-<p class="wp-block-paragraph">It’s been a while since I last covered the Build Tools that support development in VCF Automation, and a lot has changed since my original <strong><em>IaC for vRealize</em> </strong>series. I’ve received quite a few requests for an update, and I finally found time to write one. This post covers the latest release of the Build Tools (version 4.7.0 at the time of writing) and is recommended for users running version 2.30.x or later. Earlier versions may not function as expected.</p>
+<p class="wp-block-paragraph">This post updates my <strong><em>IaC for vRealize</em> </strong>series with Build Tools version 4.7.0, the latest release when I wrote it. The guidance is intended for version 2.30.x or later. Earlier versions may not work as described.</p>
 
 
 
-<p class="wp-block-paragraph" id="the-pasted-async">A lot has changed—most notably the rebranding from <em><strong>vRealize Build Tools</strong></em> to <em><strong>Build Tools for VMware Aria</strong></em> (can we expect another rebranding?). What was once a VMware Fling is now an officially managed open-source project on GitHub. In addition to supporting Orchestrator, the tools now offer broader integration across the VCF suite. You can manage content for the following solutions:</p>
+<p class="wp-block-paragraph" id="the-pasted-async"><em><strong>vRealize Build Tools</strong></em> was renamed <em><strong>Build Tools for VMware Aria</strong></em>. The former VMware Fling is now an officially managed open-source project on GitHub. Its integrations extend beyond Orchestrator to manage content for these VCF solutions:</p>
 
 
 
@@ -49,7 +49,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph" id="the-pasted-async">The Build Tools for VMware Aria are now available in public Maven repositories, eliminating the need to manually upload artefacts or rely on a vRO 7.3 appliance. The only exception is the keystore (more on that later). With direct internet access, you can now create a project and begin using the Build Tools immediately. For enterprise environments, however, it’s still best practice to set up a supporting platform for greater control.</p>
+<p class="wp-block-paragraph" id="the-pasted-async">Build Tools for VMware Aria is available in public Maven repositories. Except for the keystore, you no longer need to upload artefacts manually or use a vRO 7.3 appliance. With direct internet access, you can create a project and start using the tools. For enterprise environments, I recommend a supporting platform to provide greater control.</p>
 
 
 
@@ -79,40 +79,40 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">I feel these topics are best covered in dedicated posts and are not required to be up and running with the Build Tools.</p>
+<p class="wp-block-paragraph">These topics need dedicated posts and are not prerequisites for this setup.</p>
 
 
 
 
-<h2 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="Deploy_and_Configure_Artifactory_Repository_Manager_optional"></span>Deploy and Configure Artifactory Repository Manager (optional)<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="Deploy_and_Configure_Artifactory_Repository_Manager_optional"></span>Deploy and configure Artifactory Repository Manager (optional)<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">It’s strongly recommended to deploy or have access to an artefact repository manager to store supporting artefacts and integrate them into your deployment targets and pipelines. There are many suitable options available, such as Artifactory, Nexus, or GitLab, and most enterprises already have solutions in place with established projects, repositories, and permission models. What I provide here is a basic setup intended purely for guidance and demonstration purposes.</p>
+<p class="wp-block-paragraph">I strongly recommend an artefact repository manager to store supporting artefacts and integrate them with deployment targets and pipelines. Options include Artifactory, Nexus and GitLab. Many enterprises already have repositories, projects and permissions in place. The basic setup below is for guidance and demonstration.</p>
 
 
 
-<p class="wp-block-paragraph">Given the wide variety of products and deployment options available, it wouldn’t be practical to cover the entire setup process here in detail. Instead, I chose to set up JFrog Artifactory using a containerised deployment managed by Podman on Rocky Linux 9, following <a href="https://unixcop.com/how-to-install-jfrog-artifactory-on-rhel-8-centos-8-rocky-linux-8/">this guide</a>. You’re welcome to follow the same guide or adapt the process to suit your own environment and tooling preferences.</p>
+<p class="wp-block-paragraph">This guide does not cover every product or deployment option. I deployed JFrog Artifactory in a container managed by Podman on Rocky Linux 9, following <a href="https://unixcop.com/how-to-install-jfrog-artifactory-on-rhel-8-centos-8-rocky-linux-8/">this guide</a>. You can follow the same guide or adapt the deployment to your environment.</p>
 
 
 
-<h3 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="Configure_Jfrog_Artifactory"></span>Configure Jfrog Artifactory<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="Configure_Jfrog_Artifactory"></span>Configure JFrog Artifactory<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">If you’re installing Artifactory, it’s assumed that you’ve already completed the initial setup, changed the default password and successfully logged into the UI. This section will walk you through the steps required to configure Artifactory for use with the Build Tools for VMware Aria.</p>
+<p class="wp-block-paragraph">Before continuing, complete the initial Artifactory setup, change the default password and sign in to the UI. The following steps configure Artifactory for Build Tools for VMware Aria.</p>
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_Local_Repository_for_Aria"></span>Create a Local Repository for Aria<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_Local_Repository_for_Aria"></span>Create a local repository for Aria<span class="ez-toc-section-end"></span></h4>
 
 
 
-<p class="wp-block-paragraph">The first step is to create a new repository to store the keystore file. In earlier versions of the Build Tools, a Java Keystore was used, but this has since been replaced by a Maven package containing a certificate and key file. This new format is significantly easier to manage and simplifies distribution across environments.</p>
+<p class="wp-block-paragraph">First, create a repository for the keystore file. Earlier Build Tools versions used a Java Keystore. Its replacement is a Maven package containing a certificate and key file, which is easier to manage and distribute.</p>
 
 
 
-<p class="wp-block-paragraph">Select <strong>Administration</strong> -&gt; <strong>Repositories</strong> and select the <strong>Local</strong> tab. Click the ‘<strong>Add Repository</strong>‘ button (located at the top right for the version I am using) and select ‘<strong>Local Repository</strong>‘. Choose <strong>Maven</strong> as the package type. Enter a <strong>Repository Key</strong> (I used aria-local) and click ‘<strong>Create Local Repository</strong>‘.</p>
+<ol><li>Select <strong>Administration</strong> &gt; <strong>Repositories</strong> &gt; <strong>Local</strong>.</li><li>Select <strong>Add Repository</strong> &gt; <strong>Local Repository</strong>. In the version shown, the button is at the top right.</li><li>Select <strong>Maven</strong> as the package type.</li><li>Enter a <strong>Repository Key</strong>. I used aria-local.</li><li>Select <strong>Create Local Repository</strong>.</li></ol>
 
 
 
@@ -124,7 +124,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">The next step is to add this repository to the <strong>libs-release</strong> virtual repository. Select the <strong>Virtual</strong> tab and click on the repository name <strong>libs-release</strong>.&nbsp; On the <strong>Basic</strong> Configuration page, scroll to the bottom until you see <strong>Repositories</strong>. Drag or select and use the arrow button to move the repository across to the right (Selected).</p>
+<p>Add the local repository to the <strong>libs-release</strong> virtual repository:</p><ol><li>Select the <strong>Virtual</strong> tab.</li><li>Select <strong>libs-release</strong>.</li><li>On the <strong>Basic</strong> Configuration page, scroll down to <strong>Repositories</strong>.</li><li>Move your local repository to the right-hand list (Selected), either by dragging it or using the arrow button.</li></ol>
 
 
 
@@ -132,7 +132,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">While on this screen, click the checkbox for ‘<strong>Force Authentication</strong>‘ located just above <strong>Repositories</strong>. This will force the requirement for an authenticated user to access the repository (anonymous access disabled).</p>
+<p class="wp-block-paragraph">Select <strong>Force Authentication</strong>, just above <strong>Repositories</strong>. This requires users to authenticate and disables anonymous access.</p>
 
 
 
@@ -148,15 +148,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_User_for_Repository_Access"></span>Create a User for Repository Access<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_User_for_Repository_Access"></span>Create a user for repository access<span class="ez-toc-section-end"></span></h4>
 
 
 
-<p class="wp-block-paragraph">This section will detail the steps to create a local Artifactory user account that can be used to authenticate to the repository. You can also opt to use an LDAP/Active Directory account if you configure this integration.</p>
+<p class="wp-block-paragraph">Create a local Artifactory account for repository access. If you configure LDAP/Active Directory integration, you can use a directory account instead.</p>
 
 
 
-<p class="wp-block-paragraph">Select <strong>Administration</strong> -&gt; <strong>User Management</strong> and select <strong>Users</strong>. Click the ‘<strong>New User</strong>‘ button (located at the top right for the version I am using). Give this user a name that you find suitable (I called this user aria-ci) and set the password.&nbsp; You can optionally check ‘<strong>Disable UI Access</strong>‘, but you may want to leave this unchecked for testing.</p>
+<ol><li>Select <strong>Administration</strong> &gt; <strong>User Management</strong> &gt; <strong>Users</strong>.</li><li>Select <strong>New User</strong>. In the version shown, the button is at the top right.</li><li>Enter a username and password. I used aria-ci.</li></ol><p>You can select <strong>Disable UI Access</strong>, but leave it unchecked if you need UI access for testing.</p>
 
 
 
@@ -164,11 +164,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Click <strong>Save</strong></p>
+<p class="wp-block-paragraph">Select <strong>Save</strong>.</p>
 
 
 
-<p class="wp-block-paragraph">Next, select <strong>Permissions</strong> and click the ‘<strong>New Permission</strong>‘ button. Provide a suitable name for this permission (I called this aria-ci). Under <strong>Resources</strong>, click ‘<strong>Add Repositories</strong>‘ and check the 3 checkboxes at the top, ‘<strong>Any Local Repository</strong>‘, ‘<strong>Any Remote Repository</strong>‘, and ‘<strong>Any Distribution Repository</strong>‘.</p>
+<ol><li>Select <strong>Permissions</strong> &gt; <strong>New Permission</strong>.</li><li>Enter a permission name. I used aria-ci.</li><li>Under <strong>Resources</strong>, select <strong>Add Repositories</strong>.</li><li>Select the three checkboxes: <strong>Any Local Repository</strong>, <strong>Any Remote Repository</strong> and <strong>Any Distribution Repository</strong>.</li></ol>
 
 
 
@@ -180,7 +180,7 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">Under <strong>Users</strong>, click the + icon next to <strong>Selected Users</strong>. Drag or select and use the arrow to move the user account to this permission.</p>
+<p class="wp-block-paragraph">Under <strong>Users</strong>, select the + icon next to <strong>Selected Users</strong>. Move the user account into this permission by dragging it or using the arrow button.</p>
 
 
 
@@ -192,19 +192,19 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_Certificate_for_Orchestrator_Package_Signing"></span>Create a Certificate for Orchestrator Package Signing<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_Certificate_for_Orchestrator_Package_Signing"></span>Create a certificate for Orchestrator package signing<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">A certificate is required to sign packages for VCF Operations Orchestrator (import/export). In earlier versions of the Build Tools, the requirement was to create a Java Keystore file that contained all the certificates. This wasn’t easy to manage and was difficult to distribute across teams. This has now been replaced with a Maven artefact that contains the certificate and private key and can be distributed using an artefact repository manager.</p>
+<p class="wp-block-paragraph">VCF Operations Orchestrator requires a certificate to sign packages for import and export. Earlier Build Tools versions stored certificates in a Java Keystore, which was difficult to manage and share. The replacement Maven artefact contains the certificate and private key. An artefact repository manager can distribute it across the team.</p>
 
 
 
-<p class="wp-block-paragraph">OpenSSL is required to generate the certificates. I am using 3.0.x (LTS) Light release for Windows, which can be downloaded from <a href="https://slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<p class="wp-block-paragraph">Use OpenSSL to generate the certificates. I use the 3.0.x (LTS) Light release for Windows, available from the <a href="https://slproweb.com/products/Win32OpenSSL.html" target="_blank" rel="noopener noreferrer">OpenSSL download page</a>.</p>
 
 
 
-<p class="wp-block-paragraph">I like to create a configuration file for certificate information, which I keep in Git. Create a configuration file ‘<strong>keystore.cfg</strong>‘ with the following:</p>
+<p class="wp-block-paragraph">I keep the certificate configuration in Git. Create <strong>keystore.cfg</strong> with the following content:</p>
 
 
 
@@ -236,7 +236,7 @@ DNS.1 = ##domain.local##</code></pre>
 
 
 
-<p class="wp-block-paragraph">Replace all values with <strong>##</strong>xyz<strong>##</strong> with your own.</p>
+<p class="wp-block-paragraph">Replace each <strong>##</strong>xyz<strong>##</strong> placeholder with your own value.</p>
 
 
 
@@ -244,7 +244,7 @@ DNS.1 = ##domain.local##</code></pre>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Signed_Certificate"></span>Signed Certificate<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Signed_Certificate"></span>Signed certificate<span class="ez-toc-section-end"></span></h3>
 
 
 
@@ -265,7 +265,7 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Self-Signed_Certificate"></span>Self-Signed Certificate<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Self-Signed_Certificate"></span>Self-signed certificate<span class="ez-toc-section-end"></span></h3>
 
 
 
@@ -282,7 +282,7 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Create_Keystore_Artefact_optional"></span>Create Keystore Artefact (optional)<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Create_Keystore_Artefact_optional"></span>Create the keystore artefact (optional)<span class="ez-toc-section-end"></span></h3>
 
 
 
@@ -304,15 +304,15 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph">Compress this folder using ZIP format and create a file called ‘<strong>archetype.keystore-1.0.0.zip</strong>‘ (the zip file should include the folder called archetype.keystore-1.0.0).</p>
+<p class="wp-block-paragraph">Create <strong>archetype.keystore-1.0.0.zip</strong> from the folder. The ZIP file must contain the archetype.keystore-1.0.0 folder itself, not just its contents.</p>
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Upload_Keystore_Artefact_to_Artifactory"></span>Upload Keystore Artefact to Artifactory<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Upload_Keystore_Artefact_to_Artifactory"></span>Upload the keystore artefact to Artifactory<span class="ez-toc-section-end"></span></h4>
 
 
 
-<p class="wp-block-paragraph">Log in to the Artifactory UI, select <strong>Application</strong>-&gt; <strong>Artifactory,</strong> and select <strong>Artifacts</strong>. In the repositories list on the left, select the ‘<strong>aria-local</strong>‘ (or the local repository you created earlier) repository.</p>
+<ol><li>Sign in to the Artifactory UI.</li><li>Select <strong>Application</strong> &gt; <strong>Artifactory</strong> &gt; <strong>Artifacts</strong>.</li><li>In the left-hand list, select <strong>aria-local</strong> or the local repository you created earlier.</li></ol>
 
 
 
@@ -320,7 +320,7 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph">Click the ‘<strong>Deploy</strong>‘ button (located at the top right for the version I am using). Make sure that ‘<strong>Single Deploy</strong>‘ is selected and add the ‘<strong>archetype.keystore-1.0.0.zip</strong>‘ file. Set the <strong>Target Path</strong> to ‘com/vmware/pscoe/build/archetype.keystore/1.0.0/archetype.keystore-1.0.0.zip’ and then click <strong>Deploy</strong>.</p>
+<ol><li>Select <strong>Deploy</strong>. In the version shown, the button is at the top right.</li><li>Select <strong>Single Deploy</strong>.</li><li>Add <strong>archetype.keystore-1.0.0.zip</strong>.</li><li>Set <strong>Target Path</strong> to com/vmware/pscoe/build/archetype.keystore/1.0.0/archetype.keystore-1.0.0.zip.</li><li>Select <strong>Deploy</strong>.</li></ol>
 
 
 
@@ -336,11 +336,11 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<h2 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="Configure_Developer_Workstation_Windows"></span>Configure Developer Workstation (Windows)<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading" id="the-pasted-async"><span class="ez-toc-section" id="Configure_Developer_Workstation_Windows"></span>Configure the developer workstation (Windows)<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The developer workstation will need some prerequisite software installed and Maven configured to start using the Build Tools. This guide focuses specifically on Windows.</p>
+<p class="wp-block-paragraph">The developer workstation needs prerequisite software and Maven configuration. This section covers Windows.</p>
 
 
 
@@ -348,15 +348,15 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph">Postman is a great tool for testing API calls on the Windows desktop and has a nice graphical interface for managing environments, variables, and API collections. This is optional, but I will provide some steps to use Postman to obtain the VCF Automation API Refresh Token, which is needed for the build tools to access the infrastructure. Download it <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<p class="wp-block-paragraph">Postman provides a graphical interface for API calls, environments, variables and collections on Windows. It is optional. The example below uses it to obtain the VCF Automation API refresh token needed by the Build Tools. <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener noreferrer">Download Postman</a> to follow that example.</p>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Obtain_VCF_Automation_Refresh_Token"></span>Obtain VCF Automation Refresh Token<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Obtain_VCF_Automation_Refresh_Token"></span>Obtain a VCF Automation refresh token<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">An API refresh token is required to obtain an access (bearer) token when making API calls to VCF Automation. For the Build Tools, only the refresh token is required (as the build tools will internally request bearer tokens when needed). To request the refresh token, make a POST request to ‘https://<strong>{{vra_host}}</strong>/csp/gateway/am/api/login?access_token’, where {{vra_host}} is the hostname of your VCF Automation environment.</p>
+<p class="wp-block-paragraph">A refresh token is needed to obtain an access token (bearer token) for VCF Automation API calls. Supply only the refresh token to the Build Tools; they request bearer tokens internally. To obtain the refresh token, send a POST request to https://<strong>{{vra_host}}</strong>/csp/gateway/am/api/login?access_token. Replace {{vra_host}} with your VCF Automation hostname.</p>
 
 
 
@@ -372,11 +372,11 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph">Substituting <strong>{{username}}</strong>, <strong>{{password}}</strong> and <strong>{{domain}}</strong> with your own values. If you are using a local account, then set the domain to ‘<strong>System Domain</strong>‘, otherwise, use the domain name of the directory that has been integrated (i.e. Active Directory domain).</p>
+<p class="wp-block-paragraph">Replace <strong>{{username}}</strong>, <strong>{{password}}</strong> and <strong>{{domain}}</strong> with your values. For a local account, use <strong>System Domain</strong>. Otherwise, use the integrated directory's domain name, such as your Active Directory domain.</p>
 
 
 
-<p class="wp-block-paragraph">Here is an example of this in POSTMAN (I am using a POSTMAN environment with these variables set):</p>
+<p class="wp-block-paragraph">This Postman example uses an environment with those variables set:</p>
 
 
 
@@ -384,7 +384,7 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph" id="the-pasted-async">When pressing <strong>Send</strong>, a refresh token is received:</p>
+<p class="wp-block-paragraph" id="the-pasted-async">Select <strong>Send</strong> to receive the refresh token:</p>
 
 
 
@@ -404,7 +404,7 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph">Java JDK is required to use Maven, and the Build Tools officially support JDK version 21 (LTS release). I use the Adoptium build of JDK, which can be downloaded here: <a href="https://adoptium.net/en-GB/download/" target="_blank" rel="noopener noreferrer">https://adoptium.net/en-GB/download/</a>. Please make sure you download the JDK (not JRE). I also recommend the ‘<strong>Installer</strong>‘ which can set the Path and JAVA_HOME variables for you.</p>
+<p class="wp-block-paragraph">Maven requires a Java JDK. The Build Tools officially support JDK 21 (LTS). I use the <a href="https://adoptium.net/en-GB/download/" target="_blank" rel="noopener noreferrer">Adoptium build</a>. Download the JDK, not the JRE. I recommend the <strong>Installer</strong>, which can set Path and JAVA_HOME.</p>
 
 
 
@@ -420,7 +420,7 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts -out cert.pem</code></pre>
 
 
 
-<p class="wp-block-paragraph">NodeJS is required for the Build Tools to download any dependencies via NPM. The Build Tools support version 22.x, which can be downloaded from the NodeJS website <a href="https://nodejs.org/download/release/latest-v22.x" target="_blank" rel="noopener noreferrer">here</a>. I recommend the x64 MSI package as it’s the easiest option that also sets the environment PATH.</p>
+<p class="wp-block-paragraph">The Build Tools use NodeJS to download dependencies through NPM and support version 22.x. Download it from the <a href="https://nodejs.org/download/release/latest-v22.x" target="_blank" rel="noopener noreferrer">NodeJS website</a>. I recommend the x64 MSI package, which also sets the environment PATH.</p>
 
 
 
@@ -448,7 +448,7 @@ npm --version
 
 
 
-<p class="wp-block-paragraph">Add the Maven bin directory to the environment path. I had previously provided examples of using the ‘<strong>setx</strong>‘ command, but have since found this can be quite unreliable. Instead, do this manually by adding the path to the <strong>PATH</strong> environment variable under ‘<strong>Edit environment variables for your account</strong>‘ in the Start menu.</p>
+<p class="wp-block-paragraph">Add the Maven bin directory to <strong>PATH</strong>. Open <strong>Edit environment variables for your account</strong> from the Start menu and add the path manually. I previously suggested <strong>setx</strong>, but found it unreliable.</p>
 
 
 
@@ -469,15 +469,15 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph">If this doesn’t work, go back and check the paths where Maven and JDK have been installed and ensure that these have been correctly set in the environment variables.</p>
+<p class="wp-block-paragraph">If the command fails, check the Maven and JDK installation paths and their environment variables.</p>
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_Master_Password"></span>Create a Master Password<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Create_a_Master_Password"></span>Create a master password<span class="ez-toc-section-end"></span></h4>
 
 
 
-<p class="wp-block-paragraph">Maven allows encrypted server passwords to be stored in the settings.xml file. Before Maven can do this, a master password must first be set. This is achieved using the <strong><code>mvn --encrypt-master-password</code></strong> command, which will prompt you to enter the master password that will be encrypted:</p>
+<p class="wp-block-paragraph">Maven can store encrypted server passwords in settings.xml. First, set a master password with <strong><code>mvn --encrypt-master-password</code></strong>. The command prompts for a password and returns its encrypted form:</p>
 
 
 
@@ -489,7 +489,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph">Store this encrypted string in the <strong>settings-security.xml</strong> located in the ‘<strong>%USERPROFILE%\.m2\</strong>‘ folder. If this does not already exist, then create it with the following content:</p>
+<p class="wp-block-paragraph">Store the encrypted string in <strong>settings-security.xml</strong>, in <strong>%USERPROFILE%\.m2\</strong>. If the file does not exist, create it with this content:</p>
 
 
 
@@ -499,11 +499,11 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<h4 class="wp-block-heading"><span class="ez-toc-section" id="Configure_Project_Settings_settingsxml"></span>Configure Project Settings (settings.xml)<span class="ez-toc-section-end"></span></h4>
+<h4 class="wp-block-heading"><span class="ez-toc-section" id="Configure_Project_Settings_settingsxml"></span>Configure project settings (settings.xml)<span class="ez-toc-section-end"></span></h4>
 
 
 
-<p class="wp-block-paragraph">The following sections provide example <strong>settings.xml</strong> files that allow the Build Tools to be used with or without an artefact repository manager. I felt it would be useful for those who simply want to test-drive the Build Tools without having to invest in deploying a dedicated platform.</p>
+<p class="wp-block-paragraph">The following <strong>settings.xml</strong> examples support setups with and without an artefact repository manager. You can use the second example to try the Build Tools without deploying a dedicated platform.</p>
 
 
 
@@ -519,7 +519,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph" id="the-pasted-async">Replace all values with <strong>{{ }} </strong>with your own.</p>
+<p class="wp-block-paragraph" id="the-pasted-async">Replace each <strong>{{ }} </strong>placeholder with your own value.</p>
 
 
 
@@ -647,7 +647,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph">Replace all values with {{ }} with your own.</p>
+<p class="wp-block-paragraph">Replace each {{ }} placeholder with your own value.</p>
 
 
 
@@ -695,15 +695,15 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Create_Your_First_Project_Actions-based"></span>Create Your First Project (Actions-based)<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Create_Your_First_Project_Actions-based"></span>Create your first project (actions-based)<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">In this example, I will show you how to create a JavaScript Actions-based project and how to push and pull code. If you wish to try out other project types, then use the official docs for guidance&nbsp;<a href="https://github.com/vmware/build-tools-for-vmware-aria/tree/v2.36.0/docs/archive/doc/markdown" target="_blank" rel="noopener noreferrer">https://github.com/vmware/build-tools-for-vmware-aria/tree/v2.36.0/docs/archive/doc/markdown</a>.</p>
+<p class="wp-block-paragraph">This example creates a JavaScript Actions-based project and shows how to push and pull its code. For other project types, see the <a href="https://github.com/vmware/build-tools-for-vmware-aria/tree/v2.36.0/docs/archive/doc/markdown" target="_blank" rel="noopener noreferrer">official documentation</a>.</p>
 
 
 
-<p class="wp-block-paragraph">I recommend creating a single new root folder to store your projects. Open a command prompt and enter this folder location. Run the following command:</p>
+<ol><li>Create a root folder for your projects.</li><li>Open a command prompt in that folder.</li><li>Run the following command.</li></ol>
 
 
 
@@ -711,7 +711,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph">Replace <strong>‘com.simplygeek</strong>‘ with your own value if you wish!</p>
+<p class="wp-block-paragraph">You can replace <strong>com.simplygeek</strong> with your own value.</p>
 
 
 
@@ -723,7 +723,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Push_Actions"></span>Push Actions<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Push_Actions"></span>Push actions<span class="ez-toc-section-end"></span></h3>
 
 
 
@@ -743,7 +743,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Pull_Actions"></span>Pull Actions<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Pull_Actions"></span>Pull actions<span class="ez-toc-section-end"></span></h3>
 
 
 
@@ -751,7 +751,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph"><strong>Tip:</strong> You can add additional server-side Actions to the package that was pushed, and it will also be pulled down.</p>
+<p class="wp-block-paragraph"><strong>Tip:</strong> Add server-side actions to the package you pushed to include them in the next pull.</p>
 
 
 
@@ -759,12 +759,11 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"</code><
 
 
 
-<p class="wp-block-paragraph">If you’ve made it this far and everything is working, well done! In future posts, I’ll dive deeper into the various project types you can create and explore strategies for managing them effectively in a Git repository.</p>
+<p class="wp-block-paragraph">You now have a working Build Tools setup. Future posts cover the project types and ways to manage them in Git.</p>
 
 
 
-<p class="wp-block-paragraph">I’ve done my best to test all the steps and solutions outlined here, but if you run into any issues, feel free to leave a comment, and I’ll do my best to help you out.</p>
-
+<p class="wp-block-paragraph">I have tested the steps and solutions in this guide as thoroughly as I can. If you encounter issues, share them and I will help where I can.</p>
 
 
 

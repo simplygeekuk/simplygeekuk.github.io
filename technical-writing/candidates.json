@@ -5,5 +5,33 @@
     "issue": 9
   },
   "candidates": [],
-  "notes": "Initial selective terminology discovery completed: 20 proposals yielded 13 exact protected names/identifiers, 2 general-prose uses, and 5 domain candidates. The owner approved all five noun definitions on 2026-09-18; they now reside in terms.json. No proposals remain pending or rejected."
+  "notes": "Initial discovery yielded five noun definitions approved on 2026-09-18. The subsequent explicit rescan reviewed all 23 governed files and yielded 11 additional noun proposals, all explicitly approved by the owner on 2026-09-18 and moved to terms.json. The scan record is preserved; terminology approval did not rescan or rewrite documentation.",
+  "last_scan": {
+    "date": "2026-09-18",
+    "files": {
+      "README.md": "a065f30cce553387065ccf5af41e324685717ad63e5e276bb2936aeefd2d8890",
+      "migration/PLAN.md": "bc9914d0f4f39c7d7d6f2d119a5597fa29e6e274706c4f99923f6141bf520c14",
+      "migration/VALIDATION.md": "9118241cbe1f7bf5c5fc174f6b9dd2834e665abf14d93c58484a04e41c2ae3e3",
+      "src/content/articles/1490-nsx.md": "716d980eacd2eb18755c28f7ff964bb34191aac0580247384fc039bf50bed487",
+      "src/content/articles/2-about.md": "0a5b1161a3f807341bdaba82e81de2edb6ff3fb904cad1f65114c3b2527b226f",
+      "src/content/articles/2339-aria-automation.md": "e4badcbeb6031423acd6d41b0cf040bbb13ae3069156345e491e1b5a8c314b40",
+      "src/content/articles/2342-aria-automation-orchestrator.md": "e25ae1ba2dc7e0a872e94edc439df468423938abc899bee9bc5bf90dbcb0e6ed",
+      "src/content/articles/2386-vmware-aria.md": "2249d8cd1dddf7ae3032a91b7ce379051e3606835d8b52e6ea18088f42add81a",
+      "src/content/articles/2390-build-tools-for-vmware-aria.md": "8428e29a5eba8215d2c1c3385ca4e5d43f19e169adb9966d607866fcb86bdde5",
+      "src/content/articles/2601-using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development.md": "438c29831671ab3ad40fa70a8e9667c45f8564cf92b42ae48da4fe4a83d4f581",
+      "src/content/articles/2648-vcf-automation-build-tools-for-vmware-aria-up-and-running.md": "1a5943dafc446dee98288aa209399d305564b810f15e57306fe53d2b9bb37ae3",
+      "src/content/articles/2653-vcf-automation-build-tools-for-vmware-aria-overview-of-vcf-automation-projects.md": "88b69b50a3217335f45d100e887d1b6eb651ec47e9b9f74df5c95258d81af4bb",
+      "src/content/articles/2657-vcf-automation-build-tools-for-vmware-aria-visual-studio-code-integration.md": "df23d5427620f35cbb12d5cb69b87c2fba523a240b34024d6bb4b0aa97f42224",
+      "src/content/articles/2662-vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference.md": "da4b2631b69c82f69b941f0f50c17361e9bb8852158ed5ab096c1cf908e06321",
+      "src/content/articles/2664-vcf-automation-native-git-integration-vs-alternatives.md": "a95159e13383f75e3b29e724fba1258ed7824d1253a8911a2ac22ab8bca93964",
+      "src/content/articles/2672-logger-for-better-logs-in-vcf-operations-orchestrator.md": "98e3e6a8186a31be91ff44b72c1142392fce1d5cb98abfeaf64449ce665e9f98",
+      "src/content/articles/2675-empower-vcf-operations-orchestrator-api-integration-with-httprestclient.md": "b36bbede74116acc99963ef88798aa727decd3875b644118dcbfab94f0c56957",
+      "src/content/articles/2688-process-locking-made-easy-in-vcf-operations-orchestrator-featuring-automatic-unlock.md": "6b9ca73b5ac31b6bdeedf292c3842437baebd3223644c8a721bea31e7ad19527",
+      "src/content/articles/2693-vcf-operations-orchestrator-why-i-write-actions-and-not-workflows-mostly.md": "2175b6a228b6fcb5181216b0b5b34a79a4e871d44d65d4eaaaaf093c5f33e7ca",
+      "src/content/articles/2723-vcf-operations-orchestrator-auto-document-your-actions-with-ease.md": "48672b16cc8afa9d948cfdc6cf67a8a2227ab536c66e81b8a1df024d69fbdb95",
+      "src/content/articles/2809-how-i-write-beautiful-code-in-vcf-operations-orchestrator-using-eslint-and-prettier.md": "efe9209c2a9143fcf2279b48266c350b77c9261a7d06b2d563ab170d3ca0a800",
+      "src/content/articles/2838-getting-started-with-ansible-development-on-windows-using-wsl-and-visual-studio-code.md": "3a1b37e9030a0e36cf4fb4201e1c5af223d28a56b0f5ffe16f73b4306a61f251",
+      "src/content/articles/2887-ansible.md": "9fac7549cca4205b147d8086e18c4c4f54f46e62352f2143395fd39a6630f5b5"
+    }
+  }
 }

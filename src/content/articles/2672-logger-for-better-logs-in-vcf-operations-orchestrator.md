@@ -1,10 +1,10 @@
 ---
 title: "Logger for better Logs in VCF Operations Orchestrator"
-description: "VCF Automation Orchestrator has a limitation with console logging because there is no way to dynamically output the name of an action or sub-workflow. The statement this.workflow.name can be used to get the name of a top-level workflow,…"
+description: "Use a reusable Logger class to identify Orchestrator actions and workflows in console logs, with examples and a comparison to setLogMarker."
 path: "/logger-for-better-logs-in-vcf-operations-orchestrator/"
 kind: "post"
 published: "2025-06-24T15:04:26Z"
-updated: "2025-07-03T21:32:12Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Operations Orchestrator"]
 tags: ["VCF Operations Orchestrator"]
@@ -15,15 +15,15 @@ featuredImage: "/wp-content/uploads/2025/06/petri-r-jEQ6bbVh5OQ-unsplash-scaled.
 ---
 
 
-<p class="wp-block-paragraph">VCF Automation Orchestrator has a limitation with console logging because there is no way to dynamically output the name of an action or sub-workflow. The statement <code>this.workflow.name</code> can be used to get the name of a top-level workflow, but the same value would be used for all sub-workflows and Actions.</p>
+<p class="wp-block-paragraph">VCF Operations Orchestrator cannot dynamically include an action or sub-workflow name in console logs. The expression <code>this.workflow.name</code> returns the top-level workflow name, even inside sub-workflows and actions.</p>
 
 
 
-<p class="wp-block-paragraph">Several years ago, I wrote a post on my Simplygeek blog, demonstrating my solution to this problem. I still believe this is the best option available and will work without limitations.</p>
+<p class="wp-block-paragraph">I described my solution on SimplyGeek several years ago. I still consider it the best option and believe it avoids these logging limitations.</p>
 
 
 
-<p class="wp-block-paragraph">My solution was to create a Logger class that can be imported into every Action and Workflow. This method allows for a standardised logging experience.</p>
+<p class="wp-block-paragraph">My Logger class provides consistent logging across actions and workflows. Import it wherever you need to identify the source of a message.</p>
 
 
 
@@ -31,7 +31,7 @@ featuredImage: "/wp-content/uploads/2025/06/petri-r-jEQ6bbVh5OQ-unsplash-scaled.
 
 
 
-<p class="wp-block-paragraph">Below is an example of my Logger class being used on an Action called ‘<strong>addComputerToAD</strong>‘ that adds a computer object to Active Directory:</p>
+<p class="wp-block-paragraph">This example uses Logger in <strong>addComputerToAD</strong>, an action that adds a computer object to Active Directory:</p>
 
 
 
@@ -55,11 +55,11 @@ featuredImage: "/wp-content/uploads/2025/06/petri-r-jEQ6bbVh5OQ-unsplash-scaled.
 
 
 
-<p class="wp-block-paragraph">In the example above, you can see multiple Actions sending log messages and the log type used (INFO, DEBUG and WARNING). These are additional Actions that are called from ‘addComputerToAD’. This makes the source of the log messages very clear and helps with troubleshooting.</p>
+<p class="wp-block-paragraph">The output identifies messages from addComputerToAD and the actions it calls, with INFO, DEBUG and WARNING log types. This makes each message's source clear and helps with troubleshooting.</p>
 
 
 
-<p class="wp-block-paragraph">Using Logger in an Action or Workflow simply requires the following to import the module, which should be added at the very top of an Action or Workflow scriptable task.</p>
+<p class="wp-block-paragraph">To import Logger, add the following code at the top of the action or workflow scriptable task:</p>
 
 
 
@@ -70,7 +70,7 @@ featuredImage: "/wp-content/uploads/2025/06/petri-r-jEQ6bbVh5OQ-unsplash-scaled.
 
 
 
-<p class="wp-block-paragraph">You will need to set the two parameters as follows:</p>
+<p class="wp-block-paragraph">Set these two parameters:</p>
 
 
 
@@ -82,15 +82,17 @@ featuredImage: "/wp-content/uploads/2025/06/petri-r-jEQ6bbVh5OQ-unsplash-scaled.
 
 
 
-<p class="wp-block-paragraph">A new instance of the Logger class will be created and exposed by the variable ‘<strong>log</strong>‘ that can be used to send the log messages. Note that ‘<strong>log</strong>‘ can be changed to any value you require.</p>
+<p class="wp-block-paragraph">The code creates a Logger instance in <strong>log</strong>. Use that variable to send messages, or rename it if needed.</p>
 
 
 
-<p class="wp-block-paragraph">The only downside is that the logName has to be manually set to the actual name of the Action (but this can easily be handled with a Jasmine unit test). If the Action was renamed, then the logMessage value would also need to be updated. For the 1000’s of Actions that I have written, this has been a very minor issue. Note that using <code>arguments.callee</code> to get the Action name dynamically causes problems with nested Actions.</p>
+<p class="wp-block-paragraph">Set logName manually to the action's name. A Jasmine unit test can check this. If you rename the action, you also need to update logMessage. Across the thousands of actions I have written, this has been a minor issue.</p>
+
+<p class="wp-block-paragraph">Using <code>arguments.callee</code> to retrieve the action name dynamically causes problems with nested actions.</p>
 
 
 
-<p class="wp-block-paragraph">To send a log message to the console, choose from one of the available methods, as follows:</p>
+<p class="wp-block-paragraph">Use one of the following methods to send a console message:</p>
 
 
 
@@ -109,15 +111,15 @@ log.debug("my log test");</code></pre>
 
 
 
-<h2 class="wp-block-heading">Alternative Logging Methods</h2>
+<h2 class="wp-block-heading">Alternative logging methods</h2>
 
 
 
-<p class="wp-block-paragraph">There is a logging alternative using the built-in <strong>setLogMarker </strong>method provided by the <strong>System </strong>class. LogMarker allows you to pass a string as a parameter to the <strong>setLogMarker </strong>method to set the prefix value for all log messages that follow.</p>
+<p class="wp-block-paragraph">The <strong>System </strong>class also provides <strong>setLogMarker </strong>. Pass a string to <strong>setLogMarker </strong>to set the prefix for subsequent log messages.</p>
 
 
 
-<p class="wp-block-paragraph">The problem with using LogMarker is that it can throw errors if the Action is executed from the UI or if Actions are nested (calling one Action from another) with more complex deployments. These are deal breakers for me, as this is how most of my code is structured.</p>
+<p class="wp-block-paragraph">In more complex deployments, LogMarker can throw errors when an action runs from the UI or calls nested actions. These limitations rule it out for me because most of my code uses that structure.</p>
 
 
 
@@ -130,4 +132,3 @@ log.debug("my log test");</code></pre>
 
 
 <p class="wp-block-paragraph">Thanks for reading, and please let me know your thoughts or if you found this post useful.</p>
-

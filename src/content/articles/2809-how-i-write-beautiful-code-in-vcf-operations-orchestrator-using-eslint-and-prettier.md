@@ -1,10 +1,10 @@
 ---
 title: "How I Write Beautiful Code in VCF Operations Orchestrator using ESLint and Prettier"
-description: "When developing code for VCF Operations Orchestrator, I follow a strict and consistent style methodology. This approach significantly simplifies navigating multiple files, identifying patterns, and maintaining readability across the…"
+description: "Configure ESLint and Prettier for Orchestrator JavaScript development, including command-line checks, VS Code formatting and performance tuning."
 path: "/how-i-write-beautiful-code-in-vcf-operations-orchestrator-using-eslint-and-prettier/"
 kind: "post"
 published: "2025-07-17T16:36:53Z"
-updated: "2025-07-17T16:36:56Z"
+updated: "2026-09-18T16:22:41Z"
 author: "SimplyGeek"
 categories: ["Prettier","JavaScript","ESLint","Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator"]
 tags: ["Prettier","Visual Studio Code","ESLint","VCF Automation","VCF Operations Orchestrator"]
@@ -13,29 +13,29 @@ originalUrl: "https://simplygeek.co.uk/how-i-write-beautiful-code-in-vcf-operati
 ---
 
 
-<p class="wp-block-paragraph">When developing code for VCF Operations Orchestrator, I follow a strict and consistent style methodology. This approach significantly simplifies navigating multiple files, identifying patterns, and maintaining readability across the codebase.</p>
+<p class="wp-block-paragraph">I use a consistent code style for VCF Operations Orchestrator development. It makes files easier to navigate, patterns easier to identify and code easier to read.</p>
 
 
 
-<p class="wp-block-paragraph">Adhering to both industry-standard and custom styling conventions can be tedious, but fortunately, some tools make this process much simpler once properly configured. These tools help automate formatting and ensure consistency across the codebase with minimal manual effort.</p>
+<p class="wp-block-paragraph">Applying industry conventions and team preferences manually can be tedious. Configured tools automate formatting and keep the codebase consistent.</p>
 
 
 
-<p class="wp-block-paragraph">I use two different tools to achieve this:</p>
+<p class="wp-block-paragraph">I use two tools:</p>
 
 
 
 <ul class="wp-block-list">
-<li><strong>ESLint</strong> – A widely used linting tool for JavaScript and TypeScript that helps identify and fix problems in your code. It supports customizable rules and can automatically apply fixes, making it a powerful tool for maintaining code quality and consistency.</li>
+<li><strong>ESLint</strong> – A widely used JavaScript and TypeScript linter with customisable rules. It identifies code problems and can apply fixes automatically to improve quality and consistency.</li>
 
 
 
-<li><strong>Prettier</strong> – A code formatting tool that enforces consistent stylistic rules across your codebase. Unlike ESLint, Prettier doesn’t check for logical errors or implement best practices. While ESLint can also handle formatting, Prettier is increasingly favoured for this purpose due to its “zero-config” simplicity, speed, and consistent output.</li>
+<li><strong>Prettier</strong> – A formatter that applies consistent style. It does not check logic or enforce coding best practices. Although ESLint can also format code, Prettier is increasingly favoured for its minimal configuration, speed and consistent output.</li>
 </ul>
 
 
 
-<p class="wp-block-paragraph">Here are just a few examples of the types of issues these tools can detect:</p>
+<p class="wp-block-paragraph">Together, these tools can detect issues such as:</p>
 
 
 
@@ -65,15 +65,15 @@ originalUrl: "https://simplygeek.co.uk/how-i-write-beautiful-code-in-vcf-operati
 
 
 
-<p class="wp-block-paragraph">While some of these rules may seem opinionated, the configuration is highly customizable to suit your preferences or team standards. That said, it’s worth noting that <strong>Prettier</strong> is intentionally opinionated, by design, to promote consistency with minimal configuration.</p>
+<p class="wp-block-paragraph">You can customise the rules to suit your preferences or team standards. <strong>Prettier</strong> deliberately offers fewer choices to keep formatting consistent with minimal configuration.</p>
 
 
 
-<p class="wp-block-paragraph">What makes these tools even more powerful is their ability to fix syntax and styling issues automatically; No need to chase down red squiggly lines or manually correct formatting. With proper configuration, they can automatically apply fixes every time you save a file, allowing you to stay focused on writing code while ensuring consistency and clean formatting in the background.</p>
+<p class="wp-block-paragraph">The tools can also apply fixes automatically when you save a file. This reduces the time spent correcting formatting and syntax issues by hand.</p>
 
 
 
-<p class="wp-block-paragraph">Below is an example of some of the style fixes that can be detected and fixed:</p>
+<p class="wp-block-paragraph">This example shows style issues the tools can detect and fix:</p>
 
 
 
@@ -81,7 +81,7 @@ originalUrl: "https://simplygeek.co.uk/how-i-write-beautiful-code-in-vcf-operati
 
 
 
-<p class="wp-block-paragraph">In the screenshot above, there are three identified issues:</p>
+<p class="wp-block-paragraph">The screenshot shows three issues:</p>
 
 
 
@@ -99,7 +99,7 @@ originalUrl: "https://simplygeek.co.uk/how-i-write-beautiful-code-in-vcf-operati
 
 
 
-<p class="wp-block-paragraph">When the file is saved, these issues are automatically corrected by the configured tooling, ensuring clean, consistent code with no manual intervention.</p>
+<p class="wp-block-paragraph">With the tools configured, saving the file corrects these issues automatically.</p>
 
 
 
@@ -107,19 +107,19 @@ originalUrl: "https://simplygeek.co.uk/how-i-write-beautiful-code-in-vcf-operati
 
 
 
-<p class="wp-block-paragraph">The screenshots above demonstrate this functionality in Visual Studio Code (I’ll walk through how to set this up later in the post), but the same results can be achieved via the command line, making it easy to integrate into a CI pipeline or use in environments without an IDE.</p>
+<p class="wp-block-paragraph">These screenshots show Visual Studio Code, which I configure later in the post. You can get the same results from the command line, including in a CI pipeline or without an IDE.</p>
 
 
 
-<h2 class="wp-block-heading">Configure Development Environment for ESLint and Prettier</h2>
+<h2 class="wp-block-heading">Configure the development environment for ESLint and Prettier</h2>
 
 
 
-<p class="wp-block-paragraph">The following steps assume that your source code is available locally on your workstation. This also assumes you’re using the <a href="/series/build-tools-for-vmware-aria/" data-type="series" data-id="219" target="_blank" rel="noopener noreferrer">Build Tools for VMware Aria</a>, which enable you to manage your Orchestrator code in a local development environment. Additionally, you’ll need <a href="https://nodejs.org/" data-type="link" data-id="https://nodejs.org/" target="_blank" rel="noopener noreferrer">Node.js</a> installed, though this should already be available if you’re working with the Build Tools. I should also note that I am using Windows.</p>
+<p>This guide uses Windows and assumes you have:</p><ul><li>Your source code available locally.</li><li><a href="/series/build-tools-for-vmware-aria/" data-type="series" data-id="219" target="_blank" rel="noopener noreferrer">Build Tools for VMware Aria</a> to manage Orchestrator code in a local development environment.</li><li><a href="https://nodejs.org/" data-type="link" data-id="https://nodejs.org/" target="_blank" rel="noopener noreferrer">Node.js</a>, which should already be installed for Build Tools.</li></ul>
 
 
 
-<p class="wp-block-paragraph">Open a command prompt and enter into the top-level directory of your project. Run the following command to install all the dependencies that are required for ESLint and Prettier to function.</p>
+<p class="wp-block-paragraph">Open a command prompt in the project's root directory. Run this command to install the ESLint and Prettier dependencies:</p>
 
 
 
@@ -127,11 +127,11 @@ originalUrl: "https://simplygeek.co.uk/how-i-write-beautiful-code-in-vcf-operati
 
 
 
-<p class="wp-block-paragraph">Both ESLint and Prettier require configuration files to define their rules and behavior. For ESLint, you’ll need an <a href="https://github.com/simplygeekuk/vcf-automation-maven/blob/main/eslint.config.js" target="_blank" rel="noopener noreferrer">eslint.config.js</a>  file, and for Prettier, a <a href="https://github.com/simplygeekuk/vcf-automation-maven/blob/main/.prettierrc" target="_blank" rel="noopener noreferrer">.prettierrc</a> file. These should be placed in the root directory of your project. To help you get started, I’ve linked to the configuration files from my own project as examples.</p>
+<p>Place both configuration files in the project root. These examples come from my project:</p><ul><li><a href="https://github.com/simplygeekuk/vcf-automation-maven/blob/main/eslint.config.js" target="_blank" rel="noopener noreferrer">eslint.config.js</a> defines the ESLint rules.</li><li><a href="https://github.com/simplygeekuk/vcf-automation-maven/blob/main/.prettierrc" target="_blank" rel="noopener noreferrer">.prettierrc</a> configures Prettier.</li></ul>
 
 
 
-<p class="wp-block-paragraph">Once the dependencies are installed and configuration is in place, you can run each tool directly from the command line. It’s important to note that both ESLint and Prettier support two modes of operation: a <strong>check mode</strong>, which reports issues without making changes, and a <strong>write mode</strong>, which automatically applies fixes to the code.</p>
+<p class="wp-block-paragraph">After installing the dependencies and adding the configuration, run either tool from the command line. Both can check files without changing them or write automatic fixes. The following commands show these two modes.</p>
 
 
 
@@ -152,7 +152,7 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">In check mode, Prettier will simply warn which file is non-compliant.</p>
+<p class="wp-block-paragraph">In check mode, Prettier identifies files that do not match its formatting rules.</p>
 
 
 
@@ -160,7 +160,7 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">Whereas ESLint will do the same, but will go into a bit more detail, highlighting the exact line number where a rule was broken and specifying which rule was violated.</p>
+<p class="wp-block-paragraph">ESLint also reports the line number and rule for each issue.</p>
 
 
 
@@ -168,19 +168,19 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">It’s important to note that while Prettier is specifically designed to handle code formatting, ESLint also includes rules for styling. This overlap can lead to both tools attempting to fix the same issues, potentially causing conflicts or unnecessary performance overhead. To avoid this, Prettier can be integrated with ESLint by disabling any conflicting rules within the ESLint configuration. The configuration examples I’ve provided above already include this integration.</p>
+<p class="wp-block-paragraph">Prettier handles formatting, but some ESLint rules also control style. The overlap can cause conflicting fixes and extra processing. Disable the conflicting ESLint rules to use the tools together. The example configuration already does this.</p>
 
 
 
-<h2 class="wp-block-heading">Using ESLint and Prettier with Visual Studio Code</h2>
+<h2 class="wp-block-heading">Use ESLint and Prettier with Visual Studio Code</h2>
 
 
 
-<p class="wp-block-paragraph">If you are using Visual Studio Code as your preferred IDE then extensions are available for ESLint and Prettier. Search the extensions marketplace for “<strong>ESLint</strong>” and “<strong>Prettier – Code formatter</strong>“. </p>
+<p class="wp-block-paragraph">In Visual Studio Code, search the extensions marketplace for <strong>ESLint</strong> and <strong>Prettier – Code formatter</strong>.</p>
 
 
 
-<p class="wp-block-paragraph">Edit your VSCode <strong>user</strong> or <strong>workspace </strong>settings and apply the following:</p>
+<p class="wp-block-paragraph">Add the following to your VS Code <strong>user</strong> or <strong>workspace </strong>settings:</p>
 
 
 
@@ -208,7 +208,7 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">The configuration above still requires you to manually format files with Prettier or rely on red squiggly lines to identify issues flagged by ESLint. If you’d prefer a fully automated experience, where formatting, styling, and syntax issues are resolved on save, you can enable this by adding the following additional configuration.</p>
+<p class="wp-block-paragraph">The configuration above requires manual Prettier formatting and displays ESLint issues in the editor. To apply automatic formatting and fixes when you save, add the following settings:</p>
 
 
 
@@ -222,7 +222,7 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">Prettier typically applies formatting almost instantly, but ESLint can occasionally be slower, especially on larger files or projects with complex rule sets. If you’re experiencing performance issues, ESLint provides a way to diagnose them. You can run the following command against a file to perform an ESLint performance test:</p>
+<p class="wp-block-paragraph">Prettier usually formats files almost instantly. ESLint can be slower on large files or with complex rules. If you notice delays, run this command against a file to inspect ESLint performance:</p>
 
 
 
@@ -230,7 +230,7 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">A report similar to the following will be displayed:</p>
+<p class="wp-block-paragraph">The command produces a report like this:</p>
 
 
 
@@ -238,7 +238,7 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">I found that JSDoc-related rules tend to be relatively slow and, in most cases, cannot be automatically fixed. As a result, I chose to exclude them from on-save processing. Fortunately, Visual Studio Code provides an option to configure this behavior in the User or Workspace settings, allowing you to exclude specific rules from being run automatically.</p>
+<p class="wp-block-paragraph">I found JSDoc rules relatively slow, and most could not apply fixes automatically. I excluded them from processing on save. The following VS Code User or Workspace setting excludes specific rules from automatic runs:</p>
 
 
 
@@ -264,9 +264,9 @@ npx prettier --write "src\main\resources/**/*.js"</code></pre>
 
 
 
-<p class="wp-block-paragraph">I hope this post has provided useful insight into writing clean, consistent code for VCF Operations Orchestrator (or any JavaScript project). By automating formatting and enforcing industry-standard styles, you can maintain high-quality code without disrupting your primary focus: getting the job done efficiently.</p>
+<p class="wp-block-paragraph">Automating formatting and style checks helps keep Orchestrator code consistent. The same approach also works for other JavaScript projects.</p>
 
 
 
-<p class="wp-block-paragraph">If you use other styling tools, techniques, or have suggestions to improve my configuration, I’d love to connect and collaborate, feel free to share your ideas!</p>
+<p class="wp-block-paragraph">If you use other tools or have suggestions for my configuration, I would like to hear them.</p>
 

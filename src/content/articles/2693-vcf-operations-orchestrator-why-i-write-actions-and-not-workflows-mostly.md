@@ -1,10 +1,10 @@
 ---
 title: "VCF Operations Orchestrator: Why I Write Actions and Not Workflows (Mostly)"
-description: "This might be a controversial stance, but if you’ve reviewed any of my VCF Operations Orchestrator code, you’ll notice that 99% of it is written as Actions. I take this approach because it enables me to write “pure” JavaScript code that is…"
+description: "Why I move Orchestrator logic into reusable JavaScript actions, keep workflows small and use development tools for testing and code review."
 path: "/vcf-operations-orchestrator-why-i-write-actions-and-not-workflows-mostly/"
 kind: "post"
 published: "2025-07-01T14:17:56Z"
-updated: "2025-07-03T21:14:02Z"
+updated: "2026-09-18T16:22:41Z"
 author: "SimplyGeek"
 categories: ["VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator","Development","JavaScript","Broadcom (VMware)"]
 tags: ["VCF Automation","VCF Operations Orchestrator"]
@@ -15,15 +15,17 @@ featuredImage: "/wp-content/uploads/2025/07/jakub-zerdzicki-LMsSNDJ9Hvc-unsplash
 ---
 
 
-<p class="wp-block-paragraph">This might be a controversial stance, but if you’ve reviewed any of my VCF Operations Orchestrator code, you’ll notice that 99% of it is written as Actions. I take this approach because it enables me to write “pure” JavaScript code that is easier to read, maintain, and integrate with modern development tools such as linters, unit testing frameworks, and code analysers.</p>
+<p class="wp-block-paragraph">99% of my VCF Operations Orchestrator code is written as actions. This lets me write pure JavaScript that is easier to read and maintain. It also works with linters, unit testing frameworks and code analysers.</p>
 
 
 
-<p class="wp-block-paragraph">Workflows are a visual tool that provides a drag-and-drop interface used to develop automation flows without writing (much) code. It was originally intended for system administrators and infrastructure teams, who might not be traditional developers, to automate tasks on vCenter Server.</p>
+<h2 class="wp-block-heading">Why large workflows become difficult to maintain</h2>
+
+<p class="wp-block-paragraph">Workflows provide a visual, drag-and-drop interface for automation with little code. They were originally intended to help system administrators and infrastructure teams automate vCenter Server tasks without needing a traditional development background.</p>
 
 
 
-<p class="wp-block-paragraph">Below is an example of a very simple Workflow with small script tasks, a for each loop and some error handling (red line).</p>
+<p class="wp-block-paragraph">This simple workflow contains small script tasks, a for each loop and error handling, shown by the red line:</p>
 
 
 
@@ -31,15 +33,15 @@ featuredImage: "/wp-content/uploads/2025/07/jakub-zerdzicki-LMsSNDJ9Hvc-unsplash
 
 
 
-<p class="wp-block-paragraph">The challenge is that the landscape has evolved significantly since Orchestrator was first released in 2009. What began as a platform for simple scripts and automation flows has grown into a tool expected to support complex solutions, often requiring integration with dozens of disparate systems.</p>
+<p class="wp-block-paragraph">Orchestrator's role has changed since its first release in 2009. A platform for simple scripts and automation flows now needs to support complex solutions that integrate dozens of systems.</p>
 
 
 
-<p class="wp-block-paragraph">This has led to a significant challenge: developers are still attempting to build automation using Orchestrator’s traditional workflow-based model. In my view, this approach is no longer suitable, as workflows have grown so large and complex that they’ve become increasingly difficult to maintain, understand, and troubleshoot.</p>
+<p class="wp-block-paragraph">Developers still build these solutions with the traditional workflow model. In my view, that approach no longer fits: large, complex workflows are difficult to understand, maintain and troubleshoot.</p>
 
 
 
-<p class="wp-block-paragraph">Let’s take a look at another Workflow example that is used to run a script on a virtual machine.</p>
+<p class="wp-block-paragraph">This larger workflow runs a script on a virtual machine:</p>
 
 
 
@@ -47,15 +49,15 @@ featuredImage: "/wp-content/uploads/2025/07/jakub-zerdzicki-LMsSNDJ9Hvc-unsplash
 
 
 
-<p class="wp-block-paragraph">While this is a relatively clean example (and I’ve seen far worse), it serves to illustrate what a large Workflow can look like. At first glance, it may appear manageable, but once you need to make changes, you’ll likely spend more time wrestling with the visual layout than making meaningful progress. The complexity of the visual interface quickly becomes a barrier to efficient development.</p>
+<p class="wp-block-paragraph">This is a relatively tidy example compared with others I have seen. Even so, changing a large workflow can mean spending more time rearranging the visual layout than developing the solution.</p>
 
 
 
-<p class="wp-block-paragraph">There’s another significant issue: workflows are primarily stored as XML. When versioned in a Git repository, you’re essentially working with raw XML files. This makes development outside of the visual editor extremely cumbersome and complicates peer reviews as merge requests become difficult to read, understand, and evaluate effectively.</p>
+<p class="wp-block-paragraph">Workflows also store their content primarily as XML. In Git, you work with those raw files, which makes development outside the visual editor cumbersome. Large XML diffs are difficult to read and assess during peer review.</p>
 
 
 
-<p class="wp-block-paragraph">Here is an example of a Workflow in XML format, which can often be several hundred, if not thousands, of lines long.</p>
+<p class="wp-block-paragraph">A workflow's XML can contain hundreds or thousands of lines. Here is an example:</p>
 
 
 
@@ -63,23 +65,25 @@ featuredImage: "/wp-content/uploads/2025/07/jakub-zerdzicki-LMsSNDJ9Hvc-unsplash
 
 
 
-<p class="wp-block-paragraph">In conclusion, Orchestrator’s traditional workflow-based development model no longer aligns with the demands of modern automation. As automation solutions grow in complexity and scale, the limitations of this approach become increasingly clear.</p>
+<p class="wp-block-paragraph">For these reasons, I do not consider the traditional workflow model suitable for increasingly complex automation.</p>
 
 
 
-<p class="wp-block-paragraph"><strong>My solution is simple: </strong>write Actions. By focusing on Actions, you gain the flexibility to write clean, modular JavaScript code that is easier to maintain, test, and integrate with modern development practices and tooling.</p>
+<h2 class="wp-block-heading">Move the logic into actions</h2>
+
+<p class="wp-block-paragraph"><strong>My approach is to write actions.</strong> Modular JavaScript is easier to maintain and test, and integrates with modern development tools.</p>
 
 
 
-<p class="wp-block-paragraph">Unfortunately, it’s not possible to eliminate Workflows entirely; for example, VCF Automation Extensibility Subscriptions require a workflow as the entry point. However, it’s entirely feasible to significantly reduce reliance on workflows by offloading most of the logic into reusable Actions.</p>
+<p class="wp-block-paragraph">Workflows remain necessary in some cases. VCF Automation Extensibility Subscriptions, for example, require a workflow entry point. Moving most of the logic into reusable actions reduces the workflow's role.</p>
 
 
 
-<p class="wp-block-paragraph">I address this limitation by placing only a single Action on the workflow palette. If you think of a workflow as a top-level function, then that role can just as effectively be filled by an Action. This Action can serve as the entry point, chaining together other Actions and consuming other services, while keeping the visual workflow minimal and maintainable.</p>
+<p class="wp-block-paragraph">I place a single action on the workflow palette. That action becomes the entry point for the logic, calling other actions and services. The visual workflow stays small and maintainable.</p>
 
 
 
-<p class="wp-block-paragraph">The resulting Workflow looks like this (all my workflows follow this pattern)</p>
+<p class="wp-block-paragraph">All my workflows follow this pattern:</p>
 
 
 
@@ -87,7 +91,7 @@ featuredImage: "/wp-content/uploads/2025/07/jakub-zerdzicki-LMsSNDJ9Hvc-unsplash
 
 
 
-<p class="wp-block-paragraph">and the corresponding XML:</p>
+<p class="wp-block-paragraph">The corresponding XML is:</p>
 
 
 
@@ -95,21 +99,21 @@ featuredImage: "/wp-content/uploads/2025/07/jakub-zerdzicki-LMsSNDJ9Hvc-unsplash
 
 
 
-<p class="wp-block-paragraph">This structure is largely static and easily templated if needed. The only elements that typically require modification are the input parameters, output parameters, and the referenced Action, everything else remains consistent.</p>
+<p class="wp-block-paragraph">This structure stays largely unchanged and can be templated. Usually, only the input parameters, output parameters and referenced action need to change.</p>
 
 
 
-<p class="wp-block-paragraph">Another major advantage of writing Actions is the ability to leverage a broader development ecosystem. When using the <a href="/series/build-tools-for-vmware-aria/" data-type="page" data-id="2390" target="_blank" rel="noopener noreferrer">Build Tools for VMware Aria</a>, Actions become easy to develop and maintain, while also unlocking powerful capabilities such as unit testing, linting, static analysis, and full integration with your preferred IDE.</p>
+<h2 class="wp-block-heading">Use development tools with actions</h2>
+
+<p class="wp-block-paragraph">Actions also work with a broader development toolset. <a href="/series/build-tools-for-vmware-aria/" data-type="page" data-id="2390" target="_blank" rel="noopener noreferrer">Build Tools for VMware Aria</a> makes them easier to develop and maintain. It supports unit testing, linting, static analysis and integration with your preferred IDE.</p>
 
 
 
-<p class="wp-block-paragraph">If you’re an Orchestrator developer, I’d love to hear your perspective. What approaches have you taken to modernize your development practices on the platform?</p>
+<p class="wp-block-paragraph">If you develop with Orchestrator, I would like to hear how you have modernised your development practices.</p>
 
 
 
 <p class="wp-block-paragraph">Let’s share ideas and learn from each other’s experiences!</p>
-
-
 
 
 

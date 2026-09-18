@@ -1,10 +1,10 @@
 ---
 title: "VCF Automation – Native Git Integration vs Alternatives"
-description: "VCF Automation integration with a Git solution like GitHub or Gitlab is a conversation that has come up a lot over the years, and again recently. The suggestion is often to use the native integration options provided with the product,…"
+description: "Compare native Git integration, APIs, Terraform and Build Tools for managing VCF Automation infrastructure and content."
 path: "/vcf-automation-native-git-integration-vs-alternatives/"
 kind: "post"
 published: "2025-06-24T14:46:19Z"
-updated: "2025-07-03T21:35:03Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator","Development","Git"]
 tags: ["VCF Automation","VCF Operations Orchestrator"]
@@ -15,61 +15,61 @@ featuredImage: "/wp-content/uploads/2025/06/gabriel-heinzer-EUzk9BIEq6M-unsplash
 ---
 
 
-<p class="wp-block-paragraph">VCF Automation integration with a Git solution like GitHub or Gitlab is a conversation that has come up a lot over the years, and again recently. The suggestion is often to use the native integration options provided with the product, which are fine for their intended use case, but many misconceptions lead to disappointment.</p>
+<p class="wp-block-paragraph">Git integration with VCF Automation comes up regularly in conversations about GitHub and GitLab. Native integrations suit their intended uses, but misunderstandings about their scope can lead to disappointment.</p>
 
 
 
-<p class="wp-block-paragraph">It’s important to understand what content can be managed from a Git repository using the native functionality before any decision-making takes place. I will address these in this post and help to understand what can be achieved and the available alternatives (and in many cases, necessities).</p>
+<p class="wp-block-paragraph">Before choosing an integration, establish which content it can manage from Git. This post explains the native options, their limitations and the alternatives you may need.</p>
 
 
 
-<p class="wp-block-paragraph">VCF Automation uses VCF Operations Orchestrator, which is required to unlock the product’s full automation capabilities. Orchestrator is often overlooked as it is a separate product bundled with VCF Automation. These two products integrate with Git in different ways, and this is something that has to be taken into consideration.</p>
+<p class="wp-block-paragraph">VCF Automation relies on the bundled VCF Operations Orchestrator product for its full automation capabilities. Orchestrator is often overlooked because it is a separate product. The two products integrate with Git differently, so consider both.</p>
 
 
 
-<p class="wp-block-paragraph">When investigating options for using Git, there are many different use cases for managing content. I break these down into 3 high-level categories:</p>
+<p class="wp-block-paragraph">I divide the uses of Git into three categories:</p>
 
 
 
 <ul class="wp-block-list">
-<li><strong>Infrastructure</strong> – This is the configuration stored in Git that defines what the infrastructure for the platform should look like. This includes the configuration for compute, storage and networking, where the hardware is either physical or software-based. We often refer to this as ‘<strong>Infrastructure as Code</strong>‘, though this term is usually applied everywhere.</li>
+<li><strong>Infrastructure</strong> – Configuration stored in Git that defines the platform's compute, storage and networking, whether physical or software-based. This is often called <strong>infrastructure as code</strong>, although the term is used more broadly.</li>
 
 
 
-<li><strong>Content</strong> – This is content developed and presented to the end users for consumption. Content includes configuration, blueprints, workflows and other code, which is managed in a more traditional development lifecycle. Content typically consumes the underlying infrastructure.</li>
+<li><strong>Content</strong> – Configuration, blueprints, workflows and other code developed for end users through a traditional development lifecycle. Content typically consumes the underlying infrastructure.</li>
 
 
 
-<li><strong>Consumers</strong> – These are end users, processes, tools, etc, that consume content on the platform via the API or the GUI. As consumers are free to choose how they consume content, <strong>it is not something I will discuss in this post.</strong></li>
+<li><strong>Consumers</strong> – Users, processes and tools that access platform content through the API or GUI. They can choose how to consume it, so <strong>their approaches are outside this post's scope.</strong></li>
 </ul>
 
 
 
-<p class="wp-block-paragraph">Each category could and will almost certainly use a different set of tooling, methodologies and lifecycle.</p>
+<p class="wp-block-paragraph">Each category is likely to need different tools, methods and a different lifecycle.</p>
 
 
 
-<p class="wp-block-paragraph">This post will not discuss orchestration tools in detail, as the aim is to look at this purely from a Git support perspective.</p>
+<p class="wp-block-paragraph">This post focuses on Git support rather than examining orchestration tools in detail.</p>
 
 
 
-<h2 class="wp-block-heading">VCF Automation Native Git Support</h2>
+<h2 class="wp-block-heading">Native Git support in VCF Automation</h2>
 
 
 
-<p class="wp-block-paragraph">The following sections provide a list of infrastructure items and content that could be managed in a Git repository, and what the currently available ‘<strong>out of the box</strong>‘ integration supports.</p>
+<p class="wp-block-paragraph">The following tables list infrastructure configuration and content that could be stored in Git. They show which items the native integrations supported when I wrote this post.</p>
 
 
 
-<p class="wp-block-paragraph">A separate section is provided for VCF Automation and VCF Operations Orchestrator.</p>
+<p class="wp-block-paragraph">VCF Automation and VCF Operations Orchestrator have separate tables.</p>
 
 
 
-<h3 class="wp-block-heading">Infrastructure Configuration</h3>
+<h3 class="wp-block-heading">Infrastructure configuration</h3>
 
 
 
-<p class="wp-block-paragraph">Below is a list of the most common infrastructure-related configurations in VCF Automation and VCF Operations Orchestrator.</p>
+<p class="wp-block-paragraph">These are the most common infrastructure configuration items:</p>
 
 
 
@@ -151,7 +151,7 @@ featuredImage: "/wp-content/uploads/2025/06/gabriel-heinzer-EUzk9BIEq6M-unsplash
 
 
 
-<p class="wp-block-paragraph">Below is a list of content that can be managed in VCF Automation and VCF Operations Orchestrator. Content is generally consumed by end users (or supports that goal).</p>
+<p class="wp-block-paragraph">The following content is consumed by end users or supports that consumption:</p>
 
 
 
@@ -168,7 +168,7 @@ featuredImage: "/wp-content/uploads/2025/06/gabriel-heinzer-EUzk9BIEq6M-unsplash
 </tr>
 <tr>
 <td>Templates (blueprints)</td>
-<td>One way only. Content can only be pulled from a Git Repository and changes to a Template cannot be pushed (without additional effort and workarounds). Templates will fail to import if the version number is not incremented for every commit or any syntax errors are present.</td>
+<td>Pull only. Pushing template changes requires extra work or workarounds. Import fails if the version number is not incremented for every commit, or if the template contains syntax errors.</td>
 </tr>
 <tr>
 <td>Property Groups</td>
@@ -245,23 +245,23 @@ featuredImage: "/wp-content/uploads/2025/06/gabriel-heinzer-EUzk9BIEq6M-unsplash
 
 
 
-<p class="wp-block-paragraph"><strong>*</strong> Only a single branch can be presented to Orchestrator and made active at any time. In a typical branching strategy, there is no way to handle environment-specific content (I.e. Configurations). Additional effort would be required to ensure the correct content is selected for the respective environment.</p>
+<p class="wp-block-paragraph"><strong>*</strong> Orchestrator can present and activate only one branch at a time. A typical branching strategy does not handle environment-specific content, such as configurations, by itself. You need additional work to select the correct content for each environment.</p>
 
 
 
-<h2 class="wp-block-heading">VCF Automation Alternative Git Support</h2>
+<h2 class="wp-block-heading">Alternatives to native Git integration</h2>
 
 
 
-<h3 class="wp-block-heading">Using the API’s</h3>
+<h3 class="wp-block-heading">Use the APIs</h3>
 
 
 
-<p class="wp-block-paragraph">All of the VCF Automation services have an API that allows Infrastructure and content to be managed programmatically. This allows any ad-hoc solution to be used, and the configuration can be stored and read from a Git Repository. An example might be a set of JSON documents that describe the infrastructure, which can be processed in a script written in PowerShell or Python.</p>
+<p class="wp-block-paragraph">All VCF Automation services expose APIs for managing infrastructure and content programmatically. You can build a custom solution that reads configuration from Git. For example, a PowerShell or Python script could process JSON documents describing the infrastructure.</p>
 
 
 
-<p class="wp-block-paragraph">This is the most flexible option available but requires more effort and maintenance to support.</p>
+<p class="wp-block-paragraph">This provides the most flexibility, but requires more development and maintenance.</p>
 
 
 
@@ -269,27 +269,27 @@ featuredImage: "/wp-content/uploads/2025/06/gabriel-heinzer-EUzk9BIEq6M-unsplash
 
 
 
-<h3 class="wp-block-heading">Using Orchestration Tools such as Terraform</h3>
+<h3 class="wp-block-heading">Use orchestration tools such as Terraform</h3>
 
 
 
-<p class="wp-block-paragraph">There are many orchestration tools available, but Terraform is always the one which comes up in discussions. Whilst Terraform is a great tool, it was designed to consume content from big cloud providers like AWS. However, Terraform does include providers that can be used to facilitate an Infrastructure as Code approach to managing the VCF Automation Infrastructure. I believe Terraform would be a good use case for the Infrastructure Configuration, where the code and state can be held in a Git Repository.</p>
+<p class="wp-block-paragraph">Terraform is often suggested among the available orchestration tools. It was designed to consume content from cloud providers such as AWS. Its providers also support infrastructure as code for VCF Automation infrastructure. I consider it a good fit for infrastructure configuration, with code and state held in a Git repository.</p>
 
 
 
-<p class="wp-block-paragraph">Terraform is going to struggle, however, when it comes to content. It can do parts of what is needed, but it isn’t designed for this purpose. I will likely cover the use of Terraform for infrastructure configuration in a future post.</p>
+<p class="wp-block-paragraph">I find Terraform less suited to content management. It can handle parts of the process, but was not designed for that purpose. I may cover its use for infrastructure configuration in a future post.</p>
 
 
 
-<h3 class="wp-block-heading">Using the Build Tools for VMware Aria</h3>
+<h3 class="wp-block-heading">Use Build Tools for VMware Aria</h3>
 
 
 
-<p class="wp-block-paragraph">The Build Tools for VMware Aria (which I have covered in my <a href="/series/build-tools-for-vmware-aria/" target="_blank" rel="noopener noreferrer">Build Tools for VMware Aria series</a>) is a framework for developing content on the VCF Automation platform (inc VCF Operations Orchestrator). It is without a doubt the best option available when it comes to using the traditional development lifecycle approach to developing content. All content managed by the Build Tools is designed to be held in a Git repository, and the Maven project management tool also has a lot of built-in capabilities to support this.</p>
+<p class="wp-block-paragraph">Build Tools for VMware Aria is a framework for developing VCF Automation and Orchestrator content. I cover it in my <a href="/series/build-tools-for-vmware-aria/" target="_blank" rel="noopener noreferrer">Build Tools for VMware Aria series</a>. I consider it the best option for managing content through a traditional development lifecycle. Its content is designed to live in Git, with Maven providing supporting project management capabilities.</p>
 
 
 
-<p class="wp-block-paragraph">The Build Tools have very limited support for infrastructure configuration and only support items such as Flavor Mappings and Image Mappings, which do not make it well-suited for this purpose.</p>
+<p class="wp-block-paragraph">Build Tools has limited support for infrastructure configuration, covering items such as Flavor Mappings and Image Mappings. This makes it less suitable for managing the infrastructure itself.</p>
 
 
 
@@ -297,15 +297,15 @@ featuredImage: "/wp-content/uploads/2025/06/gabriel-heinzer-EUzk9BIEq6M-unsplash
 
 
 
-<p class="wp-block-paragraph">The native Git integrations are not designed to allow for the infrastructure itself to be managed as code. There is some support for content on the VCF Automation platform for Templates and ABX Actions, but even these are quite limited and frustrating to use. I have used them in the past and found myself constantly forgetting to increment the version on a template every time I made any change, be it minor or major (I ended up using a Git hook to automate this). The one-way ‘pull’ is also a problem as it requires that content be exported and saved in the Git repository manually.</p>
+<p>Native Git integrations do not manage the infrastructure as code. Their support for Templates and ABX Actions is also limited. In my experience, two constraints make them frustrating to use:</p><ul><li>Every template change needs a version increment, however small the change. I used a Git hook to automate this after repeatedly forgetting it.</li><li>The integration pulls in one direction. You must export content and save it in Git manually.</li></ul>
 
 
 
-<p class="wp-block-paragraph">Consideration also has to be given to the 3 categories I listed above (Infrastructure, Content, Consumer) as I so often see these being bundled together as ‘<strong>Infrastructure as Code</strong>‘, which makes the conversations confusing and difficult. Focus on one, and find the right solution, don’t expect a one-size-fits-all all for everything.</p>
+<p class="wp-block-paragraph">Keep the Infrastructure, Content and Consumer categories distinct. Calling all three <strong>infrastructure as code</strong> makes requirements harder to discuss. Choose a solution for each need rather than expecting one tool to cover everything.</p>
 
 
 
-<p class="wp-block-paragraph">When it comes to end users/consumers, my best advice would be to let them decide how they want to consume the content. I have been in many conversations with engineers who try and come up with a solution for everyone and have all the configurations stored in Git. This is novel, but every person and team is different, and they will each have their specific approach to consuming the infrastructure.</p>
+<p class="wp-block-paragraph">Let consumers choose how they use the content. I have seen engineers try to design one solution for everyone, with every configuration stored in Git. Different people and teams have different needs and ways of consuming infrastructure.</p>
 
 
 

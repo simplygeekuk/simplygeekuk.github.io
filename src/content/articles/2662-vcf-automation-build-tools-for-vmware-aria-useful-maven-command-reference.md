@@ -1,10 +1,10 @@
 ---
 title: "VCF Automation – Build Tools for VMware Aria – Useful Maven Command Reference"
-description: "This series has focused on getting up and running with the Build Tools and creating basic projects. In this post, I will demonstrate all the available Maven commands and some additional parameters that can be used. This page can also be…"
+description: "A Maven command reference for Build Tools for VMware Aria: create projects, push and pull content, and clean up Orchestrator packages."
 path: "/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/"
 kind: "post"
 published: "2025-06-24T14:39:14Z"
-updated: "2025-06-24T14:47:35Z"
+updated: "2026-09-18T16:22:40Z"
 author: "SimplyGeek"
 categories: ["Broadcom (VMware)","VMware Cloud Foundation","VCF Automation","VCF Operations Orchestrator","Build Tools for VMware Aria","Development","Maven"]
 tags: ["VCF Automation","VCF Operations Orchestrator","Build Tools for VMware Aria"]
@@ -16,27 +16,27 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 <div class="ez-toc-title-container">
 <p class="ez-toc-title">Page Contents</p>
 <span class="ez-toc-title-toggle"></span></div>
-<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Creating_Projects">Creating Projects</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#TypeScript_Project">TypeScript Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#JavaScript_Project">JavaScript Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#XML_Project">XML Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Mixed_Project">Mixed Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#ABX_Project">ABX Project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#vRA_8x_Project">vRA 8.x Project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Push_Content">Push Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Pull_Content">Pull Content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Clean_Orchestrator_Packages">Clean Orchestrator Packages</a></li></ul></nav></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1 "><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Creating_Projects">Create projects</a><ul class="ez-toc-list-level-2"><li class="ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-2" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#TypeScript_Project">TypeScript project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-3" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#JavaScript_Project">JavaScript project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-4" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#XML_Project">XML project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-5" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Mixed_Project">Mixed project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-6" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#ABX_Project">ABX project</a></li><li class="ez-toc-page-1 ez-toc-heading-level-2"><a class="ez-toc-link ez-toc-heading-7" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#vRA_8x_Project">vRA 8.x project</a></li></ul></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-8" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Push_Content">Push content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-9" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Pull_Content">Pull content</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-10" href="/vcf-automation-build-tools-for-vmware-aria-useful-maven-command-reference/#Clean_Orchestrator_Packages">Clean up Orchestrator packages</a></li></ul></nav></div>
 
 
-<p class="wp-block-paragraph">This series has focused on getting up and running with the Build Tools and creating basic projects. In this post, I will demonstrate all the available Maven commands and some additional parameters that can be used. This page can also be used as a useful Maven command reference.</p>
-
-
-
-
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Creating_Projects"></span>Creating Projects<span class="ez-toc-section-end"></span></h2>
+<p class="wp-block-paragraph">Earlier posts covered Build Tools setup and basic projects. This reference collects the Maven commands for creating projects, pushing and pulling content, and cleaning up packages, together with their parameters.</p>
 
 
 
-<p class="wp-block-paragraph">The following sections provide all the commands for creating the various project types. In all of the examples, you can substitute <strong>groupId </strong>and <strong>artifactId </strong>with your own values. The <strong>archetypeVersion </strong>is the desired version of the Build Tools (if these are new projects, use the latest available).</p>
+
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Creating_Projects"></span>Create projects<span class="ez-toc-section-end"></span></h2>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="TypeScript_Project"></span>TypeScript Project<span class="ez-toc-section-end"></span></h3>
+<p class="wp-block-paragraph">In each example, replace <strong>groupId </strong>and <strong>artifactId </strong>with your values. Set <strong>archetypeVersion </strong>to the required Build Tools version. For new projects, use the latest available release.</p>
 
 
 
-<p class="wp-block-paragraph">A TypeScript-based project can manage all VCF Operations Orchestrator content, including Workflows, Actions, Resources and Configurations. The following command can be used to create a TypeScript-based project.</p>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="TypeScript_Project"></span>TypeScript project<span class="ez-toc-section-end"></span></h3>
+
+
+
+<p class="wp-block-paragraph">A TypeScript-based project manages all Orchestrator content: workflows, actions, resources and configurations. Create one with this command:</p>
 
 
 
@@ -44,11 +44,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="JavaScript_Project"></span>JavaScript Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="JavaScript_Project"></span>JavaScript project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">A JavaScript-based project can be used to manage VCF Operations Orchestrator Actions. It’s not possible to manage other content such as Workflows, Resources or Configurations. The following command can be used to create a JavaScript-based project.</p>
+<p class="wp-block-paragraph">A JavaScript-based project manages only Orchestrator actions. It does not support workflows, resources or configurations. Create one with this command:</p>
 
 
 
@@ -56,11 +56,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="XML_Project"></span>XML Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="XML_Project"></span>XML project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">An XML-based project can manage VCF Operations Orchestrator Workflows, Resources and Configurations in the platform’s native XML format. It is also possible to manage Actions, but not recommended as they will be wrapped in XML (use the JavaScript-based project for these instead). The following command can be used to create an XML-based project.</p>
+<p class="wp-block-paragraph">An XML-based project manages workflows, resources and configurations in Orchestrator's native XML format. It also supports actions, but I recommend a JavaScript-based project to avoid wrapping them in XML. Create an XML-based project with this command:</p>
 
 
 
@@ -68,15 +68,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">The <strong>workflowsPath </strong>parameter will be the top-level workflow path within Orchestrator where all workflows will reside (note that additional folders can easily be added later).</p>
+<p class="wp-block-paragraph">Set <strong>workflowsPath </strong>to the top-level Orchestrator folder for the workflows. You can add more folders later.</p>
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="Mixed_Project"></span>Mixed Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="Mixed_Project"></span>Mixed project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">This is not a real project but a Maven multi-module project that contains both a JavaScript-based and an XML-based project as submodules. According to the Built Tools documentation, this project is designed for initial onboarding. I do not recommend using this project type at all, as it’s easier to create the two projects separately. The following command can be used to create a mixed project.</p>
+<p class="wp-block-paragraph">This Maven multi-module project contains JavaScript-based and XML-based subprojects. The Build Tools documentation recommends it for initial onboarding. I prefer creating the two projects separately and do not recommend this type. To create a mixed project, use this command:</p>
 
 
 
@@ -84,11 +84,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="ABX_Project"></span>ABX Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="ABX_Project"></span>ABX project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">An ABX project can manage VCF Automation ABX Actions. ABX Actions are an alternative orchestration runtime to those provided by VCF Operations Orchestrator. Each ABX Action is considered its own project, which makes them a little more complicated to manage. The following command can be used to create an ABX project.</p>
+<p class="wp-block-paragraph">An ABX project manages a VCF Automation ABX action. ABX provides an alternative orchestration runtime to Orchestrator. Each action needs its own project, which adds management overhead. Create one with this command:</p>
 
 
 
@@ -100,11 +100,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRA_8x_Project"></span>vRA 8.x Project<span class="ez-toc-section-end"></span></h3>
+<h3 class="wp-block-heading"><span class="ez-toc-section" id="vRA_8x_Project"></span>vRA 8.x project<span class="ez-toc-section-end"></span></h3>
 
 
 
-<p class="wp-block-paragraph">A vRA 8.x project can manage VCF Automation content such as Templates (blueprints), Custom Forms, Content Sources and Policies. This project type is required to manage content that is not ABX or VCF Operations Orchestrator. The following command can be used to create a vRA 8.x project.</p>
+<p class="wp-block-paragraph">A vRA 8.x project manages VCF Automation content such as Templates (blueprints), Custom Forms, Content Sources and Policies. Use this type for content outside ABX and Orchestrator. Create one with this command:</p>
 
 
 
@@ -112,11 +112,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Push_Content"></span>Push Content<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Push_Content"></span>Push content<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The Build Tools provide the command <code>vrealize:push</code> to push content from the local environment to VCF Automation. The following command can be used to push content.</p>
+<p class="wp-block-paragraph">Use <code>vrealize:push</code> to push local content to VCF Automation:</p>
 
 
 
@@ -124,15 +124,15 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<p class="wp-block-paragraph">The <strong>profile_name </strong>should be substituted with the name of a profile for your VCF Automation environment as defined in the Maven <strong>settings.xml</strong> file.</p>
+<p class="wp-block-paragraph">Replace <strong>profile_name </strong>with your VCF Automation environment's profile name from Maven <strong>settings.xml</strong>.</p>
 
 
 
-<p class="wp-block-paragraph">The following additional parameters can also be used:</p>
+<p class="wp-block-paragraph">The command accepts these additional parameters:</p>
 
 
 
-<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>includeDependencies=&lt;true/false&gt;</td><td>If you have multiple projects to manage content that has dependencies defined between those projects, you can use this to control if those should be included in the push. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>skipInstallNodeDeps=&lt;true/false&gt;</td><td>When content is pushed, the required node dependencies will be installed first. This can add considerable time to the push process (from approx 30 seconds to 5 minutes). When developing and pushing frequently, turning this off can save a lot of time. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>skipTests=&lt;true/false&gt;</td><td>This can be used to skip running any unit tests that have been defined. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>license.skip</td><td>If you are not concerned about license headers or files being present, which could cause the push to fail, then specify this parameter to ignore missing license information. No values need to be passed.</td></tr><tr><td>license.skipAddThirdParty=&lt;true/false&gt;</td><td>Same as <strong>license.skip</strong> but supports the values <strong>true </strong>or <strong>false</strong>.</td></tr><tr><td>vro.packageImportConfigurationAttributeValues=&lt;true/false&gt;</td><td>This is specific to VCF Operations Orchestrator content only with an XML-based project that contains Configurations. Whether or not to import Configuration Attribute values. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>vro.packageImportConfigSecureStringAttributeValues=&lt;true/false&gt;</td><td>Same as <strong>vro.packageImportConfigurationAttributeValues</strong> but for SecureString attributes. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>vrealize.ssl.ignore.certificate</td><td>Ignore SSL certificate errors by passing this parameter. No values need to be passed.</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>includeDependencies=&lt;true/false&gt;</td><td>For projects with dependencies on other projects, controls whether the push includes those dependencies. Set to <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>skipInstallNodeDeps=&lt;true/false&gt;</td><td>Skips installation of required Node dependencies when pushing. Installation can add approximately 30 seconds to 5 minutes, so skipping it can save time during frequent pushes. Set to <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>skipTests=&lt;true/false&gt;</td><td>This can be used to skip running any unit tests that have been defined. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>license.skip</td><td>Ignores missing licence headers or files that could otherwise cause the push to fail. Use this when you do not require that information. No value is needed.</td></tr><tr><td>license.skipAddThirdParty=&lt;true/false&gt;</td><td>Same as <strong>license.skip</strong> but supports the values <strong>true </strong>or <strong>false</strong>.</td></tr><tr><td>vro.packageImportConfigurationAttributeValues=&lt;true/false&gt;</td><td>Controls whether configuration attribute values are imported. Applies only to Orchestrator XML-based projects containing configurations. Set to <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>vro.packageImportConfigSecureStringAttributeValues=&lt;true/false&gt;</td><td>Same as <strong>vro.packageImportConfigurationAttributeValues</strong> but for SecureString attributes. Values should be <strong>true</strong> or <strong>false</strong>.</td></tr><tr><td>vrealize.ssl.ignore.certificate</td><td>Ignore SSL certificate errors by passing this parameter. No values need to be passed.</td></tr></tbody></table></figure>
 
 
 
@@ -140,11 +140,11 @@ originalUrl: "https://simplygeek.co.uk/vcf-automation-build-tools-for-vmware-ari
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Pull_Content"></span>Pull Content<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Pull_Content"></span>Pull content<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The Build Tools provide two commands for pulling content from VCF Automation to the local environment. The command <code>vro:pull</code> can be used to pull VCF Operations Orchestrator content. The command <code>vra-ng:pull</code> can be used to pull VCF Automation content. Note that pulling ABX content is not supported. The following are example commands for pulling content.</p>
+<p>Build Tools provides two commands to pull content into the local environment:</p><ul><li><code>vro:pull</code> retrieves VCF Operations Orchestrator content.</li><li><code>vra-ng:pull</code> retrieves VCF Automation content.</li></ul><p>Pulling ABX content is not supported. The following examples show both commands.</p>
 
 
 
@@ -153,11 +153,11 @@ mvn vra-ng:pull -Pprofile_name</code></pre>
 
 
 
-<p class="wp-block-paragraph">The <strong>profile_name </strong>should be substituted with the name of a profile for your VCF Automation environment as defined in the Maven <strong>settings.xml</strong> file.</p>
+<p class="wp-block-paragraph">Replace <strong>profile_name </strong>with your VCF Automation environment's profile name from Maven <strong>settings.xml</strong>.</p>
 
 
 
-<p class="wp-block-paragraph">The following additional parameters can also be used:</p>
+<p class="wp-block-paragraph">The commands accept these additional parameters:</p>
 
 
 
@@ -169,19 +169,19 @@ mvn vra-ng:pull -Pprofile_name</code></pre>
 
 
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="Clean_Orchestrator_Packages"></span>Clean Orchestrator Packages<span class="ez-toc-section-end"></span></h2>
+<h2 class="wp-block-heading"><span class="ez-toc-section" id="Clean_Orchestrator_Packages"></span>Clean up Orchestrator packages<span class="ez-toc-section-end"></span></h2>
 
 
 
-<p class="wp-block-paragraph">The Build Tools provide the command <code>vrealize:clean</code> to clean up Orchestrator packages from the server. When deleting Orchestrator content locally, this is not realized on the server side and over time, many stale items will remain and need to be cleaned up manually.</p>
+<p class="wp-block-paragraph">Deleting Orchestrator content locally does not remove it from the server. Stale items can accumulate. Use <code>vrealize:clean</code> to clean up server packages instead of removing them manually.</p>
 
 
 
-<p class="wp-block-paragraph">The <code>vrealize:clean</code> command can help solve this problem and can be used as part of a release process.</p>
+<p class="wp-block-paragraph">You can include <code>vrealize:clean</code> in your release process.</p>
 
 
 
-<p class="wp-block-paragraph">One of the following additional parameters must also be used:</p>
+<p class="wp-block-paragraph">Use exactly one of the following parameters:</p>
 
 
 
@@ -213,7 +213,7 @@ mvn vra-ng:pull -Pprofile_name</code></pre>
 
 
 
-<p class="wp-block-paragraph">The <strong>profile_name </strong>should be substituted with the name of a profile for your VCF Automation environment as defined in the Maven <strong>settings.xml</strong> file.</p>
+<p class="wp-block-paragraph">Replace <strong>profile_name </strong>with your VCF Automation environment's profile name from Maven <strong>settings.xml</strong>.</p>
 
 
 
