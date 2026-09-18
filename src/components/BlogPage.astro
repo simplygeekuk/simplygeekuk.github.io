@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import PostCard from "../components/PostCard.astro";
+import type { CollectionEntry } from "astro:content";
+import { POSTS_PER_PAGE } from "../lib/content";
+import { load } from "cheerio";
+interface Props {
+  allPosts: CollectionEntry<"articles">[];
+  currentPage?: number;
+}
+const { allPosts, currentPage = 1 } = Astro.props;
+const totalPages = Math.max(1, Math.ceil(allPosts.length / POSTS_PER_PAGE));
+const posts = allPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+const previousPage = currentPage === 2 ? "/" : `/page/${currentPage - 1}/`;
+const previews = new Map(posts.map((post) => {
+  const $ = load(post.body ?? "");
+  $("pre, script, style, .missing-image, #ez-toc-container").remove();
+  const text = $("p").toArray().map((paragraph) => $(paragraph).text()).join(" ").replace(/\s+/g, " ").trim();
+  const preview = text.length > 1500 ? text.slice(0, 1500).replace(/\s+\S*$/, "") + "…" : text;
+  return [post.id, preview || post.data.description];
+}));
+const years = [
+  ...new Set(posts.map((post) => post.data.published.getUTCFullYear())),
+];
+---
+
+<Base title={currentPage > 1 ? `Articles - Page ${currentPage}` : undefined}>
+  <div class="home wrap">
+    <header class="home-intro">
+      <div>
+        <h1>DevOps &amp; Automation</h1>
+        <p>A vAdmin's journey. Practical guides and lessons from the field.</p>
+      </div>
+      <a href="/feed.xml">
+        Follow via RSS <span aria-hidden="true">&nearr;</span>
+      </a>
+    </header>
+    {currentPage === 1 && <section class="featured-posts" aria-label="Featured articles">
+      {posts.slice(0, 3).map((post) => (
+        <PostCard post={post} featured />
+      ))}
+    </section>}
+    <section class="yearly-posts" aria-label="Latest articles">
+      {years.map((year) => (
+        <section class="year-section" aria-labelledby={`year-${year}`}>
+          <div class="year-heading">
+            <h2 id={`year-${year}`}>{year}</h2>
+            <span class="year-rule" aria-hidden="true"></span>
+            <span>Articles &amp; guides</span>
+          </div>
+          {posts
+            .filter((post) => post.data.published.getUTCFullYear() === year)
+            .map((post) => (
+              <PostCard post={post} preview={previews.get(post.id)} />
+            ))}
+        </section>
+      ))}
+      {totalPages > 1 && (
+        <nav class="archive-link pagination" aria-label="Article pages">
+          {currentPage > 1 && <a href={previousPage} rel="prev"><span aria-hidden="true">&larr;</span> Previous</a>}
+          <span class="page-number">Page {currentPage} of {totalPages}</span>
+          {currentPage < totalPages && <a href={`/page/${currentPage + 1}/`} rel="next">Next <span aria-hidden="true">&rarr;</span></a>}
+        </nav>
+      )}
+    </section>
+  </div>
+</Base>

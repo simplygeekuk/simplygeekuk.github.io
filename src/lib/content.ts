@@ -1,5 +1,7 @@
 import { getCollection } from "astro:content";
 
+export const POSTS_PER_PAGE = 8;
+
 export async function articles() {
   const entries = await getCollection("articles", ({ data }) => !data.draft);
   const paths = new Set<string>();

@@ -1,13 +1,16 @@
 import type { APIContext } from "astro";
-import { articles } from "../lib/content";
+import { articles, POSTS_PER_PAGE } from "../lib/content";
 import { archives } from "../lib/archives";
 
 export async function GET({ site }: APIContext) {
+  const entries = await articles();
+  const totalPages = Math.ceil(entries.filter(({ data }) => data.kind === "post").length / POSTS_PER_PAGE);
   const paths = [
     "/",
     "/archive/",
     "/sitemap/",
-    ...(await articles()).map((entry) => entry.data.path),
+    ...Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => `/page/${index + 2}/`),
+    ...entries.map((entry) => entry.data.path),
     ...archives
       .filter((archive) => archive.postIds.length > 0)
       .map((archive) => archive.path),

@@ -409,6 +409,23 @@ nav a[aria-current="page"] {
   color: var(--accent);
   margin-left: 20px;
 }
+.pagination {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.pagination a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.pagination span {
+  margin: 0;
+}
+.pagination .page-number {
+  color: var(--muted);
+  font-size: 13px;
+}
 .site-footer {
   border-top: 1px solid var(--line);
   display: flex;
