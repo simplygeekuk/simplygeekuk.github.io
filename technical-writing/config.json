@@ -17,16 +17,7 @@
   },
   "paths": [
     {
-      "glob": "migration/VALIDATION.md",
-      "mode": "descriptive"
-    },
-    {
       "glob": "README.md",
-      "mode": "mixed",
-      "default_mode": "descriptive"
-    },
-    {
-      "glob": "migration/*.md",
       "mode": "mixed",
       "default_mode": "descriptive"
     },
@@ -37,11 +28,10 @@
     }
   ],
   "exclude": [
-    "migration/CHANGED-FILES.md",
     "dist/**",
     "node_modules/**",
     ".migration-cache/**",
     "CHANGELOG.md"
   ],
-  "notes": "Covers maintenance documentation and blog articles for the SimplyGeek migration. Existing imported content is preserved; this configuration governs later writing and review."
+  "notes": "Covers maintenance documentation and blog articles for SimplyGeek. Existing imported content is preserved; this configuration governs later writing and review."
 }

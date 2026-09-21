@@ -2,7 +2,7 @@
 
 The SimplyGeek blog, built with Astro for GitHub Pages. Articles cover DevOps, automation and cloud infrastructure.
 
-The configured site URL is `https://simplygeekuk.github.io`. See [Deployment](#deployment) for publishing and indexing settings, and [Migration notes](migration/README.md) for the WordPress import history and domain cutover plan.
+The site URL is `https://simplygeek.co.uk`. See [Deployment](#deployment) for publishing and indexing settings.
 
 ## Site features
 
@@ -50,9 +50,8 @@ If a restricted environment blocks Astro's per-user telemetry configuration, set
 | `src/data/` | Series definitions, image credits, imported archives and comments configuration |
 | `public/images/` | Images added during ongoing authoring |
 | `technical-writing/` | Writing profile and approved terminology |
-| `migration/` | Import records, media recovery and domain cutover planning |
 
-Article files contain YAML metadata followed by Markdown or imported HTML. Both formats are supported, including in homepage and archive previews. Imported articles have received local editorial updates; the importer is not part of routine authoring.
+Article files contain YAML metadata followed by Markdown or imported HTML. Both formats are supported, including in homepage and archive previews. Maintain articles directly in this repository; the WordPress migration is complete and the original WordPress site is no longer live.
 
 ## Write an article
 
@@ -93,6 +92,8 @@ Use local public URLs for images. Set `featuredImage` for the article's header i
 The layout finds alternative text and credit information by featured-image URL. Keep the source, photographer and licence details accurate. The current attribution format is for Pexels; other sources need a suitable caption implementation.
 
 Keep technical screenshots in the article body so readers can inspect them without the header image's crop. Preserve missing-image placeholders until the original screenshots or genuine replacements are available.
+
+[src/data/media-recovery.json](src/data/media-recovery.json) records the source and archive URL for a recovered screenshot, plus historical records of unavailable images.
 
 Production builds generate lossless WebP variants and verify that accepted conversions preserve the pixels. Original images remain available for downloads and historical URLs.
 
@@ -148,14 +149,12 @@ The current working tree includes an optional Giscus component for new comments 
 3. Commit and push the changes to `main` when ready to publish them.
 4. Check the workflow's build and deployment results in the Actions tab. If it ran before Pages was configured, rerun it.
 
-The deployment target is `https://simplygeekuk.github.io`, as configured in [astro.config.mjs](astro.config.mjs). A successful push alone does not confirm a successful deployment.
+The site URL is `https://simplygeek.co.uk`, as configured in [astro.config.mjs](astro.config.mjs). A successful push alone does not confirm a successful deployment.
 
 ### Domain and indexing
 
-The layout still includes a `noindex` meta tag, and [public/robots.txt](public/robots.txt) blocks crawlers. These settings discourage indexing during migration; they do not make the site private. No `CNAME` file is present.
+The site uses the custom domain `simplygeek.co.uk`. Manage the custom domain in the repository's GitHub Pages settings and keep it consistent with [astro.config.mjs](astro.config.mjs).
 
-The custom-domain cutover is a separate step. Follow [migration/PLAN.md](migration/PLAN.md), including changes to the site URL, domain configuration and both indexing settings.
+[public/robots.txt](public/robots.txt) allows crawling and points to `/sitemap.xml`. The shared layout permits indexing; the compatibility pages at `/feed/` and `/sitemap.html` retain `noindex`.
 
-RSS is served at `/feed.xml`. The browser redirect from `/feed/` is not an HTTP redirect for feed readers. Existing subscribers need the new URL or an HTTP redirect at domain cutover. `/sitemap.html` remains as a compatibility entry, and `/page/2/` is retained for pagination.
-
-For import records, missing media and instructions for rerunning the importer, see [Migration notes](migration/README.md).
+RSS is served at `/feed.xml`. The browser redirect from `/feed/` is not an HTTP redirect for feed readers. Subscribers using `/feed/` need `/feed.xml` or an HTTP redirect. `/sitemap.html` remains as a compatibility entry, and `/page/2/` is retained for pagination.

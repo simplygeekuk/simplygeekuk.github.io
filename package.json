@@ -10,8 +10,7 @@
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro build",
-    "preview": "astro preview",
-    "import:wordpress": "node scripts/import-wordpress.mjs"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",
