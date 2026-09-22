@@ -235,11 +235,9 @@ This snapshot predates the `getUserByName` example and does not include that imp
 
 This is a reference bundle to adapt to an existing Build Tools for VMware Aria project. It is not a complete project: the examples have dependencies outside the bundle, and no buildable Maven project is included.
 
-The exported reference files were checked separately from the `getUserByName` task above. ESLint reported no errors or warnings across 21 JavaScript files, and all 37 files supported by Prettier passed its formatting check. The action lint configuration also rejected an ES2015 syntax probe, matching the ES5 constraint stated in the skills.
+The reference bundle passed lint, formatting and focused local checks. It has not been validated in a live Orchestrator environment.
 
-All 19 module-exemplar references resolved, and the supplied XML and JSON files parsed successfully. Focused Node checks confirmed the dependency loader and the revised validation examples, using mocks where Orchestrator globals were needed.
-
-These export checks used the existing installed development tools. The Jasmine screenshot documents the separate development example, not a test run of the downloadable reference bundle. A fresh dependency installation and live Orchestrator validation have not been verified for this export.
+These checks used the existing development tools; a fresh dependency installation has not been verified. The Jasmine screenshot shows the separate worked example.
 
 To use it in your own repository:
 
