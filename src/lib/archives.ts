@@ -31,6 +31,25 @@ export function topicArchive(path: string) {
   return archives.find((archive) => archive.path === topicArchives[path]);
 }
 
+export function topicPosts(path: string, entries: CollectionEntry<"articles">[]) {
+  if (path === "/ai/") {
+    return entries.filter(({ data }) => data.kind === "post" &&
+      [...data.categories, ...data.tags].some((label) => label.toLowerCase() === "ai"));
+  }
+  const archive = topicArchive(path);
+  if (!archive) return undefined;
+  if (archive.kind === "series") return archivePosts(archive, entries);
+
+  const imported = new Set(archive.postIds);
+  const labels = new Set(archives
+    .filter((candidate) => candidate.kind === archive.kind && candidate.path.startsWith(archive.path))
+    .map((candidate) => candidate.title.toLowerCase()));
+  return entries.filter(({ data }) => data.kind === "post" &&
+    (data.wordpressId !== undefined
+      ? imported.has(data.wordpressId)
+      : [...data.categories, ...data.tags].some((label) => labels.has(label.toLowerCase()))));
+}
+
 export function archivePosts(
   archive: (typeof archives)[number],
   entries: CollectionEntry<"articles">[],

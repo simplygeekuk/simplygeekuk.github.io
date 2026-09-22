@@ -2,12 +2,14 @@
 import { render } from "astro:content";
 import Base from "../layouts/Base.astro";
 import PostCard from "../components/PostCard.astro";
+import FeaturedPosts from "../components/FeaturedPosts.astro";
+import YearlyPosts from "../components/YearlyPosts.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import SeriesNavigation from "../components/SeriesNavigation.astro";
 import Comments from "../components/Comments.astro";
 import BackToTop from "../components/BackToTop.astro";
 import { articles, formatDate } from "../lib/content";
-import { archives, allArchives, archivePosts, topicArchive } from "../lib/archives";
+import { archives, allArchives, archivePosts, topicArchive, topicPosts } from "../lib/archives";
 import { articleSeries, relatedArticles } from "../lib/series";
 import comments from "../data/comments.json";
 import articleImages from "../data/article-images.json";
@@ -43,6 +45,7 @@ const series = isPost ? articleSeries(entries).find((group) => group.posts.some(
 const suggestions = isPost ? relatedArticles(entry, entries) : [];
 const topic = archive ?? (entry ? topicArchive(entry.data.path) : undefined);
 const related = topic ? archivePosts(topic, entries) : [];
+const topicArticles = entry?.data.kind === "page" ? topicPosts(entry.data.path, entries) : undefined;
 const title = entry?.data.title ?? archive?.title ?? "Archive";
 const description =
   (entry?.data.description ?? archive?.description) ||
@@ -81,6 +84,27 @@ const discussion = entry
         </p>
       )}
     </section>
+  ) : topicArticles !== undefined ? (
+    <div class="home wrap">
+      <a class="back-link" href="/">&larr; Back to the blog</a>
+      <header class="home-intro">
+        <div>
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </div>
+      </header>
+      {Content && <div class="prose"><Content /></div>}
+      {topicArticles.length ? (
+        <>
+          {topic?.kind !== "series" && <FeaturedPosts posts={topicArticles} />}
+          <section aria-label="Articles in this topic">
+            <YearlyPosts posts={topicArticles} groupByYear={topic?.kind !== "series"} />
+          </section>
+        </>
+      ) : (
+        <p>No articles are currently published in this topic. <a href="/archive/">Browse all articles.</a></p>
+      )}
+    </div>
   ) : (
     entry && (
       <article class="article wrap">
@@ -132,18 +156,6 @@ const discussion = entry
           <section class="related-articles" aria-labelledby="related-articles-title">
             <h2 id="related-articles-title">Related articles</h2>
             {suggestions.map((post) => <PostCard post={post} />)}
-          </section>
-        )}
-        {topic && (
-          <section class="topic-articles" aria-label="Articles in this topic">
-            {related.length ? (
-              related.map((post) => <PostCard post={post} />)
-            ) : (
-              <p>
-                No articles are currently published in this topic.{" "}
-                <a href="/archive/">Browse all articles.</a>
-              </p>
-            )}
           </section>
         )}
         {isPost && entry.data.tags.length > 0 && (

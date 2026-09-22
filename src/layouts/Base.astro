@@ -76,6 +76,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           <span aria-hidden="true">&#9776;</span>
         </button>
         <nav id="site-navigation" aria-label="Main navigation">
+          <a
+            href="/ai/"
+            aria-current={Astro.url.pathname === "/ai/" ? "page" : undefined}
+          >
+            AI
+          </a>
+          <a href="/ansible/">Ansible</a>
           <details class="topic-menu">
             <summary>
               VMware Cloud Foundation <span aria-hidden="true">&#8964;</span>
@@ -86,25 +93,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
               <a href="/aria-automation-orchestrator/">
                 VCF Operations Orchestrator
               </a>
-              <a
-                class="subtopic"
-                href="/vcf-operations-orchestrator-auto-document-your-actions-with-ease/"
-              >
-                Auto-document your actions
-              </a>
-              <a
-                class="subtopic"
-                href="/how-i-write-beautiful-code-in-vcf-operations-orchestrator-using-eslint-and-prettier/"
-              >
-                Code style with ESLint & Prettier
-              </a>
               <a href="/build-tools-for-vmware-aria/">
                 Build Tools for VMware Aria
               </a>
               <a href="/nsx/">VMware NSX</a>
             </div>
           </details>
-          <a href="/ansible/">Ansible</a>
           <a
             href="/about/"
             aria-current={Astro.url.pathname === "/about/" ? "page" : undefined}

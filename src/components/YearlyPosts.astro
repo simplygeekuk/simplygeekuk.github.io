@@ -6,8 +6,9 @@ import { display } from "../config/display";
 
 interface Props {
   posts: CollectionEntry<"articles">[];
+  groupByYear?: boolean;
 }
-const { posts } = Astro.props;
+const { posts, groupByYear = true } = Astro.props;
 const previews = new Map(posts.map((post) => {
   const $ = load(post.rendered?.html ?? post.body ?? "");
   $("pre, script, style, .missing-image, #ez-toc-container").remove();
@@ -19,7 +20,7 @@ const years = [...new Set(posts.map((post) => post.data.published.getUTCFullYear
 ---
 
 <div class="yearly-posts">
-  {years.map((year) => (
+  {!groupByYear ? posts.map((post) => <PostCard post={post} preview={previews.get(post.id)} />) : years.map((year) => (
     <section class="year-section" aria-labelledby={`year-${year}`}>
       <div class="year-heading">
         <h2 id={`year-${year}`}>{year}</h2>
