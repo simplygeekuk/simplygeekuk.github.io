@@ -7,7 +7,7 @@ export const display = {
   mobileGutterPx: 36,
   // Homepage pagination. The searchable archive continues to show all articles.
   articlesPerPage: 8,
-  // Total recent articles in the homepage carousel, not the number visible at once.
+  // Maximum randomly selected articles per carousel, not the number visible at once.
   recentArticles: 6,
   // Maximum preview lines on homepage/archive cards and related-article cards.
   previewLines: 5,

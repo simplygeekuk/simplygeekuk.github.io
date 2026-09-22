@@ -1,10 +1,10 @@
 ---
 title: "About"
-description: "Hi, my name is Gavin Stephens and I live in a small country called Wales, in the United Kingdom. I have been working in the industry for around 11 years, starting out as a network engineer and then getting into virtualization/VMware very…"
+description: "Meet Gavin Stephens, the person behind SimplyGeek, and explore his work in automation development, API integration and AI-assisted development."
 path: "/about/"
 kind: "page"
 published: "2007-11-28T20:34:13Z"
-updated: "2019-02-28T15:52:20Z"
+updated: "2026-09-23T09:00:00Z"
 author: "SimplyGeek"
 categories: []
 tags: []
@@ -12,18 +12,16 @@ wordpressId: 2
 originalUrl: "https://simplygeek.co.uk/about/"
 ---
 
-<p>Hi, my name is Gavin Stephens and I live in a small country called Wales, in the United Kingdom.</p>
-<p>I have been working in the industry for around 11 years, starting out as a network engineer and then getting into virtualization/VMware very quickly, for the last 10 years.</p>
-<p>I have focused on building cloud platforms, from your typical on-premise vSphere environments to working with many MSP’s using vCloud Director (ever since the 1.x days). I have since worked more closely with vRealize Automation and vRealize Orchestrator. It’s really hard to describe exactly what I do but I think a systems integration developer, most likely fits the bill. I spend most of my time gluing many API’s together to deliver solutions.</p>
-<p>I have a 42u server rack in the garage where I host all my infrastructure running on VMware vSphere and vSAN, which hosts the entire VMware stack. I also work with a lot of open source software, such as Ansible, Terraform, Netbox, Jenkins… the list goes on.</p>
-<p>Outside of work I am a big PC gamer at heart. I once enjoyed the fast-paced RTS genre but now stick to turn based strategies as I have a little bit more time to think. I am also a big board gamer, getting together with friends for at weekends and having a 12 hour gaming session.</p>
-<p id="gyPrLSX"><img loading="lazy" decoding="async" width="176" height="200" class="size-full wp-image-1319 alignleft" src="/wp-content/uploads/2019/02/img_5c7800a22d4e5.png" alt=""></p>
+Hi, I'm Gavin Stephens, the person behind SimplyGeek.
 
+My background is in network engineering, virtualisation and cloud platforms. Over time, my work has moved towards automation and systems integration: connecting APIs, building reusable services and turning infrastructure tasks into code that can be tested and maintained.
 
+Much of this blog follows that journey through VMware technologies, from vSphere and vCloud Director to automation and orchestration. Today, I write about VMware Cloud Foundation, VCF Operations Orchestrator and Ansible, alongside the development practices that make those tools easier to work with.
 
+I'm particularly interested in how automation code is structured. Reusable actions, clear interfaces, consistent validation, useful logging and meaningful tests all feature in my projects. I share the reasoning behind those choices as well as the implementation, so readers can decide what fits their own environment.
 
+AI-assisted development is another part of that work. I'm exploring how repository instructions, reusable skills and focused review agents can help an assistant follow established project conventions. My articles show the prompts, examples and checks involved, including where human judgement is still needed.
 
+SimplyGeek is where I document what I build and learn along the way. You'll find practical walkthroughs, code examples and reference files drawn from that work.
 
-
-
-
+Explore the [AI articles](/ai/), [Ansible guides](/ansible/) or [VMware Cloud Foundation topics](/vmware-aria/), or browse my projects on [GitHub](https://github.com/simplygeekuk).

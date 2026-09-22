@@ -7,26 +7,32 @@ interface Props {
   posts: CollectionEntry<"articles">[];
 }
 const { posts } = Astro.props;
-const recentPosts = posts.slice(0, display.recentArticles);
+const eligiblePosts = posts.filter(({ data }) => data.kind === "post" && !data.draft);
+const initialPosts = eligiblePosts.slice(0, display.recentArticles);
+const remainingPosts = eligiblePosts.slice(display.recentArticles);
 ---
 
-{recentPosts.length > 0 && (
-  <section class="recent-articles" aria-labelledby="recent-articles-title" data-article-carousel>
+{initialPosts.length > 0 && (
+  <section class="recent-articles" aria-labelledby="recent-articles-title" data-article-carousel data-article-limit={display.recentArticles}>
     <div class="recent-articles-heading">
-      <h2 id="recent-articles-title">Recent articles</h2>
+      <h2 id="recent-articles-title">Explore articles</h2>
       <div class="carousel-controls" hidden>
         <span class="carousel-status" aria-live="polite" aria-atomic="true"></span>
-        <button type="button" data-previous aria-label="Previous recent articles" aria-controls="recent-articles-track" disabled>
+        <button type="button" data-autoplay aria-label="Pause automatic scrolling" aria-controls="recent-articles-track">Pause</button>
+        <button type="button" data-previous aria-label="Previous articles" aria-controls="recent-articles-track" disabled>
           <span aria-hidden="true">&larr;</span>
         </button>
-        <button type="button" data-next aria-label="Next recent articles" aria-controls="recent-articles-track">
+        <button type="button" data-next aria-label="Next articles" aria-controls="recent-articles-track">
           <span aria-hidden="true">&rarr;</span>
         </button>
       </div>
     </div>
-    <div id="recent-articles-track" class="featured-posts" tabindex="0" role="group" aria-label="Recent articles; use the left and right arrow keys to scroll">
-      {recentPosts.map((post) => <PostCard post={post} featured />)}
+    <div id="recent-articles-track" class="featured-posts" tabindex="0" role="group" aria-label="Explore articles; use the left and right arrow keys to scroll">
+      {initialPosts.map((post) => <PostCard post={post} featured />)}
     </div>
+    <template data-carousel-candidates>
+      {remainingPosts.map((post) => <PostCard post={post} featured />)}
+    </template>
   </section>
 )}
 
@@ -37,10 +43,44 @@ const recentPosts = posts.slice(0, display.recentArticles);
     const previous = carousel.querySelector<HTMLButtonElement>("[data-previous]");
     const next = carousel.querySelector<HTMLButtonElement>("[data-next]");
     const status = carousel.querySelector<HTMLElement>(".carousel-status");
-    if (!track || !controls || !previous || !next || !status) return;
-    const cards = [...track.querySelectorAll<HTMLElement>(".post-card")];
+    const autoplay = carousel.querySelector<HTMLButtonElement>("[data-autoplay]");
+    if (!track || !controls || !previous || !next || !status || !autoplay) return;
+    const candidates = carousel.querySelector<HTMLTemplateElement>("[data-carousel-candidates]");
+    const pool = [
+      ...track.querySelectorAll<HTMLElement>(".post-card"),
+      ...(candidates?.content.querySelectorAll<HTMLElement>(".post-card") ?? []),
+    ];
+    for (let index = pool.length - 1; index > 0; index--) {
+      const other = Math.floor(Math.random() * (index + 1));
+      [pool[index], pool[other]] = [pool[other], pool[index]];
+    }
+    const cards = pool.slice(0, Number(carousel.dataset.articleLimit));
+    track.replaceChildren(...cards);
+    candidates?.remove();
     if (!cards.length) return;
 
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    let paused = false;
+    let playRequested = false;
+    let pointerDown = false;
+    let autoplayTimer: ReturnType<typeof setTimeout>;
+    const schedule = () => {
+      clearTimeout(autoplayTimer);
+      autoplay.textContent = paused ? "Play" : "Pause";
+      autoplay.setAttribute("aria-label", paused ? "Start automatic scrolling" : "Pause automatic scrolling");
+      const interacting = !playRequested &&
+        (carousel.matches(":hover") || carousel.contains(document.activeElement));
+      const stopped = paused || document.hidden || pointerDown || interacting ||
+        track.scrollWidth - track.clientWidth <= 2;
+      status.setAttribute("aria-live", stopped ? "polite" : "off");
+      if (stopped) return;
+      autoplayTimer = setTimeout(() => {
+        const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        if (atEnd) move(0);
+        else step(1);
+        schedule();
+      }, 5000);
+    };
     const stride = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap);
     const update = () => {
       const max = track.scrollWidth - track.clientWidth;
@@ -51,16 +91,31 @@ const recentPosts = posts.slice(0, display.recentArticles);
       const last = Math.min(cards.length, first + visible - 1);
       status.textContent = first === last ? `${first} of ${cards.length}` : `${first}–${last} of ${cards.length}`;
       controls.hidden = max <= 2;
+      schedule();
     };
     const move = (position: number) => {
       track.scrollTo({
         left: Math.max(0, Math.min(position, track.scrollWidth - track.clientWidth)),
-        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+        behavior: reducedMotion.matches ? "instant" : "smooth",
       });
     };
     const step = (direction: number) => move((Math.round(track.scrollLeft / stride()) + direction) * stride());
     previous.addEventListener("click", () => step(-1));
     next.addEventListener("click", () => step(1));
+    autoplay.addEventListener("click", () => {
+      paused = !paused;
+      playRequested = !paused;
+      schedule();
+    });
+    carousel.addEventListener("mouseenter", () => { playRequested = false; schedule(); });
+    carousel.addEventListener("mouseleave", schedule);
+    carousel.addEventListener("focusin", () => { playRequested = false; schedule(); });
+    carousel.addEventListener("focusout", () => setTimeout(schedule, 0));
+    carousel.addEventListener("pointerdown", () => { playRequested = false; pointerDown = true; schedule(); });
+    window.addEventListener("pointerup", () => { pointerDown = false; schedule(); });
+    window.addEventListener("pointercancel", () => { pointerDown = false; schedule(); });
+    document.addEventListener("visibilitychange", schedule);
+    reducedMotion.addEventListener("change", schedule);
     track.addEventListener("keydown", (event) => {
       if (event.target !== track) return;
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
