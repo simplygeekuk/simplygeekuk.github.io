@@ -6,7 +6,10 @@ import { display } from "../config/display";
 export const POSTS_PER_PAGE = display.articlesPerPage;
 
 export async function articles() {
-  const entries = await getCollection("articles", ({ data }) => !data.draft);
+  const entries = await getCollection(
+    "articles",
+    ({ data }) => import.meta.env.DEV || !data.draft,
+  );
   const paths = new Set<string>();
   for (const entry of entries) {
     if (
