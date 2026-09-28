@@ -1,16 +1,5 @@
 [
   {
-    "path": "/introducing-the-vcf-automation-assessment-tool/",
-    "featuredImage": "/images/featured/vcf-assessment-server-racks.jpg",
-    "thumbnail": "/images/featured/vcf-assessment-server-racks-thumb.jpg",
-    "alt": "A row of server racks with red and blue network cables behind mesh doors.",
-    "photographer": "Brett Sayles",
-    "source": "https://www.pexels.com/photo/server-racks-on-data-center-5480781/",
-    "license": "Pexels licence",
-    "licenseUrl": "https://www.pexels.com/license/",
-    "downloaded": "2026-09-28"
-  },
-  {
     "path": "/using-a-service-oriented-architecture-approach-to-vcf-operations-orchestrator-development/",
     "featuredImage": "/images/featured/network-connections.webp",
     "thumbnail": "/images/featured/network-connections-thumb.webp",

@@ -9,6 +9,8 @@ categories: ["VCF Automation"]
 tags: ["VCF Automation", "VCF Operations Orchestrator", "Python", "Assessment"]
 draft: false
 toc: true
+featuredImage: "/images/introducing-the-vcf-automation-assessment-tool/assessment-laptop-banner.png"
+thumbnail: "/images/introducing-the-vcf-automation-assessment-tool/assessment-laptop-banner.png"
 ---
 
 Understanding an established VCF Automation environment takes more than counting projects and deployments. You need to know how its configuration fits together, who can request its services, and which parts need attention.
