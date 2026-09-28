@@ -52,7 +52,9 @@ Findings use `INFO`, `WARNING` and `CRITICAL` severities. An informational findi
 
 Each finding also shows an evidence label, suggested priority, why it matters, a recommended action and verification guidance. Evidence labels distinguish **Observed failure**, **Potential issue** and **Review candidate**. A failed operation does not by itself establish a current service outage; the environment's owners still need to confirm the business impact.
 
-The HTML report includes its scripts and diagrams, so opening it requires no external requests. You can inspect it offline, export its data tables as CSV, and print the summary or full evidence. Affected-object tables show up to 500 rows per finding by default. CSV exports retain that limit; the optional JSON output holds the full collected data and findings.
+The HTML report includes its scripts and diagrams, so opening it requires no external requests. You can inspect it offline and print the summary or full evidence.
+
+Every inventory and finding table includes an **Export CSV** button, so you can export individual tables for review in a spreadsheet or share them with the relevant owners. Affected-object tables show up to 500 rows per finding by default. CSV exports retain that limit; the optional JSON output holds the full collected data and findings.
 
 Set `max_rows_per_finding` in `config.yaml` to change the limit. For example, this allows up to 1,000 rows per finding:
 
